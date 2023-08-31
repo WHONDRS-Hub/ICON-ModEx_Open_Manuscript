@@ -1,0 +1,60 @@
+# HeaderRows_8
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_02; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_02; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_02; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_02; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+# Dissolved_Oxygen_Saturation; percent_saturation; Minidot_02; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen,Dissolved_Oxygen_Saturation
+ 2022-08-10 10:49:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.67,9.078,87.45
+ 2022-08-10 10:50:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.7,9.071,87.43
+ 2022-08-10 10:51:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.76,9.064,87.48
+ 2022-08-10 10:52:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.77,9.046,87.33
+ 2022-08-10 10:53:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.79,9.04,87.31
+ 2022-08-10 10:54:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.78,9.048,87.37
+ 2022-08-10 10:55:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.83,9.035,87.34
+ 2022-08-10 10:56:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.82,9.046,87.43
+ 2022-08-10 10:57:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.86,9.037,87.41
+ 2022-08-10 10:58:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.87,9.041,87.48
+ 2022-08-10 10:59:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.86,9.039,87.45
+ 2022-08-10 11:00:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.89,9.041,87.52
+ 2022-08-10 11:01:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.9,9.03,87.43
+ 2022-08-10 11:02:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.95,9.027,87.5
+ 2022-08-10 11:03:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.95,9.026,87.49
+ 2022-08-10 11:04:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,13.98,9.036,87.64
+ 2022-08-10 11:05:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.01,9.017,87.52
+ 2022-08-10 11:06:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.02,9.018,87.54
+ 2022-08-10 11:07:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.05,9.014,87.55
+ 2022-08-10 11:08:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.09,9.004,87.54
+ 2022-08-10 11:09:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.09,9.003,87.53
+ 2022-08-10 11:10:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.12,8.998,87.54
+ 2022-08-10 11:11:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.11,9.005,87.58
+ 2022-08-10 11:12:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.18,8.979,87.47
+ 2022-08-10 11:13:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.19,8.978,87.47
+ 2022-08-10 11:14:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.2,8.981,87.52
+ 2022-08-10 11:15:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.23,8.981,87.58
+ 2022-08-10 11:16:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.26,8.967,87.5
+ 2022-08-10 11:17:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.28,8.958,87.46
+ 2022-08-10 11:18:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.29,8.967,87.56
+ 2022-08-10 11:19:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.31,8.967,87.6
+ 2022-08-10 11:20:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.32,8.963,87.59
+ 2022-08-10 11:21:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.36,8.959,87.62
+ 2022-08-10 11:22:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.38,8.937,87.44
+ 2022-08-10 11:23:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.38,8.937,87.46
+ 2022-08-10 11:24:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.41,8.94,87.54
+ 2022-08-10 11:25:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.43,8.913,87.3
+ 2022-08-10 11:26:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.45,8.927,87.49
+ 2022-08-10 11:27:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.45,8.92,87.42
+ 2022-08-10 11:28:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.47,8.916,87.41
+ 2022-08-10 11:29:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.51,8.915,87.47
+ 2022-08-10 11:30:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.52,8.909,87.42
+ 2022-08-10 11:31:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.51,8.919,87.51
+ 2022-08-10 11:32:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.54,8.906,87.44
+ 2022-08-10 11:33:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.57,8.885,87.29
+ 2022-08-10 11:34:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.58,8.894,87.41
+ 2022-08-10 11:35:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.58,8.898,87.45
+ 2022-08-10 11:36:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.63,8.879,87.35
+ 2022-08-10 11:37:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.62,8.883,87.37
+ 2022-08-10 11:38:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.63,8.89,87.45
+ 2022-08-10 11:39:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.68,8.871,87.37
+ 2022-08-10 11:40:00,Pacific Standard Time (UTC-8),SSS009,665955,3.45,14.7,8.884,87.53

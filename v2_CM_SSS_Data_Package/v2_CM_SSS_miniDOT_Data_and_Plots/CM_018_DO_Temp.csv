@@ -1,0 +1,44 @@
+# HeaderRows_8
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+# Dissolved_Oxygen_Saturation; percent_saturation; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen,Dissolved_Oxygen_Saturation
+ 2022-06-28 01:40:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.86,8.201,91.74
+ 2022-06-28 01:41:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.83,8.205,91.72
+ 2022-06-28 01:42:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.8,8.207,91.7
+ 2022-06-28 01:43:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.78,8.217,91.77
+ 2022-06-28 01:44:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.74,8.219,91.73
+ 2022-06-28 01:45:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.72,8.221,91.71
+ 2022-06-28 01:46:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.69,8.23,91.76
+ 2022-06-28 01:47:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.68,8.235,91.79
+ 2022-06-28 01:48:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.68,8.231,91.74
+ 2022-06-28 01:49:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.66,8.228,91.68
+ 2022-06-28 01:50:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.63,8.242,91.79
+ 2022-06-28 01:51:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.61,8.229,91.6
+ 2022-06-28 01:52:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.59,8.247,91.77
+ 2022-06-28 01:53:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.58,8.247,91.74
+ 2022-06-28 01:54:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.53,8.251,91.71
+ 2022-06-28 01:55:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.51,8.263,91.8
+ 2022-06-28 01:56:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.51,8.257,91.73
+ 2022-06-28 01:57:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.48,8.26,91.7
+ 2022-06-28 01:58:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.47,8.259,91.68
+ 2022-06-28 01:59:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.42,8.268,91.7
+ 2022-06-28 02:00:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.41,8.27,91.69
+ 2022-06-28 02:01:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.4,8.268,91.65
+ 2022-06-28 02:02:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.38,8.27,91.65
+ 2022-06-28 02:03:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.34,8.28,91.68
+ 2022-06-28 02:04:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.32,8.286,91.7
+ 2022-06-28 02:05:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.3,8.294,91.76
+ 2022-06-28 02:06:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.29,8.289,91.69
+ 2022-06-28 02:07:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.27,8.297,91.75
+ 2022-06-28 02:08:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.24,8.299,91.71
+ 2022-06-28 02:09:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.22,8.3,91.69
+ 2022-06-28 02:10:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.21,8.299,91.65
+ 2022-06-28 02:11:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.2,8.303,91.68
+ 2022-06-28 02:12:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.15,8.321,91.78
+ 2022-06-28 02:13:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.15,8.314,91.71
+ 2022-06-28 02:14:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.13,8.312,91.66
+ 2022-06-28 02:15:00,Mountain Daylight Time (UTC-6),CM_018,449867,3.51,20.1,8.319,91.67
