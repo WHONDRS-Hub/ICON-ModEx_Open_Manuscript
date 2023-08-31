@@ -1,0 +1,28 @@
+10 November 2022
+WHONDRS S19S Sediment Grain Size Methods
+
+Storage - Samples were dried and stored at room temperature.
+
+Preservation - No preservatives added.
+
+Preparation - Samples were sieved to 2 milliliters when received and then stored until ready for final preparation. Samples were added to mixing cup with 100 milliliters of 50 grams_per_liter of sodium hexametaphosphate and 250 milliliters deionized water and left to soak overnight. If needed, 5 - 20 milliliters of 30 percent hydrogen peroxide was added to samples with 25 milliliters of Milli-Q water before adding sodium hexametaphosphate to remove organic matter. Samples were mixed with blender for five minutes then added to sedimentation cylinder and brought to 1 liter volume with deionized water. Samples were hand shaken for 30 seconds and left to settle.
+
+Analysis - Temperature and hydrometer readings taken at 90 minutes and 24 hours. Sediments were then separated using 53 micrometer, 250 micrometer, and 500 micrometer sieves.
+
+Data Processing - Fine sand was defined as sediment between 53 micrometers and 250 micrometers. Medium sand was defined as sediment between 250 micrometers and 500 micrometers. Coarse sand was defined as sediment between 500 micrometers and 2000 micrometers (2 millimeters). Percent fine, medium, and coarse sand were calculated by dividing the respective weight by the total dry weight. Percent clay was calculated from equations taken from Gee & Bauder 1986 in Methods of Soil Analysis, Part I, Physical and Mineralogical Methods using hydrometer readings at 1.5 hours (90 minutes) and 24 hours (1440 minutes). Negative clay values calculated by the script were considered below detection limit and reported as zero percent clay. When clay plus sand were greater than 100 percent, clay was adjusted so that the total percentage was 100 percent. Percent silt was calculated as percent sand minus percent clay. 
+
+-------------------------------------------------
+Data flags:
+
+Sample S19S_0001_BULK_D leaked out of the cup overnight and was NOT analyzed. 
+
+The following samples spilled while mixing and were NOT analyzed: S19S_0062_BULK-D, S19S_0030_BULK-U, S19S_0042_BULK-U
+
+Sample S19S_0082_BULK-D spilled while mixing and was analyzed. 
+
+The 250 micrometer sieve portion of Sample S19S_0026_BULK-M was discarded before weighing. 
+
+The following samples had less than 10 grams of sediment available for analysis: S19S_0014_BULK_D, S19S_0052_BULK_M, S19S_0058_BULK_D, S19S_0054_BULK-D, S19S_0030_BULK-M, S19S_0077_BULK-M, S19S_0091_BULK-D, S19S_0035_BULK-U, S19S_0077_BULK-D, S19S_0081_BULK-M, S19S_0099_BULK-M, S19S_0014_BULK-U, S19S_0019_BULK-D, S19S_0019_BULK-M, S19S_0084_BULK-M, S19S_0059_BULK-D, S19S_0067_BULK-D, S19S_0014_BULK-M, S19S_0043_BULK-U, S19S_0052_BULK-D, S19S_0067_BULK-M, S19S_0083_BULK-U, S19S_0013_BULK-D, S19S_0043_BULK-D, S19S_0073_BULK-M, S19S_0082_BULK-M, S19S_0082_BULK-U, S19S_0083_BULK-M, S19S_0089_BULK-D, S19S_0092_BULK-M, S19S_0013_BULK-U, S19S_0042_BULK-D, S19S_0047_BULK-D, S19S_0057_BULK-D, S19S_0061_BULK-M, S19S_0071_BULK-D, S19S_0042_BULK-M, S19S_0044_BULK-U, S19S_0047_BULK_U, S19S_0059_BULK-M, S19S_0059_BULK-U, S19S_0044_BULK-M, S19S_0047_BULK-M, S19S_0061_BULK-D, S19S_0073_BULK-D, S19S_0087_BULK-M, S19S_0013_BULK-M, S19S_0018_BULK-U, S19S_0029_BULK-M, S19S_0073_BULK-U, S19S_0092_BULK-U, S19S_0054_BULK-M, S19S_0061_BULK-U, S19S_0082_BULK-D
+
+Sample S19S_0040_BULK-M and sample S19S_0040_BULK-U were combined into a composite sample by the sampler, and therefore had to be analyzed together. The data for this composite sample (S19S_0040_BULK-M-U) has be duplicated for each individual sample (S19S_0040_BULK-M and S19S_0040_BULK-U).
+

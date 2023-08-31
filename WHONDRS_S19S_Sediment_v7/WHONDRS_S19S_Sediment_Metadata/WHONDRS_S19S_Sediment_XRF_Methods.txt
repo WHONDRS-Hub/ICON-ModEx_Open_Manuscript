@@ -1,0 +1,16 @@
+17 May 2022
+WHONDRS S19S Sediment XRF Methods
+
+The XRF samples were all prepared by grinding and homogenizing sediments using a ball mill. Homogenized sediments were packed into the center of custom acrylic disks and sealed with Kapton tape.
+Sample run order was randomized.
+
+Samples were run on a Bruker M4 plus with the following settings:
+Detector type: XFlash 430
+Window type: Custom type
+Detector thickness: 0.45
+Si dead layer:0.029
+
+Calibration; lin.: 10
+Calibration; abs.: -955.9
+Mn FWHM: 137.05
+Fano factor: 0.121

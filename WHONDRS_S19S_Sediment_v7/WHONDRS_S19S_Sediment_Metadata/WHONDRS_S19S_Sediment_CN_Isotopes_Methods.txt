@@ -1,0 +1,39 @@
+9 January 2023
+WHONDRS S19S Sediment Total Organic Carbon and Total Nitrogen Methods
+
+Storage - Ground solid sediment samples were stored at room temperature in capitol vials. Weighed capsules in well plates were stored in desiccator until day of analysis. 
+
+Preservation - No preservatives added.
+
+Preparation - Ground solid sediment samples were weighed on microbalance; wrapped in silver boat capsules; and placed into labelled well plate. Samples were stored in dessicator with 12 molar hydrochloric acid for  approximately 24-hour fumigation. Samples were dried in 60 degC oven following fumigation and then added to a tin boat for final wrapping. Samples were placed into labelled well plate and stored in desiccator until analysis on the instrument. 
+
+Inspection - Tin and silver capsules were wrapped and inspected to ensure there were no tears or spilts. 
+
+Analysis - Total carbon and nitrogen content in solid sediment samples were measured on a VarioIsotope Cube and Isoprime precisION IRMS (Elementar GmbH) via catalytic combustion with a thermal conductivity detector, using an elemental analyzer in CN mode; with helium flow set to 230 milliliters_per_minute; sample run time 10 minutes; combustion tube furnace at 950 degC; reduction tube furnace at 600 degC; Aspartic acid standard used with factory calibration; standards kept at room temperature between runs. Carbon and nitrogen content reported in percent_organic_carbon or percent_nitrogen. 
+
+Data Processing - Final percent carbon and nitrogen were calculated using the instrument software based on peak area values from the thermal conductivity detector. Analytical replicates were included every 15 samples. Samples were re-run if the coefficient of variation was greater than 15 percent.
+
+-------------------------------------------------
+Data flags:
+The following samples were re-run: S19S_0062_BULK-D, S19S_0012_BULK-M, S19S_0012_BULK-U, S19S_0049_BULK-U, S19S_0056_BULK-M, S19S_0069_BULK-M, S19S_0071_BULK-D, S19S_0085_BULK-U. Data quality should not be affected.
+
+====================================================================
+
+23 February 2023
+WHONDRS S19S Sediment Isotopes (C and N) Methods
+
+Storage - Samples were stored in stainless steel vials. 
+
+Preservation - Ground solid sediment samples were stored at room temperature in capitol vials. Once weighed, well plates were stored in desiccator until day of analysis. 
+
+Preparation - Ground solid sediment samples were weighed out on microbalance, wrapped in silver boat capsules and placed into labelled well plate. Samples were stored in dessicator with 12 molar hydrochloric acid for about a 24 hour fumigation. Samples were dried in 60 degC oven following fumigation, then added to a tin boat for final wrapping. Samples were placed into labelled well plate and stored in dessicator until analysis on the instrument. 
+
+Inspection - Tin and silver capsules were wrapped and inspected to ensure there were no tears or splits. 
+
+Analysis - Samples were analyzed on an elemental analyzer in line to an isotope ratio mass spectrometer. See CN methods information above for more details on the elemental analyzer and resulting data. They were then analyzed for isotope ratios of carbon-13/12 and nitrogen-15/14 using an Isoprime PrecisION isotope ratio mass spectrometer (Elementar Analysensysteme GmbH) connected to the EA. The source was tuned daily and stability and linearity checks were done prior to sample analysis. Samples were diluted to 30 percent for carbon analysis, with helium as carrier gas. In-house standards of labelled glutamic acid (delta-15N = -8.58 permil, delta-13C= -11.09 permil; and delta-15N = 73.58 permil, delta-13C = 16.73 permil) were used.
+
+Data Processing - Isotope ratios of carbon-13/12 and nitrogen-15/14 were calculated using peak heights, andthen converted to delta-13C (normalized to Vienna Pee Dee Belemnite "VPDB") and delta-15N (normalized to air) values using the in-house glutamic acid standards. Analytical replicates and blanks were included every 15 samples.
+
+-------------------------------------------------
+Data flags:
+The following samples were re-run: S19S_0062_BULK-D, S19S_0012_BULK-M, S19S_0012_BULK-U, S19S_0049_BULK-U, S19S_0056_BULK-M, S19S_0069_BULK-M, S19S_0071_BULK-D, S19S_0085_BULK-U. Data quality should not be affected.
