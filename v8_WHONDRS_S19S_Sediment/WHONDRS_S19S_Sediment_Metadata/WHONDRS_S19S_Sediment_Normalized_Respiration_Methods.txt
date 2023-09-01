@@ -1,0 +1,24 @@
+22 August 2023
+WHONDRS S19S Sediment Normalized Respiration Methods
+
+Storage - Samples were kept in a temperature controlled chamber set at 21 deg C overnight until analysis. 
+
+Preservation - No additional preservation performed.
+
+Preparation - Upon arrival 10 milliliters (or 2.5 milliliters) of sample was subsampled into a 40 milliliter glass vial with an oxygen sensor spot and a breathe-easy membrane was added to the vial opening. They were then kept in an temperature controlled chamber set at 21 deg C overnight until analysis. The following day unfiltered water from the same sample site was added to the vial until there was no headspace. This was considered the start time for the incubation.
+
+Inspection - Vials were intact and filled to appropriate levels.
+
+Analysis - Time series measurements of the incubation were taken on a Fibox 3 to measure dissolved oxygen in a nondestructive manner.  A polymer optic cable connected to a Fibox 3 takes measurements through the vial wall using the oxygen sensor spots placed inside of the vial for contactless partial pressure measurements of oxygen. Measurements were taken at the following time intervals: 0 minutes; 15 minutes; 30 minutes; 1 hour; 1 hour and 30 mins and 2 hour or until the sample was below 5 parts per million of dissolved oxygen.
+
+Data Processing - Dissolved oxygen (DO) respiration rates as milligrams_of_DO_per_liter_of_water_per_hour were normalized to per_liter_sediment by multiplying the rate by the liters of water in the incubation and dividing it by the liters of sediment in the incubation. Therefore the normalized rates units are milligrams_of_DO_per_liter_of_sediment_per_hour.  Sediment and water volume can be found in the file "S19S_Sediment_Water_Mass_Volume.csv".
+
+-------------------------------------------------
+Data flags:
+For the following list of samples a theoretical respiration rate was calculated and used in place of a measured value because the dissolved oxygen at time zero was lower than 5 milligrams_per_liter. This theoretical rate is calculated assuming that we start at 100 percent dissolved oxygen saturation conditions (set at 8.5 milligrams_per_liter for the laboratory pressure and temperature). Rates are calculated assuming that it takes 30 seconds to go from 8.5 milligrams_per_liter  to the measured dissolved oxygen value at time zero. 
+S19S_0006_SED_INC-D; S19S_0011_SED_INC-M; S19S_0013_SED_INC-D; S19S_0013_SED_INC-M; S19S_0013_SED_INC-U; S19S_0014_SED_INC-D; S19S_0014_SED_INC-M; S19S_0016_SED_INC-M; S19S_0020_SED_INC-M; S19S_0021_SED_INC-D; S19S_0024_SED_INC-D; S19S_0024_SED_INC-M; S19S_0024_SED_INC-U; S19S_0039_SED_INC-D; S19S_0039_SED_INC-U; S19S_0040_SED_INC-U; S19S_0044_SED_INC-D; S19S_0044_SED_INC-M; S19S_0044_SED_INC-U; S19S_0047_SED_INC-M; S19S_0047_SED_INC-U; S19S_0054_SED_INC-D; S19S_0054_SED_INC-M; S19S_0054_SED_INC-U; S19S_0055_SED_INC-D; S19S_0059_SED_INC-D; S19S_0061_SED_INC-D; S19S_0061_SED_INC-M; S19S_0066_SED_INC-M; S19S_0066_SED_INC-U; S19S_0067_SED_INC-D; S19S_0067_SED_INC-M; S19S_0067_SED_INC-U; S19S_0087_SED_INC-D; S19S_0089_SED_INC-D; S19S_0089_SED_INC-M; S19S_0097_SED_INC-U
+
+
+For the following list of samples the mass of 40 milliter vial with wet sediment and mass of 40 milliliter vial with wet sediment and water was not recorded. Mass of wet sediment and mass of water in vial calculated as an average of all other incubations.
+S19S_0006_SED_INC-D; S19S_0006_SED_INC-M; S19S_0006_SED_INC-U; S19S_0007_SED_INC-D; S19S_0007_SED_INC-U; S19S_0008_SED_INC-D; S19S_0008_SED_INC-M; S19S_0008_SED_INC-U; S19S_0009_SED_INC-D; S19S_0009_SED_INC-M; S19S_0009_SED_INC-U; S19S_0010_SED_INC-D; S19S_0010_SED_INC-M; S19S_0010_SED_INC-U; S19S_0036_SED_INC-M
+

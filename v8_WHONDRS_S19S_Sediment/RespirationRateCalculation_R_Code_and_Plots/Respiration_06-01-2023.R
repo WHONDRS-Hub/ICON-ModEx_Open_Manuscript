@@ -1,4 +1,4 @@
-#12 November 2020
+#01 June 2023
 #WHONDRS S19S Sediment Data Package
 #The script completes the following steps:
 # 1) Removes samples for which dissolved oxygen reached 5 mg/L O2 in less than 3 minutes
@@ -19,7 +19,7 @@ rm(list=ls());graphics.off()
 
 # Set working directory to data file
 #Example:
-setwd("//pnl/projects/SBR_SFA/Campaign C/Hydropeaking_Network/WHONDRS_and_Non-WHONDRS_Data/Data_Packaging/Uploaded_to_ESS-DIVE/WHONDRS_S19S_Sediment/RespirationRateCalculation_R_Code_and_Plots/Inputs")
+setwd("C:/Users/gara009/Downloads/WHONDRS_S19S_Sediment_v7/RespirationRateCalculation_R_Code_and_Plots/Inputs/")
 
 
 data = read.csv("DO_data_formatted.csv") #reads all the data from all treatments
@@ -37,9 +37,9 @@ ymin = min(data$AVG_DO_mg_per_L)
 location=c("-U","-M","-D") # Represents upstream, midstream and downstream sediment locations
 
 # Creating a matrix to store the rates
-respiration.metrics = as.data.frame(matrix(NA, ncol = 8, nrow=1)) #ncol has to be equal to the number of exported variables
+respiration.metrics = as.data.frame(matrix(NA, ncol = 10, nrow=1)) #ncol has to be equal to the number of exported variables
 
-colnames(respiration.metrics) = c("Sample_ID","slope_of_the_regression","rate_mg_per_L_per_min","rate_mg_per_L_per_h","R_squared","R_squared_adj","p_value","total_incubation_time_min") 
+colnames(respiration.metrics) = c("Sample_ID","slope_of_the_regression","rate_mg_per_L_per_min","rate_mg_per_L_per_h","R_squared","R_squared_adj","p_value","total_incubation_time_min","number_of_points","DO_time_zero") 
 
 # Subseting data by sediment sample location
 for (i in 1:length(location)){
@@ -47,12 +47,12 @@ for (i in 1:length(location)){
       data_location_subset = data[grep(location[i],data$Sample_ID),]
       
       # Incubations associated to each sampling location
-      unique.incubations = unique(data_location_subset$Sample_ID)
-      
+       unique.incubations = unique(data_location_subset$Sample_ID)
+        
       # Creating a matrix to store the rates
-       rate =as.data.frame(matrix(NA, ncol = 8, nrow= length(unique(data$Sample_ID))))
+       rate =as.data.frame(matrix(NA, ncol = 10, nrow= length(unique(data$Sample_ID))))
       
-      colnames(rate) = c("Sample_ID","slope_of_the_regression","rate_mg_per_L_per_min","rate_mg_per_L_per_h","R_squared","R_squared_adj","p_value","total_incubation_time_min") 
+      colnames(rate) = c("Sample_ID","slope_of_the_regression","rate_mg_per_L_per_min","rate_mg_per_L_per_h","R_squared","R_squared_adj","p_value","total_incubation_time_min","number_of_points","DO_time_zero") 
       
       # Subseting data for unique incubation and organizing sampling time in decreasing order
       for (j in 1:length(unique.incubations)){
@@ -61,13 +61,16 @@ for (i in 1:length(location)){
       data_site_subset = data_site_subset[order(data_site_subset$StartMeasureTime, decreasing = FALSE),]
       data_site_subset$StartMeasureTime = as.POSIXct(data_site_subset$StartMeasureTime, format = "%H:%M")
       
-      # Only calculating rates for incubations with data collected over 3 minutes. See "readme". 
+      # Only calculating as measured rates incubations with data collected over 3 minutes. Reactors with less than 3 mins will have theoretical rates calculated. See "readme". 
       data_collection_time_min = as.numeric(difftime(data_site_subset$StartMeasureTime[nrow(data_site_subset)],data_site_subset$StartMeasureTime[1],units="mins"))#in minutes
-      if (data_collection_time_min > 3){
+      #if (data_collection_time_min > 3){
       if (nrow(data_site_subset)>1){
         for (k in 1:nrow(data_site_subset)){
           data_site_subset$time_elapsed_min[k] = as.numeric(difftime(data_site_subset$StartMeasureTime[k],data_site_subset$StartMeasureTime[1],units="mins"))#in minutes
-        }}        
+        }
+      } else{
+        data_site_subset$time_elapsed_min = 0 #in minutes
+        }       
       
        
       # Calculating rate as the slope of the linear regression between dissolved oxygen and time
@@ -80,7 +83,7 @@ for (i in 1:length(location)){
         p = summary(fit)$coefficients[4]  
         
         # Only reporting data with R_squared > 0.25. See "readme"
-        if (r > 0.25){
+        #if (r > 0.25|nrow(data_site_subset)==1){
         
           #Plotting dissolved oxygen concentration vs elapsed incubation time  
         my.formula <- y ~ x
@@ -108,7 +111,11 @@ for (i in 1:length(location)){
         rate$R_squared_adj[j] = as.numeric(abs(r.adj))
         rate$p_value[j] = p
         rate$total_incubation_time_min[j] = as.numeric(difftime(data_site_subset$StartMeasureTime[nrow(data_site_subset)],data_site_subset$StartMeasureTime[1],units="mins"))#in minutes
-        }}}
+        rate$number_of_points[j] = nrow(data_site_subset)
+        rate$DO_time_zero[j] = data_site_subset$AVG_DO_mg_per_L[1]
+      }
+      #}
+      #}
     # Removing rows where the Sample_ID was an NA  
     rate = rate[!is.na(rate$Sample_ID),]   
     # Combining the regression metrics across locations and unique incubations
@@ -119,8 +126,12 @@ for (i in 1:length(location)){
 #removes the 1st row because it is an NA
 respiration.metrics = respiration.metrics[-1,]
 
+respiration.metrics$slope_of_the_regression[is.na(respiration.metrics$slope_of_the_regression)] = -9999
+# Keep only rates with negative slopes
+respiration.metrics = subset(respiration.metrics,respiration.metrics$slope_of_the_regression<0)
+
 #Exports data
-write.csv(respiration.metrics,"WHONDRS_S19S_Sediment_Incubations_Respiration_Rates.csv", row.names = F)
+write.csv(respiration.metrics,"WHONDRS_S19S_Sediment_Incubations_Respiration_Rates_06-01-23_v2.csv", row.names = F)
 
 
 
