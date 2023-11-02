@@ -39,7 +39,7 @@ setwd("/Users/brewaterman/Documents/GitHub/ICON-ModEx_Open_Manuscript/Fig1")
 
 - Loading metadata files & binding rows
 ```{r}
-metadata1 <- read.csv("Data/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% dplyr::select(lat = "MS_Latitude_dec.deg",
+metadata1 <- read.csv("v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% dplyr::select(lat = "MS_Latitude_dec.deg",
                                                                 long = "MS_Longitude_dec.deg",
                                                                 "Date",
                                                                 site_ID = "Sample_ID",
@@ -48,7 +48,7 @@ metadata1 <- read.csv("Data/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% dpl
                                                                 state = "State_or_Province", 
                                                                 Country = "Country") %>%
                                                                  mutate(Site_ac = "no")
-metadata2 <- read.csv("Data/v4_WHONDRS_S19S_Metadata.csv") %>% dplyr::select(lat = "Sample_Latitude",
+metadata2 <- read.csv("v2_CM_SSS_Data_Package/v2_CM_SSS_Field_Metadata.csv") %>% dplyr::select(lat = "Sample_Latitude",
                                                                 long = "Sample_Longitude",
                                                                 Date = "Sample_Date",
                                                                 site_ID = "Parent_ID",
