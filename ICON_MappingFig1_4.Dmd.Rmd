@@ -1,0 +1,105 @@
+---
+title: "ICON_Mapping"
+author: "Bre Rivera Waterman"
+date: "2023-09-22"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mapping R file
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+ - import libraries
+
+```{r}
+library(tidyverse)
+library(colourpicker)
+library(lubridate)
+
+library(sf)
+library(ggspatial)
+library(spData)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+
+getwd()
+setwd("/Users/brewaterman/Documents/GitHub/ICON-ModEx_Open_Manuscript/Fig1")
+
+```
+
+
+- Loading metadata files & binding rows
+```{r}
+metadata1 <- read.csv("Data/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% dplyr::select(lat = "MS_Latitude_dec.deg",
+                                                                long = "MS_Longitude_dec.deg",
+                                                                "Date",
+                                                                site_ID = "Sample_ID",
+                                                                Site_name = "Stream_Name",
+                                                                Agency = "Associated_Site",
+                                                                state = "State_or_Province", 
+                                                                Country = "Country") %>%
+                                                                 mutate(Site_ac = "no")
+metadata2 <- read.csv("Data/v4_WHONDRS_S19S_Metadata.csv") %>% dplyr::select(lat = "Sample_Latitude",
+                                                                long = "Sample_Longitude",
+                                                                Date = "Sample_Date",
+                                                                site_ID = "Parent_ID",
+                                                                Site_name = "Site_Name",
+                                                                Agency = "Organization",
+                                                                state = "State",
+                                                                Site_ac = "Site_ID"
+                                                                ) %>% mutate(Country = "USA")
+
+
+combo_metadata <- rbind(metadata1,metadata2) %>% 
+  #metadata2 %>%
+   filter(Country == "USA", state != "Puerto Rico", state !="Alaska") %>%
+   mutate(Date_whole = ymd(Date), Year = year(Date),
+          lat = as.numeric(lat), long = as.numeric(long),
+  Time_series = case_when(
+    str_detect(Site_ac, "HOPB|MAYF|MART") ~"Yes", 
+    TRUE ~ "No"),
+   #Agency = ifelse(str_detect(Agency, "NEON"), "NEON", "Other"), #make this filter for time series sites, not just NEON
+   season = case_when(
+   month(Date) %in% c(3,4,5) ~ "Spring", 
+   month(Date) %in% c(6,7,8) ~ "Summer", 
+   month(Date) %in% c(9,10,11) ~ "Fall", 
+   TRUE ~ "Winter", 
+))
+
+
+```
+
+
+ - Fig 1; seasonal map with time series site different shape
+```{r}
+
+usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE))
+
+ggplot(usa) +
+  geom_sf(color = "#2b2b2b", fill = "white", size=0.125) +
+  coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
+  geom_spatial_point(data=combo_metadata, aes(x=long,y=lat, color = season, shape = Time_series, size = Time_series )) +     
+  scale_color_manual(values =  c("#8c510a","#dfc27d", "#c7eae5", "#01665e" ))+ #color blind safe colors
+  #scale_color_manual(values =  c("#8B2252", "#EE799F", "#4d9221", "#e6f5d0" ))+ #color blind safe colors
+  scale_shape_manual(values = c(16, 8)) +
+    scale_size_manual(values = c(4, 8)) +
+  ylab("Latitude") + 
+  xlab("Longitude") + 
+  theme_classic()
+
+
+```
+ 
+
+
+
+
