@@ -1,0 +1,71 @@
+# HeaderRows_8
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+# Dissolved_Oxygen_Saturation; percent_saturation; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen,Dissolved_Oxygen_Saturation
+ 2022-12-05 08:39:00,Central Standard Time (UTC-6),CM_056,806577,3.46,14.06,8.998,87.42
+ 2022-12-05 08:40:00,Central Standard Time (UTC-6),CM_056,806577,3.46,14.05,9.001,87.43
+ 2022-12-05 08:41:00,Central Standard Time (UTC-6),CM_056,806577,3.47,14.02,9.017,87.54
+ 2022-12-05 08:42:00,Central Standard Time (UTC-6),CM_056,806577,3.46,14.03,9.001,87.4
+ 2022-12-05 08:43:00,Central Standard Time (UTC-6),CM_056,806577,3.47,14.02,9.008,87.45
+ 2022-12-05 08:44:00,Central Standard Time (UTC-6),CM_056,806577,3.47,14,9.02,87.52
+ 2022-12-05 08:45:00,Central Standard Time (UTC-6),CM_056,806577,3.47,14.01,9.011,87.46
+ 2022-12-05 08:46:00,Central Standard Time (UTC-6),CM_056,806577,3.47,14,9.013,87.45
+ 2022-12-05 08:47:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.99,9.015,87.45
+ 2022-12-05 08:48:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.98,9.017,87.45
+ 2022-12-05 08:49:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.97,9.02,87.47
+ 2022-12-05 08:50:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.98,9.031,87.59
+ 2022-12-05 08:51:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.95,9.041,87.64
+ 2022-12-05 08:52:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.95,9.043,87.64
+ 2022-12-05 08:53:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.96,9.035,87.6
+ 2022-12-05 08:54:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.96,9.033,87.58
+ 2022-12-05 08:55:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.95,9.038,87.59
+ 2022-12-05 08:56:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.95,9.039,87.62
+ 2022-12-05 08:57:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.94,9.05,87.69
+ 2022-12-05 08:58:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.95,9.044,87.65
+ 2022-12-05 08:59:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.05,87.67
+ 2022-12-05 09:00:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.95,9.047,87.68
+ 2022-12-05 09:01:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.046,87.64
+ 2022-12-05 09:02:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.05,87.67
+ 2022-12-05 09:03:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.94,9.057,87.76
+ 2022-12-05 09:04:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.05,87.67
+ 2022-12-05 09:05:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.056,87.73
+ 2022-12-05 09:06:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.92,9.056,87.72
+ 2022-12-05 09:07:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.93,9.06,87.77
+ 2022-12-05 09:08:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.94,9.046,87.65
+ 2022-12-05 09:09:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.059,87.76
+ 2022-12-05 09:10:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.049,87.71
+ 2022-12-05 09:11:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.93,9.059,87.76
+ 2022-12-05 09:12:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.91,9.053,87.67
+ 2022-12-05 09:13:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.058,87.77
+ 2022-12-05 09:14:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.055,87.74
+ 2022-12-05 09:15:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.057,87.76
+ 2022-12-05 09:16:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.93,9.059,87.76
+ 2022-12-05 09:17:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.048,87.67
+ 2022-12-05 09:18:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.057,87.76
+ 2022-12-05 09:19:00,Central Standard Time (UTC-6),CM_056,806577,3.47,13.92,9.053,87.69
+ 2022-12-05 09:20:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.046,87.65
+ 2022-12-05 09:21:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.93,9.051,87.68
+ 2022-12-05 09:22:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.93,9.055,87.72
+ 2022-12-05 09:23:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.051,87.7
+ 2022-12-05 09:24:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.062,87.81
+ 2022-12-05 09:25:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.036,87.57
+ 2022-12-05 09:26:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.053,87.72
+ 2022-12-05 09:27:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.052,87.71
+ 2022-12-05 09:28:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.045,87.66
+ 2022-12-05 09:29:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.057,87.78
+ 2022-12-05 09:30:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.93,9.066,87.83
+ 2022-12-05 09:31:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.056,87.77
+ 2022-12-05 09:32:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.93,9.066,87.83
+ 2022-12-05 09:33:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.057,87.78
+ 2022-12-05 09:34:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.056,87.75
+ 2022-12-05 09:35:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.065,87.85
+ 2022-12-05 09:36:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.045,87.66
+ 2022-12-05 09:37:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.94,9.059,87.78
+ 2022-12-05 09:38:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.95,9.05,87.71
+ 2022-12-05 09:39:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.97,9.05,87.76
+ 2022-12-05 09:40:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.97,9.046,87.72
+ 2022-12-05 09:41:00,Central Standard Time (UTC-6),CM_056,806577,3.46,13.96,9.048,87.72
