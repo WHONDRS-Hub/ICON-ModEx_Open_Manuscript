@@ -1,0 +1,73 @@
+# HeaderRows_8
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+# Dissolved_Oxygen_Saturation; percent_saturation; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen,Dissolved_Oxygen_Saturation
+ 2023-04-03 10:50:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.5,12.343,92.93
+ 2023-04-03 10:51:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.49,12.361,93.04
+ 2023-04-03 10:52:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.49,12.372,93.12
+ 2023-04-03 10:53:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.53,12.356,93.1
+ 2023-04-03 10:54:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.5,12.36,93.06
+ 2023-04-03 10:55:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.53,12.351,93.06
+ 2023-04-03 10:56:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.54,12.357,93.14
+ 2023-04-03 10:57:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.53,12.361,93.14
+ 2023-04-03 10:58:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.59,12.325,93.02
+ 2023-04-03 10:59:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.55,12.354,93.14
+ 2023-04-03 11:00:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.58,12.329,93.03
+ 2023-04-03 11:01:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.6,12.324,93.04
+ 2023-04-03 11:02:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.62,12.333,93.13
+ 2023-04-03 11:03:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.63,12.316,93.05
+ 2023-04-03 11:04:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.63,12.317,93.06
+ 2023-04-03 11:05:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.62,12.333,93.16
+ 2023-04-03 11:06:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.66,12.314,93.09
+ 2023-04-03 11:07:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.68,12.307,93.09
+ 2023-04-03 11:08:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.69,12.307,93.11
+ 2023-04-03 11:09:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.68,12.319,93.18
+ 2023-04-03 11:10:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.69,12.317,93.19
+ 2023-04-03 11:11:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.71,12.306,93.16
+ 2023-04-03 11:12:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.71,12.29,93.03
+ 2023-04-03 11:13:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.72,12.292,93.07
+ 2023-04-03 11:14:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.72,12.299,93.13
+ 2023-04-03 11:15:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.74,12.293,93.13
+ 2023-04-03 11:16:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.75,12.279,93.05
+ 2023-04-03 11:17:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.74,12.279,93.03
+ 2023-04-03 11:18:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.76,12.298,93.22
+ 2023-04-03 11:19:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.77,12.295,93.22
+ 2023-04-03 11:20:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.78,12.285,93.17
+ 2023-04-03 11:21:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.79,12.276,93.13
+ 2023-04-03 11:22:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.82,12.261,93.09
+ 2023-04-03 11:23:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.84,12.258,93.12
+ 2023-04-03 11:24:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.84,12.27,93.21
+ 2023-04-03 11:25:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.83,12.272,93.2
+ 2023-04-03 11:26:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.82,12.284,93.27
+ 2023-04-03 11:27:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.85,12.272,93.25
+ 2023-04-03 11:28:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.86,12.256,93.16
+ 2023-04-03 11:29:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.85,12.266,93.2
+ 2023-04-03 11:30:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.91,12.252,93.25
+ 2023-04-03 11:31:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.91,12.251,93.24
+ 2023-04-03 11:32:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.93,12.232,93.15
+ 2023-04-03 11:33:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.93,12.241,93.22
+ 2023-04-03 11:34:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.97,12.226,93.2
+ 2023-04-03 11:35:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.99,12.214,93.16
+ 2023-04-03 11:36:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.98,12.225,93.22
+ 2023-04-03 11:37:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.99,12.22,93.21
+ 2023-04-03 11:38:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4,12.223,93.26
+ 2023-04-03 11:39:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,3.99,12.223,93.23
+ 2023-04-03 11:40:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.03,12.21,93.23
+ 2023-04-03 11:41:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.07,12.198,93.21
+ 2023-04-03 11:42:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.07,12.204,93.26
+ 2023-04-03 11:43:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.07,12.204,93.26
+ 2023-04-03 11:44:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.05,12.195,93.16
+ 2023-04-03 11:45:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.1,12.19,93.23
+ 2023-04-03 11:46:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.1,12.205,93.34
+ 2023-04-03 11:47:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.13,12.179,93.22
+ 2023-04-03 11:48:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.11,12.194,93.28
+ 2023-04-03 11:49:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.13,12.181,93.23
+ 2023-04-03 11:50:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.13,12.196,93.35
+ 2023-04-03 11:51:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.15,12.174,93.23
+ 2023-04-03 11:52:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.16,12.172,93.24
+ 2023-04-03 11:53:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.2,12.157,93.22
+ 2023-04-03 11:54:00,Eastern Daylight Time (UTC-4),CM_046,243111,3.48,4.18,12.176,93.32

@@ -1,0 +1,51 @@
+# HeaderRows_8
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+# Dissolved_Oxygen_Saturation; percent_saturation; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen,Dissolved_Oxygen_Saturation
+ 2022-10-31 11:45:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.78,9.796,88.38
+ 2022-10-31 11:46:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.75,9.813,88.48
+ 2022-10-31 11:47:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.74,9.809,88.42
+ 2022-10-31 11:48:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.73,9.787,88.2
+ 2022-10-31 11:49:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.73,9.774,88.09
+ 2022-10-31 11:50:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.72,9.764,87.98
+ 2022-10-31 11:51:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.72,9.755,87.9
+ 2022-10-31 11:52:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.74,9.76,87.98
+ 2022-10-31 11:53:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.72,9.8,88.3
+ 2022-10-31 11:54:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.72,9.773,88.06
+ 2022-10-31 11:55:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.73,9.769,88.04
+ 2022-10-31 11:56:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.73,9.809,88.4
+ 2022-10-31 11:57:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.73,9.812,88.43
+ 2022-10-31 11:58:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.47,10.72,9.828,88.56
+ 2022-10-31 11:59:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.71,9.857,88.8
+ 2022-10-31 12:00:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.73,9.866,88.92
+ 2022-10-31 12:01:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.73,9.877,89.02
+ 2022-10-31 12:02:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.72,9.879,89.02
+ 2022-10-31 12:03:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.73,9.884,89.08
+ 2022-10-31 12:04:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.75,9.868,88.97
+ 2022-10-31 12:05:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.77,9.849,88.84
+ 2022-10-31 12:06:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.75,9.882,89.1
+ 2022-10-31 12:07:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.78,9.866,89.01
+ 2022-10-31 12:08:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.78,9.863,88.98
+ 2022-10-31 12:09:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.8,9.86,88.99
+ 2022-10-31 12:10:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.8,9.861,89.02
+ 2022-10-31 12:11:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.8,9.899,89.34
+ 2022-10-31 12:12:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.81,9.88,89.21
+ 2022-10-31 12:13:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.81,9.888,89.28
+ 2022-10-31 12:14:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.83,9.894,89.37
+ 2022-10-31 12:15:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.83,9.9,89.43
+ 2022-10-31 12:16:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.85,9.89,89.38
+ 2022-10-31 12:17:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.84,9.878,89.25
+ 2022-10-31 12:18:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.87,9.87,89.23
+ 2022-10-31 12:19:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.87,9.903,89.53
+ 2022-10-31 12:20:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.9,9.914,89.71
+ 2022-10-31 12:21:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.9,9.935,89.9
+ 2022-10-31 12:22:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.92,9.934,89.92
+ 2022-10-31 12:23:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.91,9.958,90.12
+ 2022-10-31 12:24:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.96,9.949,90.13
+ 2022-10-31 12:25:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.97,9.975,90.39
+ 2022-10-31 12:26:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.96,9.998,90.58
+ 2022-10-31 12:27:00,Eastern Daylight Time (UTC-4),CM_037,553257,3.46,10.99,9.992,90.6
