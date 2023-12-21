@@ -1,0 +1,68 @@
+# HeaderRows_8
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+# Dissolved_Oxygen_Saturation; percent_saturation; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen,Dissolved_Oxygen_Saturation
+ 2023-02-27 10:56:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.52,12.182,106.7
+ 2023-02-27 10:57:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.55,12.172,106.68
+ 2023-02-27 10:58:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.54,12.2,106.9
+ 2023-02-27 10:59:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.54,12.212,107.01
+ 2023-02-27 11:00:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.57,12.219,107.14
+ 2023-02-27 11:01:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.57,12.207,107.06
+ 2023-02-27 11:02:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.56,12.187,106.84
+ 2023-02-27 11:03:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.46,12.225,106.94
+ 2023-02-27 11:04:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.46,12.285,107.46
+ 2023-02-27 11:05:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.46,12.302,107.61
+ 2023-02-27 11:06:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.46,12.344,107.95
+ 2023-02-27 11:07:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.45,12.397,108.39
+ 2023-02-27 11:08:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.48,12.464,109.07
+ 2023-02-27 11:09:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.55,12.446,109.09
+ 2023-02-27 11:10:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.56,12.469,109.31
+ 2023-02-27 11:11:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.61,12.449,109.28
+ 2023-02-27 11:12:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.65,12.455,109.43
+ 2023-02-27 11:13:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.64,12.445,109.32
+ 2023-02-27 11:14:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.66,12.455,109.45
+ 2023-02-27 11:15:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.64,12.488,109.69
+ 2023-02-27 11:16:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.69,12.467,109.63
+ 2023-02-27 11:17:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.7,12.422,109.26
+ 2023-02-27 11:18:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.67,12.408,109.06
+ 2023-02-27 11:19:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.64,12.436,109.24
+ 2023-02-27 11:20:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.69,12.412,109.14
+ 2023-02-27 11:21:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.7,12.408,109.13
+ 2023-02-27 11:22:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.65,12.398,108.93
+ 2023-02-27 11:23:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.67,12.39,108.9
+ 2023-02-27 11:24:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.63,12.415,109.03
+ 2023-02-27 11:25:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.6,12.39,108.74
+ 2023-02-27 11:26:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.59,12.44,109.15
+ 2023-02-27 11:27:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.57,12.394,108.68
+ 2023-02-27 11:28:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.56,12.432,108.99
+ 2023-02-27 11:29:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.54,12.416,108.8
+ 2023-02-27 11:30:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.53,12.426,108.86
+ 2023-02-27 11:31:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.5,12.373,108.33
+ 2023-02-27 11:32:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.52,12.446,109.01
+ 2023-02-27 11:33:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.48,12.402,108.53
+ 2023-02-27 11:34:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.49,12.466,109.12
+ 2023-02-27 11:35:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.45,12.402,108.44
+ 2023-02-27 11:36:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.39,12.392,108.21
+ 2023-02-27 11:37:00,Eastern Standard Time (UTC-5),CM_078,164227,3.49,9.41,12.467,108.91
+ 2023-02-27 11:38:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.46,12.474,109.12
+ 2023-02-27 11:39:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.57,12.457,109.23
+ 2023-02-27 11:40:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.69,12.517,110.07
+ 2023-02-27 11:41:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.75,12.455,109.69
+ 2023-02-27 11:42:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.84,12.501,110.33
+ 2023-02-27 11:43:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.91,12.467,110.2
+ 2023-02-27 11:44:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.96,12.454,110.23
+ 2023-02-27 11:45:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.98,12.463,110.36
+ 2023-02-27 11:46:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.97,12.347,109.3
+ 2023-02-27 11:47:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.92,12.421,109.84
+ 2023-02-27 11:48:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.91,12.398,109.61
+ 2023-02-27 11:49:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.86,12.409,109.57
+ 2023-02-27 11:50:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.8,12.441,109.71
+ 2023-02-27 11:51:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.8,12.417,109.47
+ 2023-02-27 11:52:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.73,12.429,109.41
+ 2023-02-27 11:53:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.63,12.443,109.27
+ 2023-02-27 11:54:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.58,12.473,109.42
+ 2023-02-27 11:55:00,Eastern Standard Time (UTC-5),CM_078,164227,3.48,9.55,12.498,109.54
