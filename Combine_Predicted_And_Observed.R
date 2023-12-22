@@ -67,28 +67,29 @@ predicted <- read_csv(str_c(dynamic_learning_dir, '/scripts/post_01_output_ml_pr
 CM_metadata <- read_csv('./v3_CM_SSS_Data_Package/v3_CM_SSS_Field_Metadata.csv')
 
 CM_coords <- CM_metadata %>%
-  select(Parent_ID, Sample_Latitude, Sample_Longitude, Site_ID) %>%
+  select(Parent_ID, Sample_Latitude, Sample_Longitude, Site_ID, Sample_Date) %>%
   rename(Observed_Latitude = Sample_Latitude,
-         Observed_Longitude = Sample_Longitude)
+         Observed_Longitude = Sample_Longitude,
+         Observed_Sample_Date = Sample_Date)
 
 S19S_metadata <- read_csv('./v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv') %>%
   filter(Study_Code != 'Study code')
 
 # pivot the upstream, downstream, and midstream coordinates to each be a row
 u <- S19S_metadata %>%
-  select(Sample_ID,  US_Latitude_dec.deg, US_Longitude_dec.deg) %>%
+  select(Sample_ID,  US_Latitude_dec.deg, US_Longitude_dec.deg, Date) %>%
   rename(Observed_Latitude = US_Latitude_dec.deg, 
          Observed_Longitude = US_Longitude_dec.deg) %>%
   mutate(Sample_Name = paste0(Sample_ID, "_SED_INC-U"))
 
 m <- S19S_metadata %>%
-  select(Sample_ID,  MS_Latitude_dec.deg, MS_Longitude_dec.deg) %>%
+  select(Sample_ID,  MS_Latitude_dec.deg, MS_Longitude_dec.deg, Date) %>%
   rename(Observed_Latitude = MS_Latitude_dec.deg, 
          Observed_Longitude = MS_Longitude_dec.deg) %>%
   mutate(Sample_Name = paste0(Sample_ID, "_SED_INC-M"))
 
 d <- S19S_metadata %>%
-  select(Sample_ID,  DS_Latitude_dec.deg, DS_Longitude_dec.deg) %>%
+  select(Sample_ID,  DS_Latitude_dec.deg, DS_Longitude_dec.deg, Date) %>%
   rename(Observed_Latitude = DS_Latitude_dec.deg, 
          Observed_Longitude = DS_Longitude_dec.deg) %>%
   mutate(Sample_Name = paste0(Sample_ID, "_SED_INC-D"))
@@ -97,7 +98,8 @@ S19S_coords <- u %>%
   add_row(m) %>%
   add_row(d) %>%
   arrange(Sample_ID) %>%
-  rename(Site_ID = Sample_ID)
+  rename(Site_ID = Sample_ID,
+         Observed_Sample_Date = Date)
 
 observed_CM_combine <- observed_CM %>%
   full_join(CM_coords) %>%
@@ -107,7 +109,8 @@ observed_CM_combine <- observed_CM %>%
 observed_S19S_combine <- observed_S19S %>%
   left_join(S19S_coords) %>%
   mutate(Observed_Latitude = as.numeric(Observed_Latitude),
-         Observed_Longitude = as.numeric(Observed_Longitude))
+         Observed_Longitude = as.numeric(Observed_Longitude),
+         Observed_Sample_Date = ymd(Observed_Sample_Date))
 
 full_observed <- observed_CM_combine %>%
   add_row(observed_S19S_combine) %>%
@@ -190,7 +193,10 @@ combine_predicted_observed <- predicted_filter %>%
          Methods_Deviation = case_when(is.na(Methods_Deviation) | Methods_Deviation == '' ~ 'N/A',
                                  TRUE ~ Methods_Deviation),
          Site_ID = case_when(is.na(Site_ID) ~ 'N/A',
-                                 TRUE ~ Site_ID)) %>%
+                                 TRUE ~ Site_ID),
+         Observed_Sample_Date = as.character(str_c(' ', ymd(Observed_Sample_Date))),
+         Observed_Sample_Date = case_when(is.na(Observed_Sample_Date) ~ '-9999',
+                                          TRUE ~ Observed_Sample_Date)) %>%
   mutate_all(~replace_na(., -9999))
 
 
