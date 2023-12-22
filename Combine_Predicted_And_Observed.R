@@ -183,8 +183,8 @@ combine_predicted_observed <- predicted_filter %>%
                               TRUE ~ Predicted_Latitude),
          Longitude = case_when(!is.na(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) ~ Observed_Longitude, 
                               TRUE ~ Predicted_Longitude),
-         Log_Observed_Normalized_Respiration_Rate = log(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
-         Log_Predicted_Normalized_Respiration_Rate = log(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
+         Log_Observed_Normalized_Respiration_Rate = log10(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
+         Log_Predicted_Normalized_Respiration_Rate = log10(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
          Site_ID = case_when(str_detect(Sample_Name, '^MP-|^SP-') ~ Sample_Name,
                              TRUE ~ Site_ID)) %>%
   select(-Observed_Latitude, -Observed_Longitude, -Predicted_Latitude, -Predicted_Longitude)%>%
