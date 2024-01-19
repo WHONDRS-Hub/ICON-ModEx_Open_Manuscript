@@ -7,7 +7,7 @@
 # ==============================================================================
 #
 # Author: Brieanne Forbes
-# 8 December 2023
+# 21 December 2023
 #
 # ==============================================================================
 
@@ -19,16 +19,21 @@ rm(list=ls(all=T))
 
 current_path <- rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path))
-setwd(".")
+setwd("./../")
+
+# File path to the dynamic learning rivers github repo
+# https://github.com/parallelworks/dynamic-learning-rivers/tree/Nov-2023-log10
+# Ensure you are on the correct branch. For this script, I am using the Nov-2023-log10 branch
+dynamic_learning_dir <- './../dynamic-learning-rivers/'
 
 # ==========================  find and read data files =========================
 
 # Data downloaded from https://data.ess-dive.lbl.gov/datasets/doi:10.15485/1923689 
-observed_CM <- read_csv('./v2_CM_SSS_Data_Package/CM_SSS_Sediment_Normalized_Respiration_Rates.csv', 
+observed_CM <- read_csv('./v3_CM_SSS_Data_Package/Sample_Data/v2_CM_SSS_Sediment_Normalized_Respiration_Rates.csv', 
                             skip = 2,
                             na = c('N/A', '-9999', NA, '')) %>%
   filter(!is.na(Sample_Name)) %>%
-  select(-Field_Name, -Material) %>% 
+  select(-Field_Name, -Material, -IGSN) %>% 
   rename(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) %>%
   mutate(Parent_ID = str_extract(Sample_Name, '.{6}(?=_INC)'))
 
@@ -49,8 +54,8 @@ observed_S19S <- read_csv('./v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Norm
             na.rm = T)%>% 
   rename(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) 
 
-# Data downloaded from https://github.com/parallelworks/dynamic-learning-rivers/tree/Nov-2023-log10
-predicted <- read_csv('./post_01_output_ml_predict_avg-Nov2023-log10.csv') %>%
+# Ensure you are on the correct branch. For this script, I am using the Nov-2023-log10 branch
+predicted <- read_csv(str_c(dynamic_learning_dir, '/scripts/post_01_output_ml_predict_avg.csv')) %>%
   rename(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment,
          Predicted_Latitude = Sample_Latitude,
          Predicted_Longitude = Sample_Longitude,
@@ -59,31 +64,32 @@ predicted <- read_csv('./post_01_output_ml_predict_avg-Nov2023-log10.csv') %>%
 
 # ========  find and read metadata files and combine with observed data ========
 
-CM_metadata <- read_csv('./v2_CM_SSS_Data_Package/v2_CM_SSS_Field_Metadata.csv')
+CM_metadata <- read_csv('./v3_CM_SSS_Data_Package/v3_CM_SSS_Field_Metadata.csv')
 
 CM_coords <- CM_metadata %>%
-  select(Parent_ID, Sample_Latitude, Sample_Longitude, Site_ID) %>%
+  select(Parent_ID, Sample_Latitude, Sample_Longitude, Site_ID, Sample_Date) %>%
   rename(Observed_Latitude = Sample_Latitude,
-         Observed_Longitude = Sample_Longitude)
+         Observed_Longitude = Sample_Longitude,
+         Observed_Sample_Date = Sample_Date)
 
 S19S_metadata <- read_csv('./v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv') %>%
   filter(Study_Code != 'Study code')
 
 # pivot the upstream, downstream, and midstream coordinates to each be a row
 u <- S19S_metadata %>%
-  select(Sample_ID,  US_Latitude_dec.deg, US_Longitude_dec.deg) %>%
+  select(Sample_ID,  US_Latitude_dec.deg, US_Longitude_dec.deg, Date) %>%
   rename(Observed_Latitude = US_Latitude_dec.deg, 
          Observed_Longitude = US_Longitude_dec.deg) %>%
   mutate(Sample_Name = paste0(Sample_ID, "_SED_INC-U"))
 
 m <- S19S_metadata %>%
-  select(Sample_ID,  MS_Latitude_dec.deg, MS_Longitude_dec.deg) %>%
+  select(Sample_ID,  MS_Latitude_dec.deg, MS_Longitude_dec.deg, Date) %>%
   rename(Observed_Latitude = MS_Latitude_dec.deg, 
          Observed_Longitude = MS_Longitude_dec.deg) %>%
   mutate(Sample_Name = paste0(Sample_ID, "_SED_INC-M"))
 
 d <- S19S_metadata %>%
-  select(Sample_ID,  DS_Latitude_dec.deg, DS_Longitude_dec.deg) %>%
+  select(Sample_ID,  DS_Latitude_dec.deg, DS_Longitude_dec.deg, Date) %>%
   rename(Observed_Latitude = DS_Latitude_dec.deg, 
          Observed_Longitude = DS_Longitude_dec.deg) %>%
   mutate(Sample_Name = paste0(Sample_ID, "_SED_INC-D"))
@@ -92,7 +98,8 @@ S19S_coords <- u %>%
   add_row(m) %>%
   add_row(d) %>%
   arrange(Sample_ID) %>%
-  rename(Site_ID = Sample_ID)
+  rename(Site_ID = Sample_ID,
+         Observed_Sample_Date = Date)
 
 observed_CM_combine <- observed_CM %>%
   full_join(CM_coords) %>%
@@ -102,7 +109,8 @@ observed_CM_combine <- observed_CM %>%
 observed_S19S_combine <- observed_S19S %>%
   left_join(S19S_coords) %>%
   mutate(Observed_Latitude = as.numeric(Observed_Latitude),
-         Observed_Longitude = as.numeric(Observed_Longitude))
+         Observed_Longitude = as.numeric(Observed_Longitude),
+         Observed_Sample_Date = ymd(Observed_Sample_Date))
 
 full_observed <- observed_CM_combine %>%
   add_row(observed_S19S_combine) %>%
@@ -126,6 +134,47 @@ observed_site_list <- full_observed %>%
 predicted_filter <- predicted_filter %>%
   filter(!Sample_Name %in% observed_site_list)
 
+# ====================== fill in prediction for S19S_0085 ======================
+# Prediction is missing from final output because it does not have a pH value and
+# is excluded from the PCA, therefore there is no associated error
+# To pull the prediction, we have to get the average of the 10 ML model predictions
+
+prediction_files <- list.files(str_c(dynamic_learning_dir, '/ml_models/'), 'sl_predictions.csv',full.names = T, recursive = T)
+
+combine <- tibble("Sample_ID" = as.character(),
+                  "Sample_Longitude" = as.numeric(),
+                  "Sample_Latitude" = as.numeric(),
+                  "Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment" = as.numeric())
+
+for (prediction_file in prediction_files) {
+  
+  read_file <- read_csv(prediction_file) %>%
+    filter(str_detect(Sample_ID, 'S19S_0085')) %>%
+    select(-contains('error'))
+  
+  combine <- combine %>%
+    add_row(read_file)
+  
+}
+
+#average the model predictions
+summary <- combine %>%
+  group_by(Sample_ID, Sample_Longitude, Sample_Latitude) %>%
+  summarise(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = mean(Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>%
+  rename(Sample_Name = Sample_ID,
+         Predicted_Longitude = Sample_Longitude,
+         Predicted_Latitude = Sample_Latitude) %>%
+  add_column("mean.error" = NA,
+             "predict.error" = NA,
+             "pca.dist" = NA,
+             "mean.error.scaled" = NA,
+             "pca.dist.scaled" = NA,
+             "combined.metric" = NA)
+
+#put results into predicted file
+predicted_filter <- predicted_filter %>%
+  add_row(summary)
+
 # ====================== combine predicted and observed ========================
 
 combine_predicted_observed <- predicted_filter %>%
@@ -134,8 +183,8 @@ combine_predicted_observed <- predicted_filter %>%
                               TRUE ~ Predicted_Latitude),
          Longitude = case_when(!is.na(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) ~ Observed_Longitude, 
                               TRUE ~ Predicted_Longitude),
-         Log_Observed_Normalized_Respiration_Rate = log(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
-         Log_Predicted_Normalized_Respiration_Rate = log(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
+         Log_Observed_Normalized_Respiration_Rate = log10(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
+         Log_Predicted_Normalized_Respiration_Rate = log10(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
          Site_ID = case_when(str_detect(Sample_Name, '^MP-|^SP-') ~ Sample_Name,
                              TRUE ~ Site_ID)) %>%
   select(-Observed_Latitude, -Observed_Longitude, -Predicted_Latitude, -Predicted_Longitude)%>%
@@ -144,8 +193,14 @@ combine_predicted_observed <- predicted_filter %>%
          Methods_Deviation = case_when(is.na(Methods_Deviation) | Methods_Deviation == '' ~ 'N/A',
                                  TRUE ~ Methods_Deviation),
          Site_ID = case_when(is.na(Site_ID) ~ 'N/A',
-                                 TRUE ~ Site_ID)) %>%
+                                 TRUE ~ Site_ID),
+         Observed_Sample_Date = as.character(str_c(' ', ymd(Observed_Sample_Date))),
+         Observed_Sample_Date = case_when(is.na(Observed_Sample_Date) ~ '-9999',
+                                          TRUE ~ Observed_Sample_Date),
+         Raw_Error = (Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment - Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)/Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) %>%
   mutate_all(~replace_na(., -9999))
+
+
 
 # ================================== write file ================================
 
