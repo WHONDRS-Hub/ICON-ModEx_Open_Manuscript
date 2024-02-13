@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(colourpicker)
 library(lubridate)
-
+library(emmeans)
 library(sf)
 library(ggspatial)
 library(spData)
@@ -86,18 +86,27 @@ combo_metadata <- rbind(metadata1,metadata2) %>%  #combining datasets
 usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE))
 
 ggplot(usa) +
-  geom_sf(color = "#2b2b2b", fill = "white", size=0.125) +
-  coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
-  #geom_spatial_point(data=combo_metadata, aes(x=long,y=lat, fill = season),  pch = 21, size = 4) +  
+  geom_sf(color = "#2b2b2b", fill = "#FCFCFC", size=0.125) +
+  coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs")) +  #geom_spatial_point(data=combo_metadata, aes(x=long,y=lat, fill = season),  pch = 21, size = 4) +  
    geom_spatial_point(data=combo_metadata, aes(x=long,y=lat, fill = season, shape = Time_series, size = Time_series)) + 
 
   scale_fill_manual(values =  c("#8c510a","#dfc27d", "#c7eae5", "#01665e" ))+ #color blind safe colors
   #scale_color_manual(values =  c("#8B2252", "#EE799F", "#4d9221", "#e6f5d0" ))+ #color blind safe colors
   scale_shape_manual(values = c(21, 15)) + 
-  scale_size_manual(values = c(4, 6)) +
+  scale_size_manual(values = c(5, 7)) +
   ylab("Latitude") + 
   xlab("Longitude") + 
-  theme_classic()
+   annotation_scale(location = "bl", width_hint = 0.3,  pad_x = unit(0.5, "in"), pad_y = unit(0.5, "in")) +
+    annotation_north_arrow(location = "bl", which_north = "true", 
+        pad_x = unit(0.75, "in"), pad_y = unit(0.75, "in"),
+        style = north_arrow_fancy_orienteering) +
+  ggtitle("Sites sampled across CONUS", subtitle = "Some subtitle here") +
+  theme_bw() + 
+      theme(panel.grid.major = element_line(color = gray(0.9), linetype = "dashed", 
+        size = 0.1), panel.background = element_rect(fill = "aliceblue"), text = element_text(size = 18)) +
+  labs(fill = "Season", shape = "Time series") + 
+  guides(size = "none", fill = guide_legend(override.aes = list(size = 5, shape = 21)),  shape = guide_legend(override.aes = list(size = 5)))  
+
 
 
 ```
@@ -114,26 +123,41 @@ combods <- read.csv("C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscri
 
 #scatter plot
 combods %>% ggplot(aes(abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
-  geom_point() + 
+  geom_point(size = 4, alpha = 0.5) + 
     geom_abline (slope=1, linetype = "dashed", color="Red") + 
-    stat_poly_line(color = "light grey", alpha = 0.01) +
-  stat_poly_eq(use_label(c( "R2"))) +
+#    stat_poly_line(color = "light grey", alpha = 0.01) +
+ # stat_poly_eq(use_label(c( "R2"))) +
   ylab("Observed rates") + 
   xlab("Predicted rates") + 
     lims(y = c(0,4000), x = c(0,4000)) + 
-  theme_classic()
+  theme_classic() +
+   theme(text = element_text(size = 18))
 
 
-#trying to get log rates to fully plot
+combods %>% filter(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment < abs(500)) %>% #filter not working
+  ggplot(aes(abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+#    stat_poly_line(color = "light grey", alpha = 0.01) +
+ # stat_poly_eq(use_label(c( "R2"))) +
+  ylab("Observed rates") + 
+  xlab("Predicted rates") + 
+    lims(y = c(0,500), x = c(0,500)) + 
+  theme_classic() + 
+     theme(text = element_text(size = 18))
+
+
 combods %>% 
-  ggplot() +
-  geom_point(aes(log(-Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment+10),log(-Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment+10) )) + 
-  geom_abline (slope=1, linetype = "dashed", color="Red") + 
-  ylab("log(Observed rates + 10)") + 
-  xlab("log(Predicted rates + 10)") + 
-  #lims(y = c(4,10), x = c(4,10)) + 
-  theme_classic()
-
+  ggplot(aes(abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+#    stat_poly_line(color = "light grey", alpha = 0.01) +
+ # stat_poly_eq(use_label(c( "R2"))) +
+  ylab("Observed rates") + 
+  xlab("Predicted rates") + 
+    lims(y = c(500,4000), x = c(500,4000)) + 
+  theme_classic() + 
+     theme(text = element_text(size = 18))
 
 ```
  
@@ -150,35 +174,42 @@ library(RColorBrewer)
 
 
 Obs <- ggplot(usa) +
-  geom_sf(color = "#2b2b2b", fill = "white", size=0.125) +
+  geom_sf(color = "#2b2b2b", fill = "#FCFCFC", size=0.125) +
   coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
-  geom_spatial_point(data=combods, aes(x=Longitude,y=Latitude, fill = log(-LogObs+10)), pch = 21, size =3) +     
+  geom_spatial_point(data=combods, aes(x=Longitude,y=Latitude, fill = log(-LogObs+10)), pch = 21, size =4) +     
   #scale_shape_manual(values = c(16, 8)) +
    # scale_size_manual(values = c(4, 8)) +
   scale_fill_distiller(palette = "Oranges", direction = 1,  
                         limits = c(min(log(0+10)), max(log(4000+10)) )) + 
   ylab("Latitude") + 
-  xlab("Longitude") +
-  theme_classic()
+  xlab("") +
+   ggtitle("Observed respiration rates at sampled sites") +
+ theme_bw() +
+   theme(panel.background = element_rect(fill = "aliceblue"), text = element_text(size = 15), legend.position ="none") +
+    labs(fill = "log(Resp. + 10)") 
+
 
   
  Pred<- 
   ggplot(usa) +
-  geom_sf(color = "#2b2b2b", fill = "white", size=0.125) +
+  geom_sf(color = "#2b2b2b", fill = "#FCFCFC", size=0.125) +
   coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
-  geom_spatial_point(data=combods, aes(x=Longitude,y=Latitude, fill = log(-LogPred+10)), pch = 21, size =3) +     
+  geom_spatial_point(data=combods, aes(x=Longitude,y=Latitude, fill = log(-LogPred+10)), pch = 21, size =4) +     
   #scale_shape_manual(values = c(16, 8)) +
    # scale_size_manual(values = c(4, 8)) +
   scale_fill_distiller( palette = "Oranges", direction = 1, 
                         limits = c(min(log(0+10)), max(log(4000+10)) ) )  + 
   ylab("Latitude") + 
   xlab("Longitude")  +
-  theme_classic() 
-
+   ggtitle("Predicted respiration rates at sampled sites") +
+        annotation_scale(location = "br", width_hint = 0.3,  pad_x = unit(0.1, "in"), pad_y = unit(0.1, "in")) +
+  theme_bw() +
+   theme(panel.background = element_rect(fill = "aliceblue"), text = element_text(size = 15), legend.position = "bottom") +
+       labs(fill = "log(Resp. + 10)") 
 
 
   Obs / Pred
 
 ```
 
-- need to rename column/remove redundant "log"
+
