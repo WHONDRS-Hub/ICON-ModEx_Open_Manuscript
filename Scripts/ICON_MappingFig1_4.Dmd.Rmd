@@ -40,7 +40,7 @@ getwd()
 
 - Loading metadata files & binding rows 
 ```{r}
-metadata1 <- read.csv("./") %>% slice(-1) %>% 
+metadata1 <- read.csv("./v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% 
   #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv
   
   #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv
