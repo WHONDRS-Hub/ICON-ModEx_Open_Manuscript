@@ -1,0 +1,93 @@
+---
+title: "Fig2_Rversion"
+author: "Bre Rivera Waterman"
+date: "2024-02-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+ - import libraries
+
+```{r}
+library(tidyverse)
+library(colourpicker)
+library(lubridate)
+library(emmeans)
+library(sf)
+library(ggspatial)
+library(spData)
+library(ggpmisc)
+#install.packages("ggpubr")
+library("rstudioapi")
+
+current_path <- rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path))
+setwd("./../")
+getwd()
+
+```
+
+
+
+## Scatter plot  
+- using new merged dataset to create scatter plot
+- add kernel densities to the plots (along the side)
+
+```{r}
+
+combods <- read.csv("./ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% filter(!is.na(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),!is.na(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>% filter(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment > -9990, Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment > -9990 )
+
+#scatter plot
+fullscatter <- 
+  combods %>% ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+      geom_text(x = 500, y = 500, label = "*", size = 15, color="orange") + 
+   stat_poly_line(color = "light grey", alpha = 0.01) +
+  stat_poly_eq(use_label(c( "R2"))) +
+  xlab("Observed rates") + 
+  ylab("Predicted rates") + 
+    lims(y = c(0,4000), x = c(0,4000)) + 
+        geom_text(x = 500, y = 500, label = "*", size = 15, color="orange") + 
+  theme_classic() +
+   theme(text = element_text(size = 18))
+
+
+under500 <- combods %>%  
+  ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+   stat_poly_line(color = "light grey", alpha = 0.01) +
+  stat_poly_eq(use_label(c( "R2")), label.x = "right", label.y = "bottom") +
+  ylab("") + 
+  xlab("Observed rates") + 
+    lims(y = c(0,500), x = c(0,500)) + 
+  theme_classic() + 
+     theme(text = element_text(size = 18))
+
+
+over500 <- combods %>% 
+ ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+    stat_poly_line(color = "light grey", alpha = 0.01) +
+  stat_poly_eq(use_label(c( "R2")), label.x = "right", label.y = "bottom") +
+  ylab("") + 
+  xlab("") + 
+    lims(y = c(500,4000), x = c(500,4000)) + 
+  theme_classic() + 
+     theme(text = element_text(size = 18))
+
+fullscatter + (over500 / under500)
+
+
+```
+ 
+  - add units to axis?
+  - increase text size
+
+
+
