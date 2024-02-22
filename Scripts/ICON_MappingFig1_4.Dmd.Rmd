@@ -28,17 +28,22 @@ library(rnaturalearth)
 library(ggpmisc)
 #install.packages("ggpubr")
 library(rnaturalearthdata)
+library("rstudioapi")
 
-
+current_path <- rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path))
+setwd("./../")
 getwd()
-#setwd("C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/")
 
 ```
 
 
 - Loading metadata files & binding rows 
 ```{r}
-metadata1 <- read.csv("C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% 
+metadata1 <- read.csv("./") %>% slice(-1) %>% 
+  #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv
+  
+  #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv
                                                                 dplyr::select(lat = "MS_Latitude_dec.deg",
                                                                 long = "MS_Longitude_dec.deg",
                                                                 "Date",
