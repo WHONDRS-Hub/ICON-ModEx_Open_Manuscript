@@ -197,7 +197,8 @@ combine_predicted_observed <- predicted_filter %>%
          Observed_Sample_Date = as.character(str_c(' ', ymd(Observed_Sample_Date))),
          Observed_Sample_Date = case_when(is.na(Observed_Sample_Date) ~ '-9999',
                                           TRUE ~ Observed_Sample_Date),
-         Raw_Error = (Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment - Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)/Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) %>%
+         Raw_Error = (Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment - Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)/Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment,
+         Log_mean.error = log10(mean.error)) %>%
   mutate_all(~replace_na(., -9999))
 
 
