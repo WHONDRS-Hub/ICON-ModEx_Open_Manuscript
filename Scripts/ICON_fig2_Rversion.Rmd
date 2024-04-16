@@ -3,6 +3,8 @@ title: "Fig2_Rversion"
 author: "Bre Rivera Waterman"
 date: "2024-02-22"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -22,6 +24,9 @@ library(spData)
 library(ggpmisc)
 #install.packages("ggpubr")
 library("rstudioapi")
+install.packages("ggExtra")
+library(ggExtra)
+
 
 current_path <- rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path))
@@ -37,57 +42,61 @@ getwd()
 - add kernel densities to the plots (along the side)
 
 ```{r}
+#some filtering/mutating first
+combods <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
+#remova Na's
+  filter(!is.na(Log_Observed_Normalized_Respiration_Rate),
+         !is.na(Log_Predicted_Normalized_Respiration_Rate)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate > -9990 ) %>% 
+#group by above/below log500 
+  mutate(ds_split =                                                    ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Observed_Normalized_Respiration_Rate > 2.7, "500+",                         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Observed_Normalized_Respiration_Rate < 2.7, "500-", "500-") )) %>% 
+#scaling data for kernel density plots
+  mutate( 
+    scaledObs = (Log_Observed_Normalized_Respiration_Rate - min(Log_Observed_Normalized_Respiration_Rate)) / (max(Log_Observed_Normalized_Respiration_Rate) - min(Log_Observed_Normalized_Respiration_Rate))  ,
+  scaledPred = (Log_Predicted_Normalized_Respiration_Rate - min(Log_Predicted_Normalized_Respiration_Rate)) / (max(Log_Predicted_Normalized_Respiration_Rate) - min(Log_Predicted_Normalized_Respiration_Rate) ) ) 
 
-combods <- read.csv("./ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% filter(!is.na(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),!is.na(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>% filter(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment > -9990, Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment > -9990 )
+
 
 #scatter plot
+#needs to have kernel density plots on y and x axis
+#needs use log data
+#needs to have overall line, line for above 500, below 500, and R^2 values for all three
+#facet wrap or color dots by iteration (first versus last)
+
+
 fullscatter <- 
-  combods %>% ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
-  geom_point(size = 4, alpha = 0.5) + 
-    geom_abline (slope=1, linetype = "dashed", color="Red") + 
-      geom_text(x = 500, y = 500, label = "*", size = 15, color="orange") + 
-   stat_poly_line(color = "light grey", alpha = 0.01) +
-  stat_poly_eq(use_label(c( "R2"))) +
-  xlab("Observed rates") + 
-  ylab("Predicted rates") + 
-    lims(y = c(0,4000), x = c(0,4000)) + 
-        geom_text(x = 500, y = 500, label = "*", size = 15, color="orange") + 
+  combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
+                      abs(Log_Predicted_Normalized_Respiration_Rate) )) +
+                     # ,  color =  ds_split))+ 
+#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
+  geom_point(color = "darkgrey", size = 3, pch = 21) + 
+    geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
+    #geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
+      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
+   stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
+  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
+  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.78",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
+    geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
+                      abs(Log_Predicted_Normalized_Respiration_Rate),
+                      color =  ds_split), method = "lm", alpha = 0.2) + 
+  xlab("log10(Observed rates)") + 
+  ylab("log10(Predicted rates)") + 
+#scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
+  scale_color_manual(values = c( "lightblue", "maroon")) +
+#update if data changes - not automatically added
+  annotate(geom="text", x=3.5, y=0.5, label="R^2 == 0.41",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
+  annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.45", parse =TRUE,
+               color="lightblue", size =4.5) + #update - not automatically added
+  lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
-   theme(text = element_text(size = 18))
-
-
-under500 <- combods %>%  
-  ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
-  geom_point(size = 4, alpha = 0.5) + 
-    geom_abline (slope=1, linetype = "dashed", color="Red") + 
-   stat_poly_line(color = "light grey", alpha = 0.01) +
-  stat_poly_eq(use_label(c( "R2")), label.x = "right", label.y = "bottom") +
-  ylab("") + 
-  xlab("Observed rates") + 
-    lims(y = c(0,500), x = c(0,500)) + 
-  theme_classic() + 
-     theme(text = element_text(size = 18))
-
-
-over500 <- combods %>% 
- ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
-  geom_point(size = 4, alpha = 0.5) + 
-    geom_abline (slope=1, linetype = "dashed", color="Red") + 
-    stat_poly_line(color = "light grey", alpha = 0.01) +
-  stat_poly_eq(use_label(c( "R2")), label.x = "right", label.y = "bottom") +
-  ylab("") + 
-  xlab("") + 
-    lims(y = c(500,4000), x = c(500,4000)) + 
-  theme_classic() + 
-     theme(text = element_text(size = 18))
-
-fullscatter + (over500 / under500)
-
-
-```
+   theme(text = element_text(size = 16), 
+         legend.position = 0)
  
-  - add units to axis?
-  - increase text size
+#adding density plots on axes
+ ggExtra::ggMarginal(fullscatter, fill = "lightgrey")
+
+    
+ 
+```
 
 
 
