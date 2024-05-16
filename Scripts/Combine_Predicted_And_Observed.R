@@ -2,16 +2,17 @@
 #
 # Combine ICON-ModEx observed and predicted rates
 #
-# Status: complete
+# Status: Complete
 #
 # ==============================================================================
 #
 # Author: Brieanne Forbes
-# 21 December 2023
+# 18 April 2024
 #
 # ==============================================================================
 
 library(tidyverse)
+library(crayon)
 
 rm(list=ls(all=T))
 
@@ -23,7 +24,7 @@ setwd("./../")
 
 # File path to the dynamic learning rivers github repo
 # https://github.com/parallelworks/dynamic-learning-rivers/tree/Nov-2023-log10
-# Ensure you are on the correct branch. For this script, I am using the Nov-2023-log10 branch
+# Ensure you are on the correct branch. For this script, 
 dynamic_learning_dir <- './../dynamic-learning-rivers/'
 
 # ==========================  find and read data files =========================
@@ -54,13 +55,37 @@ observed_S19S <- read_csv('./v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Norm
             na.rm = T)%>% 
   rename(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) 
 
-# Ensure you are on the correct branch. For this script, I am using the Nov-2023-log10 branch
-predicted <- read_csv(str_c(dynamic_learning_dir, '/scripts/post_01_output_ml_predict_avg.csv')) %>%
-  rename(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment,
+cat(red('MAKE SURE YOU ARE ON THE CORRECT NOV-2023 BRANCH\n'))
+
+# Ensure you are on the correct branch. For this script, I am using the Nov-2023-log10-DO-update-correct branch
+predicted_Nov2023 <- read_csv(str_c(dynamic_learning_dir, '/scripts/post_01_output_ml_predict_avg.csv')) %>%
+  rename(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment,
          Predicted_Latitude = Sample_Latitude,
          Predicted_Longitude = Sample_Longitude,
-         Sample_Name = Sample_ID)
-  
+         Sample_Name = Sample_ID,
+         mean.error_Nov2023 = mean.error,
+         predict.error_Nov2023 = predict.error,
+         pca.dist_Nov2023 = pca.dist,
+         mean.error.scaled_Nov2023 = mean.error.scaled,
+         pca.dist.scaled_Nov2023 = pca.dist.scaled,
+         combined.metric_Nov2023 = combined.metric)
+
+cat(red('SWITCH TO THE CORRECT JUL-2022 BRANCH\n'))
+
+predicted_Jul2022 <- read_csv(str_c(dynamic_learning_dir, '/scripts/post_01_output_ml_predict_avg.csv')) %>%
+  rename(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Jul2022 = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment,
+         Predicted_Latitude = Sample_Latitude,
+         Predicted_Longitude = Sample_Longitude,
+         Sample_Name = Sample_ID,
+         mean.error_Jul2022 = mean.error,
+         predict.error_Jul2022 = predict.error,
+         pca.dist_Jul2022 = pca.dist,
+         mean.error.scaled_Jul2022 = mean.error.scaled,
+         pca.dist.scaled_Jul2022 = pca.dist.scaled,
+         combined.metric_Jul2022 = combined.metric)
+
+predicted <- predicted_Nov2023 %>%
+  full_join(predicted_Jul2022)
 
 # ========  find and read metadata files and combine with observed data ========
 
@@ -139,41 +164,83 @@ predicted_filter <- predicted_filter %>%
 # is excluded from the PCA, therefore there is no associated error
 # To pull the prediction, we have to get the average of the 10 ML model predictions
 
-prediction_files <- list.files(str_c(dynamic_learning_dir, '/ml_models/'), 'sl_predictions.csv',full.names = T, recursive = T)
+cat(red('MAKE SURE YOU ARE ON THE CORRECT NOV-2023 BRANCH\n'))
 
-combine <- tibble("Sample_ID" = as.character(),
+prediction_files_Nov2023 <- list.files(str_c(dynamic_learning_dir, '/ml_models/'), 'sl_predictions.csv',full.names = T, recursive = T)
+
+combine_Nov2023 <- tibble("Sample_ID" = as.character(),
                   "Sample_Longitude" = as.numeric(),
                   "Sample_Latitude" = as.numeric(),
                   "Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment" = as.numeric())
 
-for (prediction_file in prediction_files) {
+for (prediction_file_Nov2023 in prediction_files_Nov2023) {
   
-  read_file <- read_csv(prediction_file) %>%
+  read_file_Nov2023 <- read_csv(prediction_file_Nov2023) %>%
     filter(str_detect(Sample_ID, 'S19S_0085')) %>%
     select(-contains('error'))
   
-  combine <- combine %>%
-    add_row(read_file)
+  combine_Nov2023 <- combine_Nov2023 %>%
+    add_row(read_file_Nov2023)
   
 }
 
 #average the model predictions
-summary <- combine %>%
+summary_Nov2023 <- combine_Nov2023 %>%
   group_by(Sample_ID, Sample_Longitude, Sample_Latitude) %>%
-  summarise(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment = mean(Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>%
+  summarise(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 = mean(Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>%
   rename(Sample_Name = Sample_ID,
          Predicted_Longitude = Sample_Longitude,
          Predicted_Latitude = Sample_Latitude) %>%
-  add_column("mean.error" = NA,
-             "predict.error" = NA,
-             "pca.dist" = NA,
-             "mean.error.scaled" = NA,
-             "pca.dist.scaled" = NA,
-             "combined.metric" = NA)
+  add_column("mean.error_Nov2023" = NA,
+             "predict.error_Nov2023" = NA,
+             "pca.dist_Nov2023" = NA,
+             "mean.error.scaled_Nov2023" = NA,
+             "pca.dist.scaled_Nov2023" = NA,
+             "combined.metric_Nov2023" = NA)
+
+
+## repeat process for Jul2022 iteration
+cat(red('SWITCH TO THE CORRECT JUL-2022 BRANCH\n'))
+
+prediction_files_Jul2022 <- list.files(str_c(dynamic_learning_dir, '/ml_models/'), 'sl_predictions.csv',full.names = T, recursive = T)
+
+combine_Jul2022 <- tibble("Sample_ID" = as.character(),
+                          "Sample_Longitude" = as.numeric(),
+                          "Sample_Latitude" = as.numeric(),
+                          "Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment" = as.numeric())
+
+for (prediction_file_Jul2022 in prediction_files_Jul2022) {
+  
+  read_file_Jul2022 <- read_csv(prediction_file_Jul2022) %>%
+    filter(str_detect(Sample_ID, 'S19S_0085')) %>%
+    select(-contains('error'))
+  
+  combine_Jul2022 <- combine_Jul2022 %>%
+    add_row(read_file_Jul2022)
+  
+}
+
+#average the model predictions
+summary_Jul2022 <- combine_Jul2022 %>%
+  group_by(Sample_ID, Sample_Longitude, Sample_Latitude) %>%
+  summarise(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Jul2022 = mean(Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>%
+  rename(Sample_Name = Sample_ID,
+         Predicted_Longitude = Sample_Longitude,
+         Predicted_Latitude = Sample_Latitude) %>%
+  add_column("mean.error_Jul2022" = NA,
+             "predict.error_Jul2022" = NA,
+             "pca.dist_Jul2022" = NA,
+             "mean.error.scaled_Jul2022" = NA,
+             "pca.dist.scaled_Jul2022" = NA,
+             "combined.metric_Jul2022" = NA)
+
+summary <- summary_Nov2023 %>%
+  full_join(summary_Jul2022)
 
 #put results into predicted file
 predicted_filter <- predicted_filter %>%
   add_row(summary)
+
 
 # ====================== combine predicted and observed ========================
 
@@ -184,7 +251,8 @@ combine_predicted_observed <- predicted_filter %>%
          Longitude = case_when(!is.na(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) ~ Observed_Longitude, 
                               TRUE ~ Predicted_Longitude),
          Log_Observed_Normalized_Respiration_Rate = log10(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
-         Log_Predicted_Normalized_Respiration_Rate = log10(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment * -1),
+         Log_Predicted_Normalized_Respiration_Rate_Nov2023 = log10(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 * -1),
+         Log_Predicted_Normalized_Respiration_Rate_Jul2022 = log10(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Jul2022 * -1),
          Site_ID = case_when(str_detect(Sample_Name, '^MP-|^SP-') ~ Sample_Name,
                              TRUE ~ Site_ID)) %>%
   select(-Observed_Latitude, -Observed_Longitude, -Predicted_Latitude, -Predicted_Longitude)%>%
@@ -197,8 +265,10 @@ combine_predicted_observed <- predicted_filter %>%
          Observed_Sample_Date = as.character(str_c(' ', ymd(Observed_Sample_Date))),
          Observed_Sample_Date = case_when(is.na(Observed_Sample_Date) ~ '-9999',
                                           TRUE ~ Observed_Sample_Date),
-         Raw_Error = (Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment - Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)/Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment,
-         Log_mean.error = log10(mean.error)) %>%
+         Raw_Error_Nov2023 = (Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 - Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)/Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023,
+         Raw_Error_Jul2022 = (Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Jul2022 - Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)/Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Jul2022,
+         Log_mean.error_Nov2023 = log10(mean.error_Nov2023),
+         Log_mean.error_Jul2022 = log10(mean.error_Jul2022)) %>%
   mutate_all(~replace_na(., -9999))
 
 
