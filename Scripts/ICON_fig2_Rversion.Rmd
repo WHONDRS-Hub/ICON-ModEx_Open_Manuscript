@@ -26,6 +26,7 @@ library(ggpmisc)
 library("rstudioapi")
 install.packages("ggExtra")
 library(ggExtra)
+library(patchwork)
 
 
 current_path <- rstudioapi::getActiveDocumentContext()$path 
@@ -45,14 +46,24 @@ getwd()
 #some filtering/mutating first
 combods <- read.csv("C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/Scripts/ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
 #remova Na's
-  filter(!is.na(Log_Observed_Normalized_Respiration_Rate),
-         !is.na(Log_Predicted_Normalized_Respiration_Rate)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate > -9990 ) %>% 
+  filter(!is.na(Log_Observed_Normalized_Respiration_Rate), #Log_Observed_Normalized_Respiration_Rate
+         !is.na(Log_Predicted_Normalized_Respiration_Rate_Jul2022), !is.na(Log_Predicted_Normalized_Respiration_Rate_Nov2023)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate_Nov2023 > -9990 ,
+ Log_Predicted_Normalized_Respiration_Rate_Jul2022 > -9990) %>% #Log_Predicted_Normalized_Respiration_Rate
 #group by above/below log500 
-  mutate(ds_split =                                                    ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Observed_Normalized_Respiration_Rate > 2.7, "500+",                         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Observed_Normalized_Respiration_Rate < 2.7, "500-", "500-") )) %>% 
-#scaling data for kernel density plots
-  mutate( 
-    scaledObs = (Log_Observed_Normalized_Respiration_Rate - min(Log_Observed_Normalized_Respiration_Rate)) / (max(Log_Observed_Normalized_Respiration_Rate) - min(Log_Observed_Normalized_Respiration_Rate))  ,
-  scaledPred = (Log_Predicted_Normalized_Respiration_Rate - min(Log_Predicted_Normalized_Respiration_Rate)) / (max(Log_Predicted_Normalized_Respiration_Rate) - min(Log_Predicted_Normalized_Respiration_Rate) ) ) 
+  mutate(ds_split =                                                    ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7, "500+",                         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7, "500-", "500-") )) %>% 
+  #clasifying by quad
+  mutate(ds_quadrant =                                                    ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 > 2.7 , "hs23",
+  ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 < 2.7 , "misclass_hs23",                                                                                              ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Jul2022 > 2.7 , "hs22",
+  ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Jul2022 < 2.7 , "misclass_hs22",  
+  
+
+  ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 < 2.7 , "cs23",    
+  ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 > 2.7 , "misclass_cs23",                          
+         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & 
+       Log_Predicted_Normalized_Respiration_Rate_Jul2022 > 2.7 , "misclass_cs22",
+         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 &  
+       Log_Predicted_Normalized_Respiration_Rate_Jul2022 < 2.7 , "cs22", NA) ))))))))  
+
 
 
 
@@ -63,43 +74,84 @@ combods <- read.csv("C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscri
 #facet wrap or color dots by iteration (first versus last)
 
 
-fullscatter <- 
+fullscatter_firstiteration <- 
   combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
-                      abs(Log_Predicted_Normalized_Respiration_Rate) )) +
-                     # ,  color =  ds_split))+ 
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022) #)) +
+                      ,  color =  ds_split))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point(color = "darkgrey", size = 3, pch = 21) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
     geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
       geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
    stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
-  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.78",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
+ # stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
+  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.54",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
     geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
-                      abs(Log_Predicted_Normalized_Respiration_Rate),
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022),
                       color =  ds_split), method = "lm", alpha = 0.2) + 
   xlab("log10(Observed rates+1)") + 
   ylab("log10(Predicted rates+1)") + 
-#scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
+scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
   scale_color_manual(values = c( "lightblue", "maroon")) +
 #update if data changes - not automatically added
-  annotate(geom="text", x=3.5, y=0.5, label="R^2 == 0.41",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
-  annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.45", parse =TRUE,
+  annotate(geom="text", x=3.5, y=0.5, label="R^2 == 0.22",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
+ annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.15", parse =TRUE,
                color="lightblue", size =4.5) + #update - not automatically added
   lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
    theme(text = element_text(size = 16), 
          legend.position = 0)
+
+#adding density plots on axes
+ ggExtra::ggMarginal(fullscatter_firstiteration, fill = "lightgrey")
+
  
+ 
+ 
+ fullscatter_lastiteration <- 
+  combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023) )) + #
+                      #,  color =  ds_split))+ 
+#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
+  geom_point(color = "darkgrey", size = 3, pch = 21) + 
+    geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
+    geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
+      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
+   stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
+ # stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
+  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.61",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
+    geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
+                      color =  ds_split), method = "lm", alpha = 0.2) + 
+  xlab("log10(Observed rates+1)") + 
+  ylab("log10(Predicted rates+1)") + 
+scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
+  scale_color_manual(values = c( "lightblue", "maroon")) +
+#update if data changes - not automatically added
+  annotate(geom="text", x=3.45, y=0.5, label="R^2 == 0.20",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
+ annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.21", parse =TRUE,
+               color="lightblue", size =4.5) + #update - not automatically added
+  lims(y = c(0,4), x = c(0,4)) + 
+  theme_classic() +
+   theme(text = element_text(size = 16), 
+         legend.position = 0)
+
 #adding density plots on axes
 
- ggExtra::ggMarginal(fullscatter, fill = "lightgrey")
+ ggExtra::ggMarginal(fullscatter_lastiteration, fill = "lightgrey")
  
+
+
+
  
+    
  
- 
- 
- 
+```
+
+ - pre May 16th file update nonlog version:
+```{r}
+
+ #not log ->
  fullscatternotlog <- 
   combods %>% ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),
                       abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) )) +
@@ -133,8 +185,6 @@ fullscatter <-
  
  
 
-    
- 
 ```
 
 
@@ -146,31 +196,8 @@ combods_date <- combods %>%
 
 
 #they are all 2019
-  combods_date %>% ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),
-                      abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),  color = Month, size = Year ))+ 
-#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
-  geom_point( pch = 21) + 
-    geom_vline (xintercept = 500, linetype = "dashed", color="grey") + 
-    geom_hline (yintercept = 500, linetype = "dashed", color="dark grey") + #not a clear threshold 
-      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
-  # stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
-  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-   scale_color_gradientn(colours = rev(rainbow(12))) +
-
-   # geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
-                     # abs(Log_Predicted_Normalized_Respiration_Rate),
-                     # color =  ds_split), method = "lm", alpha = 0.2) +
-  
-  xlab("Observed rates") + 
-  ylab("Predicted rates") + 
-  lims(y = c(0,4000), x = c(0,4000)) + 
-  theme_classic() +
-   theme(text = element_text(size = 16))
-  
-  
-  
-combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
-                      abs(Log_Predicted_Normalized_Respiration_Rate),  color = Month, size = Year ))+ 
+  combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),  color = ds_quadrant ))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point( pch = 21) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
@@ -178,7 +205,31 @@ combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
       geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
   # stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
   #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-   scale_color_gradientn(colours = rev(rainbow(12))) +
+   #scale_color_gradientn(colours = rev(rainbow(12))) +
+
+   # geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
+    #                  abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
+     #                 color =  ds_split), method = "lm", alpha = 0.2) +
+  
+  xlab("log10(Observed rates+1)") + 
+  ylab("log10(Predicted rates+1)") + 
+  lims(y = c(0,4), x = c(0,4)) + 
+  theme_classic() +
+   theme(text = element_text(size = 16))
+  
+  
+ 
+  #not sure why this is not working.... 
+combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022),  color = ds_quadrant ))+ 
+#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
+  geom_point( pch = 21) + 
+    geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
+    geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
+      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
+  # stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
+  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
+  # scale_color_gradientn(colours = rev(rainbow(12))) +
 
    # geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
                      # abs(Log_Predicted_Normalized_Respiration_Rate),
@@ -191,5 +242,21 @@ combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
    theme(text = element_text(size = 16))
   
   
+```
+
+
+#map
+```{r}
+usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE))
+
+ggplot(usa) +
+  geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125) +
+  coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
+   geom_spatial_point(data=combods, aes(x=Longitude, y=Latitude, color = ds_quadrant), size = 3) + 
+    #scale_color_manual(values=c(  "#8B5A00","#F5DEB3", "#458B74", "#B9D3EE","#4A708B", "#CDBA96" ) )+
+     ylab("Latitude") + 
+  xlab("Longitude") + 
+    theme_minimal() 
+
 ```
 
