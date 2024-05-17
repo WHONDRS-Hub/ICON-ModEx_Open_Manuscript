@@ -2,9 +2,10 @@
 title: "Fig2_Rversion"
 author: "Bre Rivera Waterman"
 date: "2024-02-22"
-output: html_document
+output: github_document
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
+chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -46,7 +47,7 @@ getwd()
 ```{r}
 #some filtering/mutating first 
 #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript
-combods <- read.csv("Scripts/ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
+combods <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
 #remova Na's
   filter(!is.na(Log_Observed_Normalized_Respiration_Rate), #Log_Observed_Normalized_Respiration_Rate
          !is.na(Log_Predicted_Normalized_Respiration_Rate_Jul2022), !is.na(Log_Predicted_Normalized_Respiration_Rate_Nov2023)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate_Nov2023 > -9990 ,
@@ -110,7 +111,7 @@ scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
 ggsave(filename = "Scripts/fullscatter_firstiteration.tiff", plot = fullscatter_firstiteration, width = 6, height = 6, dpi = 300)   
  
  
- fullscatter_lastiteration <- 
+fullscatter_lastiteration <- 
   combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
                       abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023) )) + #
                       #,  color =  ds_split))+ 
@@ -139,7 +140,6 @@ scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
          legend.position = 0)
 
 #adding density plots on axes
-
  ggExtra::ggMarginal(fullscatter_lastiteration, fill = "lightgrey")
  
 
@@ -346,6 +346,8 @@ ggplot(usa) +
 
 
 misclassmap <- outliers2022 + outliers2023
+misclassmap
+
 
 ggsave(filename = "Scripts/misclassmap.tiff", plot = misclassmap, width = 10, height = 5, dpi = 300)   
 
