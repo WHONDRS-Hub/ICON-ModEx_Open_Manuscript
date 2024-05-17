@@ -321,21 +321,22 @@ usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE))
 
 outliers2023 <- 
 ggplot(usa) +
-  geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125) +
+  geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125, alpha = 0.15) +
   coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
    geom_spatial_point(data=combods, aes(x=Longitude, y=Latitude, color = ds_quadrant23), size = 3) + 
-    #scale_color_manual(values=c(  "#8B5A00","#F5DEB3", "#458B74", "#B9D3EE","#4A708B", "#CDBA96" ) )+
+               scale_color_manual(values=c(   "#B9D3EE", "maroon", "darkgrey", "#CDBA96" ) )+
      ylab("") + 
   xlab("Longitude") + 
     theme_minimal() +
    labs(title="2023 iteration")
+outliers2023
 
 outliers2022 <- 
 ggplot(usa) +
-  geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125) +
+  geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125, alpha = 0.15) +
   coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
    geom_spatial_point(data=combods, aes(x=Longitude, y=Latitude, color = ds_quadrant22), size = 3) + 
-    #scale_color_manual(values=c(  "#8B5A00","#F5DEB3", "#458B74", "#B9D3EE","#4A708B", "#CDBA96" ) )+
+               scale_color_manual(values=c(   "#B9D3EE", "maroon", "darkgrey", "#CDBA96" ) )+
      ylab("Latitude") + 
   xlab("Longitude") + 
     theme_minimal() + 
