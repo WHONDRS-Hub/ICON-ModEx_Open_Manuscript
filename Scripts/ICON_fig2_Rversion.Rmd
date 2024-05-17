@@ -4,7 +4,6 @@ author: "Bre Rivera Waterman"
 date: "2024-02-22"
 output: github_document
 editor_options: 
-  chunk_output_type: inline
 chunk_output_type: inline
 ---
 
@@ -25,7 +24,7 @@ library(spData)
 library(ggpmisc)
 #install.packages("ggpubr")
 library("rstudioapi")
-install.packages("ggExtra")
+#install.packages("ggExtra")
 library(ggExtra)
 library(patchwork)
 
@@ -111,6 +110,13 @@ scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
 ggsave(filename = "Scripts/fullscatter_firstiteration.tiff", plot = fullscatter_firstiteration, width = 6, height = 6, dpi = 300)   
  
  
+
+
+
+ 
+```
+
+```{r}
 fullscatter_lastiteration <- 
   combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
                       abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023) )) + #
@@ -145,49 +151,10 @@ scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
 
 
 ggsave(filename = "Scripts/fullscatter_lastiteration.tiff", plot = fullscatter_lastiteration, width = 6, height = 6, dpi = 300)   
-
-
- 
 ```
 
- - pre May 16th file update nonlog version - wont work with current files
-```{r}
 
- #not log ->
- fullscatternotlog <- 
-  combods %>% ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),
-                      abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment) )) +
-                     #,  color =  ds_split))+ 
-#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
-  geom_point(color = "darkgrey", size = 3, pch = 21) + 
-    geom_vline (xintercept = 500, linetype = "dashed", color="grey") + 
-    geom_hline (yintercept = 500, linetype = "dashed", color="dark grey") + #not a clear threshold 
-      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
-   stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
-  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-  annotate(geom="text", x=225, y=4000, label="R^2 == 0.89",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
-    geom_smooth( aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment ), #above/below threshold best fit
-                      abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),
-                      color =  ds_split), method = "lm", alpha = 0.2) + 
-  xlab("Observed rates") + 
-  ylab("Predicted rates") + 
-#scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
-  scale_color_manual(values = c( "lightblue", "maroon")) +
-#update if data changes - not automatically added
-  annotate(geom="text", x=225, y=3750, label="R^2 == 0.61",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
-  annotate(geom="text", x=225, y=3500, label="R^2 == 0.24", parse =TRUE,
-               color="lightblue", size =4.5) + #update - not automatically added
-  lims(y = c(0,4000), x = c(0,4000)) + 
-  theme_classic() +
-   theme(text = element_text(size = 16), 
-         legend.position = 0)
- 
-#adding density plots on axes
- ggExtra::ggMarginal(fullscatternotlog, fill = "lightgrey")
- 
- 
 
-```
 
 - exploring misclass patterns
 ```{r}
