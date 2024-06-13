@@ -4,11 +4,17 @@ author: "Bre Rivera Waterman"
 date: "2024-02-22"
 output: github_document
 editor_options: 
+  chunk_output_type: console
 chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+current_path <- rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path))
+setwd("./../")
+getwd()
 ```
 
  - import libraries
@@ -30,10 +36,7 @@ library(patchwork)
 
 
 
-current_path <- rstudioapi::getActiveDocumentContext()$path 
-setwd(dirname(current_path))
-setwd("./../")
-getwd()
+
 
 ```
 
@@ -46,11 +49,15 @@ getwd()
 ```{r}
 #some filtering/mutating first 
 #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript
-combods <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
+
+combods <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv")
+
+
+combods_filt <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
 #remova Na's
   filter(!is.na(Log_Observed_Normalized_Respiration_Rate), #Log_Observed_Normalized_Respiration_Rate
-         !is.na(Log_Predicted_Normalized_Respiration_Rate_Jul2022), !is.na(Log_Predicted_Normalized_Respiration_Rate_Nov2023)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate_Nov2023 > -9990 ,
- Log_Predicted_Normalized_Respiration_Rate_Jul2022 > -9990) %>% #Log_Predicted_Normalized_Respiration_Rate
+         !is.na(Log_Predicted_Normalized_Respiration_Rate_Sep2019), !is.na(Log_Predicted_Normalized_Respiration_Rate_Nov2023)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate_Nov2023 > -9990 ,
+ Log_Predicted_Normalized_Respiration_Rate_Sep2019 > -9990) %>% #Log_Predicted_Normalized_Respiration_Rate
 #group by above/below log500 
   mutate(ds_split = ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7, "500+",                         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7, "500-", "500-") )) %>% 
 
@@ -60,11 +67,11 @@ combods <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.cs
 ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 < 2.7 , "cs23",    
 ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 > 2.7 , "misclass_cs23", NA)))) ,                   
       
-ds_quadrant22 =        
- ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Jul2022 > 2.7 , "hs22",
-  ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Jul2022 < 2.7 , "misclass_hs22",  
- ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Jul2022 > 2.7 , "misclass_cs22",
-ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Jul2022 < 2.7 , "cs22", NA ) )))) 
+ds_quadrant19 =        
+ ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Sep2019 > 2.7 , "hs19",
+  ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Sep2019 < 2.7 , "misclass_hs19",  
+ ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Sep2019 > 2.7 , "misclass_cs19",
+ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Sep2019 < 2.7 , "cs19", NA ) )))) 
 
 
 
@@ -76,9 +83,11 @@ ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized
 #facet wrap or color dots by iteration (first versus last)
 
 
+ firstiterationds <- combods_filt %>% filter(grepl("S19S", Sample_Name))
 fullscatter_firstiteration <- 
-  combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022) #)) +
+ firstiterationds %>%
+    ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Sep2019) #)) +
                       ,  color =  ds_split))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point(color = "darkgrey", size = 3, pch = 21) + 
@@ -87,22 +96,23 @@ fullscatter_firstiteration <-
       geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
    stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
  # stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.54",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
+  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.44",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
     geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022),
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Sep2019),
                       color =  ds_split), method = "lm", alpha = 0.2) + 
   xlab("log10(Observed rates+1)") + 
   ylab("log10(Predicted rates+1)") + 
 scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
   scale_color_manual(values = c( "lightblue", "maroon")) +
 #update if data changes - not automatically added
-  annotate(geom="text", x=3.5, y=0.5, label="R^2 == 0.22",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
- annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.15", parse =TRUE,
+  annotate(geom="text", x=3.5, y=0.5, label="R^2 == 0.05",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
+ annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.12", parse =TRUE,
                color="lightblue", size =4.5) + #update - not automatically added
   lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
    theme(text = element_text(size = 16), 
          legend.position = 0)
+fullscatter_firstiteration
 
 #adding density plots on axes
  ggExtra::ggMarginal(fullscatter_firstiteration, fill = "lightgrey")
@@ -117,18 +127,18 @@ ggsave(filename = "Scripts/fullscatter_firstiteration.tiff", plot = fullscatter_
 ```
 
 ```{r}
-fullscatter_lastiteration <- 
+#fullscatter_lastiteration <- 
   combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023) )) + #
-                      #,  color =  ds_split))+ 
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023) #)) + #
+                      ,  color =  ds_split))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point(color = "darkgrey", size = 3, pch = 21) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
     geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
       geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
    stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
- # stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.61",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
+  stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
+  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.56",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
     geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
                       abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
                       color =  ds_split), method = "lm", alpha = 0.2) + 
