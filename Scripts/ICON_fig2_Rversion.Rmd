@@ -35,9 +35,6 @@ library(ggExtra)
 library(patchwork)
 
 
-
-
-
 ```
 
 
@@ -50,18 +47,13 @@ library(patchwork)
 #some filtering/mutating first 
 #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript
 
-combods <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv")
 
-
-combods_filt <- read.csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% 
+combods_split <- read_csv("ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv", na = c(-9999, "N/A", "NA", NA)) %>%
 #remova Na's
-  filter(!is.na(Log_Observed_Normalized_Respiration_Rate), #Log_Observed_Normalized_Respiration_Rate
-         !is.na(Log_Predicted_Normalized_Respiration_Rate_Sep2019), !is.na(Log_Predicted_Normalized_Respiration_Rate_Nov2023)) %>% filter(Log_Observed_Normalized_Respiration_Rate > -9990,                                            Log_Predicted_Normalized_Respiration_Rate_Nov2023 > -9990 ,
- Log_Predicted_Normalized_Respiration_Rate_Sep2019 > -9990) %>% #Log_Predicted_Normalized_Respiration_Rate
-#group by above/below log500 
+  #split data set into "hot" and "cold" spots
   mutate(ds_split = ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7, "500+",                         ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7, "500-", "500-") )) %>% 
-
-  #clasifying by quad by year
+  
+#clasifying by quadrant (hot, cold, misclass hot, misclass cold) by year
   mutate(ds_quadrant23 =                                                    ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 > 2.7 , "hs23",
   ifelse(Log_Observed_Normalized_Respiration_Rate > 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 < 2.7 , "misclass_hs23",                                                                                              
 ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Nov2023 < 2.7 , "cs23",    
@@ -73,62 +65,93 @@ ds_quadrant19 =
  ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Sep2019 > 2.7 , "misclass_cs19",
 ifelse(Log_Observed_Normalized_Respiration_Rate < 2.7 & Log_Predicted_Normalized_Respiration_Rate_Sep2019 < 2.7 , "cs19", NA ) )))) 
 
+ 
+```
 
 
+### Scatter plot
+ - needs to have kernel density plots on y and x axis
+ - needs use log data
+ - needs to have overall line, line for above 500, below 500, and R^2 values for all three
+ - facet wrap or color dots by iteration (first versus last)
+ 
+ - right now s19s iteration, but want OG 0th iteration
 
-#scatter plot
-#needs to have kernel density plots on y and x axis
-#needs use log data
-#needs to have overall line, line for above 500, below 500, and R^2 values for all three
-#facet wrap or color dots by iteration (first versus last)
+```{r}
+#this will change - waiting on real 0th iteration data from Stefan/Brie
+firstiterationds <- combods_filt %>% filter(str_detect(Sample_Name, "S19S"))
 
+#run 3 lm up here, then extract R^2, then call into annotate 
+lm_all <- lm(Log_Predicted_Normalized_Respiration_Rate_Sep2019 ~ Log_Observed_Normalized_Respiration_Rate, firstiterationds)
+summary(lm_all)
 
- firstiterationds <- combods_filt %>% filter(grepl("S19S", Sample_Name))
+lm_sup <- lm(Log_Predicted_Normalized_Respiration_Rate_Sep2019 ~ Log_Observed_Normalized_Respiration_Rate, firstiterationds %>% filter(ds_split == "500+"))
+summary(lm_sup)
+
+lm_sub <- lm(Log_Predicted_Normalized_Respiration_Rate_Sep2019 ~ Log_Observed_Normalized_Respiration_Rate, firstiterationds %>% filter(ds_split == "500-"))
+summary(lm_sub)
+
+#plot
 fullscatter_firstiteration <- 
  firstiterationds %>%
     ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Sep2019) #)) +
-                      ,  color =  ds_split))+ 
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Sep2019) )) +
+                      #,  color =  ds_split))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point(color = "darkgrey", size = 3, pch = 21) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
     geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
-      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
+ 
+   
+        geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
    stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
  # stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.44",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
-    geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
+    geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate), #above/below threshold best fit
                       abs(Log_Predicted_Normalized_Respiration_Rate_Sep2019),
                       color =  ds_split), method = "lm", alpha = 0.2) + 
-  xlab("log10(Observed rates+1)") + 
-  ylab("log10(Predicted rates+1)") + 
+  xlab("log10(Observed rates)") + 
+  ylab("log10(Predicted rates)") + 
 scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
   scale_color_manual(values = c( "lightblue", "maroon")) +
-#update if data changes - not automatically added
-  annotate(geom="text", x=3.5, y=0.5, label="R^2 == 0.05",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
- annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.12", parse =TRUE,
-               color="lightblue", size =4.5) + #update - not automatically added
+
+annotate('text', label = str_c('R^2 == ', round(summary(lm_all)$r.squared, 2)), parse = T, x = 3.5, y = 0.75, size = 5, family = 'serif', color = "black")+
+annotate('text', label = str_c('R^2 == ', round(summary(lm_sub)$r.squared, 2)), parse = T, x = 3.5, y = 0.5, size = 5, family = 'serif', color="lightblue")+
+annotate('text', label = str_c('R^2 == ', round(summary(lm_sup)$r.squared, 2)), parse = T, x = 3.5, y = 0.25, size = 5, family = 'serif',  color="maroon")+
   lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
-   theme(text = element_text(size = 16), 
+   theme(text = element_text(size = 16,  family = 'serif'), 
          legend.position = 0)
 fullscatter_firstiteration
 
 #adding density plots on axes
- ggExtra::ggMarginal(fullscatter_firstiteration, fill = "lightgrey")
+ggExtra::ggMarginal(fullscatter_firstiteration, fill = "lightgrey")
 
+#save file
 ggsave(filename = "Scripts/fullscatter_firstiteration.tiff", plot = fullscatter_firstiteration, width = 6, height = 6, dpi = 300)   
  
  
-
-
-
- 
 ```
 
+
+
+ - final iteration 
+ 
 ```{r}
-#fullscatter_lastiteration <- 
-  combods %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
+#add in lm's
+#run 3 lm up here, then extract R^2, then call into annotate 
+lm_all_final <- lm(Log_Predicted_Normalized_Respiration_Rate_Nov2023 ~ Log_Observed_Normalized_Respiration_Rate, combods_split)
+summary(lm_all_final)
+
+lm_sup_final <- lm(Log_Predicted_Normalized_Respiration_Rate_Nov2023 ~ Log_Observed_Normalized_Respiration_Rate, combods_split %>% filter(ds_split == "500+"))
+summary(lm_sup_final)
+
+lm_sub_final <- lm(Log_Predicted_Normalized_Respiration_Rate_Nov2023 ~ Log_Observed_Normalized_Respiration_Rate, combods_split %>% filter(ds_split == "500-"))
+summary(lm_sub_final)
+
+
+
+fullscatter_lastiteration <- 
+  combods_split %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate ),
                       abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023) #)) + #
                       ,  color =  ds_split))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
@@ -137,28 +160,28 @@ ggsave(filename = "Scripts/fullscatter_firstiteration.tiff", plot = fullscatter_
     geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
       geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
    stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
-  stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-  annotate(geom="text", x=3.5, y=0.75, label="R^2 == 0.56",parse =TRUE, color="black", size =4.5) + #update if data changes - not automatically added
+ # stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
+ 
     geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
                       abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
                       color =  ds_split), method = "lm", alpha = 0.2) + 
-  xlab("log10(Observed rates+1)") + 
-  ylab("log10(Predicted rates+1)") + 
+  xlab("log10(Observed rates)") + 
+  ylab("log10(Predicted rates)") + 
 scale_shape_manual(values = c(21, 16)) + #shape or color by iteration
   scale_color_manual(values = c( "lightblue", "maroon")) +
-#update if data changes - not automatically added
-  annotate(geom="text", x=3.45, y=0.5, label="R^2 == 0.20",parse =TRUE, color="maroon", size =4.5) + #update if data changes - not automatically added
- annotate(geom="text", x=3.5, y=0.25, label="R^2 == 0.21", parse =TRUE,
-               color="lightblue", size =4.5) + #update - not automatically added
+
+annotate('text', label = str_c('R^2 == ', round(summary(lm_all_final)$r.squared, 2)), parse = T, x = 3.5, y = 0.75, size = 5, family = 'serif', color = "black")+
+annotate('text', label = str_c('R^2 == ', round(summary(lm_sub_final)$r.squared, 2)), parse = T, x = 3.5, y = 0.5, size = 5, family = 'serif', color="lightblue")+
+annotate('text', label = str_c('R^2 == ', round(summary(lm_sup_final)$r.squared, 2)), parse = T, x = 3.5, y = 0.25, size = 5, family = 'serif',  color="maroon")+
+    
   lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
-   theme(text = element_text(size = 16), 
+   theme(text = element_text(size = 16, family = 'serif'), 
          legend.position = 0)
 
 #adding density plots on axes
  ggExtra::ggMarginal(fullscatter_lastiteration, fill = "lightgrey")
  
-
 
 ggsave(filename = "Scripts/fullscatter_lastiteration.tiff", plot = fullscatter_lastiteration, width = 6, height = 6, dpi = 300)   
 ```
@@ -168,34 +191,14 @@ ggsave(filename = "Scripts/fullscatter_lastiteration.tiff", plot = fullscatter_l
 
 - exploring misclass patterns
 ```{r}
-combods_date <- combods %>%
+combods_date <- combods_split %>%
    mutate(Date_whole = ymd(Observed_Sample_Date), Year = year(Observed_Sample_Date), Month = month(Observed_Sample_Date), Day = day(Observed_Sample_Date))
  
 
 
-#based on previous plots, temporal outliers are from 2019 only
-#recreate slide 7
+#based on previous plots, temporal outliers are from 2023 only
 combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
                       abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023), color = Year ))+ 
-#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
-  geom_point( pch = 21, size = 3) + 
-    geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
-    geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
-      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
-  # stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
-  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-   # geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
-    #                  abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
-     #                 color =  ds_split), method = "lm", alpha = 0.2) +
-  
-  xlab("log10(Observed rates+1)") + 
-  ylab("log10(Predicted rates+1)") + 
-  lims(y = c(0,4), x = c(0,4)) + 
-  theme_classic() +
-   theme(text = element_text(size = 16))
-
-combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022), color = Year ))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point( pch = 21, size = 3) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
@@ -209,8 +212,8 @@ combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
     #                  abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
      #                 color =  ds_split), method = "lm", alpha = 0.2) +
   
-  xlab("log10(Observed rates+1)") + 
-  ylab("log10(Predicted rates+1)") + 
+  xlab("log10(Observed rates)") + 
+  ylab("log10(Predicted rates)") + 
   lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
    theme(text = element_text(size = 16))
@@ -225,7 +228,7 @@ combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
 ```{r}
 #to check that classifications are correct
 combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),  color = ds_quadrant23 ))+ 
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),  color =  ds_quadrant23))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point( pch = 21) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
@@ -245,32 +248,10 @@ combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
   theme_classic() +
    theme(text = element_text(size = 16))
 
-#making sure classification is correct so we can create map for spatial patterns
-  combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),  color = ds_quadrant23 ))+ 
-#to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
-  geom_point( pch = 21) + 
-    geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
-    geom_hline (yintercept = 2.7, linetype = "dashed", color="dark grey") + #not a clear threshold 
-      geom_abline (linetype = "longdash", color="black") + #not a clear threshold 
-  # stat_poly_line(color = "black", alpha = 0.5) + #overall best fit
-  #stat_poly_eq(use_label(c( "R2"))) + #remove hashtag to see R^2 of log500 split
-   #scale_color_gradientn(colours = rev(rainbow(12))) +
-
-   # geom_smooth( aes(abs(Log_Observed_Normalized_Respiration_Rate ), #above/below threshold best fit
-    #                  abs(Log_Predicted_Normalized_Respiration_Rate_Nov2023),
-     #                 color =  ds_split), method = "lm", alpha = 0.2) +
-  
-  xlab("log10(Observed rates+1)") + 
-  ylab("log10(Predicted rates+1)") + 
-  lims(y = c(0,4), x = c(0,4)) + 
-  theme_classic() +
-   theme(text = element_text(size = 16))
-  
   
  
 combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
-                      abs(Log_Predicted_Normalized_Respiration_Rate_Jul2022),  color = ds_quadrant22 ))+ 
+                      abs(Log_Predicted_Normalized_Respiration_Rate_Sep2019),  color = ds_quadrant19 ))+ 
 #to see R^2 for above/below thresholds, remove color grouping above and use stat poly eq fx (below)
   geom_point( pch = 21) + 
     geom_vline (xintercept = 2.7, linetype = "dashed", color="grey") + 
@@ -293,6 +274,7 @@ combods_date %>% ggplot(aes(abs(Log_Observed_Normalized_Respiration_Rate),
 
 
 #map to see miss-classifications spatially
+  - NA's not filtered out?
 ```{r}
 usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE))
 
@@ -300,7 +282,7 @@ outliers2023 <-
 ggplot(usa) +
   geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125, alpha = 0.15) +
   coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
-   geom_spatial_point(data=combods, aes(x=Longitude, y=Latitude, color = ds_quadrant23), size = 3) + 
+   geom_spatial_point(data=combods_date, aes(x=Longitude, y=Latitude, color = ds_quadrant23), size = 3) + 
                scale_color_manual(values=c(   "#B9D3EE", "maroon", "darkgrey", "#CDBA96" ) )+
      ylab("") + 
   xlab("Longitude") + 
@@ -308,11 +290,11 @@ ggplot(usa) +
    labs(title="2023 iteration")
 outliers2023
 
-outliers2022 <- 
+outliers2019 <- 
 ggplot(usa) +
   geom_sf(color = "#2b2b2b", fill = "lightgrey", size=0.125, alpha = 0.15) +
   coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"), datum = NA) +
-   geom_spatial_point(data=combods, aes(x=Longitude, y=Latitude, color = ds_quadrant22), size = 3) + 
+   geom_spatial_point(data=combods_date, aes(x=Longitude, y=Latitude, color = ds_quadrant19), size = 3) + 
                scale_color_manual(values=c(   "#B9D3EE", "maroon", "darkgrey", "#CDBA96" ) )+
      ylab("Latitude") + 
   xlab("Longitude") + 
@@ -322,7 +304,7 @@ ggplot(usa) +
 
 
 
-misclassmap <- outliers2022 + outliers2023
+misclassmap <- outliers2019 + outliers2023
 misclassmap
 
 
