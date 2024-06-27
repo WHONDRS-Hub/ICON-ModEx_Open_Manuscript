@@ -21,7 +21,7 @@ rm(list=ls(all=T))
 current_path <- rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path))
 setwd("./../")
-
+getwd()
 # File path to the dynamic learning rivers github repo
 # https://github.com/parallelworks/dynamic-learning-rivers/
 # Ensure you are on the correct branch. We will start on Nov-2023-log10-DO-update-correct

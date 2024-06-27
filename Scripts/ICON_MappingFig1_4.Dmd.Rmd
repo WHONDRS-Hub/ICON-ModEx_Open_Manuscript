@@ -1,0 +1,183 @@
+---
+title: "ICON_Mapping"
+author: "Bre Rivera Waterman"
+date: "2023-09-22"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mapping R file
+
+
+ - import libraries
+
+```{r}
+library(tidyverse)
+library(colourpicker)
+library(lubridate)
+library(emmeans)
+library(sf)
+library(ggspatial)
+library(spData)
+library(ggpmisc)
+#install.packages("ggpubr")
+library(rnaturalearthdata)
+library("rstudioapi")
+
+current_path <- rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path))
+setwd("./../")
+getwd()
+
+```
+
+
+- Loading metadata files & binding rows 
+```{r}
+metadata1 <- read.csv("./v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv") %>% slice(-1) %>% 
+  #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv
+  
+  #C:/Users/b923w423/Documents/GitHub/ICON-ModEx_Open_Manuscript/v8_WHONDRS_S19S_Sediment/WHONDRS_S19S_Sediment_Metadata/v4_WHONDRS_S19S_Metadata.csv
+                                                                dplyr::select(lat = "MS_Latitude_dec.deg",
+                                                                long = "MS_Longitude_dec.deg",
+                                                                "Date",
+                                                                site_ID = "Sample_ID",
+                                                                site_name = "Stream_Name",
+                                                                Agency = "Associated_Site",
+                                                                state = "State_or_Province", 
+                                                                Country = "Country") %>%
+                                                                 mutate(site_ac = "no")
+
+metadata2 <- read.csv("./v3_CM_SSS_Data_Package/v3_CM_SSS_Field_Metadata.csv", header = TRUE) %>%      mutate(Country = "USA")  %>%                           
+                                                                dplyr::select(lat = "Sample_Latitude",
+                                                                long = "Sample_Longitude",
+                                                                Date = "Sample_Date",
+                                                                site_ID = "Parent_ID",
+                                                                site_name = "Stream_Name",
+                                                                Agency = "Organization",
+                                                                state = "State",
+                                                                 "Country",
+                                                                site_ac = "Site_ID")
+                                                               
+                                                            
+
+
+combo_metadata <- rbind(metadata1,metadata2) %>%  #combining datasets
+   filter(Country == "USA", state != "Puerto Rico", state !="Alaska") %>% #next few lines are to determine which sites are NEON, create a time series Y or N column based on if sites are NEON
+   mutate(Date_whole = ymd(Date), Year = year(Date),
+          lat = as.numeric(lat), long = as.numeric(long),
+  Time_series = case_when(
+    str_detect(site_ac, "HOPB|MAYF|MART") ~"Yes", 
+    TRUE ~ "No"),
+#create season col based on months
+   season = case_when(
+   month(Date) %in% c(3,4,5) ~ "Spring", 
+   month(Date) %in% c(6,7,8) ~ "Summer", 
+   month(Date) %in% c(9,10,11) ~ "Fall", 
+   TRUE ~ "Winter", 
+))
+
+
+```
+
+
+
+## Fig 1; seasonal map with time series site different shape
+```{r}
+
+usa <- st_as_sf(maps::map("state", fill=TRUE, plot =FALSE))
+
+ggplot(usa) +
+  geom_sf(color = "#2b2b2b", fill = "#FCFCFC", size=0.125) +
+  coord_sf(crs = st_crs("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs")) +  #geom_spatial_point(data=combo_metadata, aes(x=long,y=lat, fill = season),  pch = 21, size = 4) +  
+   geom_spatial_point(data=combo_metadata, aes(x=long,y=lat, fill = season, shape = Time_series, size = Time_series)) + 
+
+  scale_fill_manual(values =  c("#8c510a","#dfc27d", "#c7eae5", "#01665e" ))+ #color blind safe colors
+  #scale_color_manual(values =  c("#8B2252", "#EE799F", "#4d9221", "#e6f5d0" ))+ #color blind safe colors
+  scale_shape_manual(values = c(21, 15)) + 
+  scale_size_manual(values = c(5, 8)) +
+  ylab("Latitude") + 
+  xlab("Longitude") + 
+   annotation_scale(location = "bl", width_hint = 0.3,  pad_x = unit(0.25, "in"), pad_y = unit(0.25, "in")) +
+    annotation_north_arrow(location = "bl", which_north = "true", 
+        pad_x = unit(0.5, "in"), pad_y = unit(0.5, "in"),
+        style = north_arrow_fancy_orienteering) +
+  ggtitle("Sites sampled across CONUS") +
+  theme_bw() + 
+      theme(panel.grid.major = element_line(color = gray(0.9), linetype = "dashed", 
+        size = 0.1), panel.background = element_rect(fill = "white"), text = element_text(size = 18)) +
+  labs(fill = "Season", shape = "Time series") + 
+  guides(size = "none", fill = guide_legend(override.aes = list(size = 5, shape = 21)),  shape = guide_legend(override.aes = list(size = 5)))  
+c("#E0EEEE")
+
+
+```
+ 
+  - needs scale bar
+  - pretty basic map, gets the point across but could be improved and open to suggestions!
+  - interactive map tutorial linked here: http://maxpohlman.com/rgistutorial
+
+
+## Scatter plot  
+- using new merged dataset to create scatter plot
+- add kernel densities to the plots (along the side)
+```{r}
+combods <- read.csv("./ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv") %>% filter(!is.na(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment),!is.na(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment)) %>% filter(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment > -9990, Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment > -9990 )
+
+#scatter plot
+fullscatter <- 
+  combods %>% ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+      geom_text(x = 500, y = 500, label = "*", size = 15, color="orange") + 
+   stat_poly_line(color = "light grey", alpha = 0.01) +
+  stat_poly_eq(use_label(c( "R2"))) +
+  xlab("Observed rates") + 
+  ylab("Predicted rates") + 
+    lims(y = c(0,4000), x = c(0,4000)) + 
+        geom_text(x = 500, y = 500, label = "*", size = 15, color="orange") + 
+  theme_classic() +
+   theme(text = element_text(size = 18))
+
+
+under500 <- combods %>%  
+  ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+   stat_poly_line(color = "light grey", alpha = 0.01) +
+  stat_poly_eq(use_label(c( "R2")), label.x = "right", label.y = "bottom") +
+  ylab("") + 
+  xlab("Observed rates") + 
+    lims(y = c(0,500), x = c(0,500)) + 
+  theme_classic() + 
+     theme(text = element_text(size = 18))
+
+
+over500 <- combods %>% 
+ ggplot(aes(abs(Observed_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment), abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment))) +
+  geom_point(size = 4, alpha = 0.5) + 
+    geom_abline (slope=1, linetype = "dashed", color="Red") + 
+    stat_poly_line(color = "light grey", alpha = 0.01) +
+  stat_poly_eq(use_label(c( "R2")), label.x = "right", label.y = "bottom") +
+  ylab("") + 
+  xlab("") + 
+    lims(y = c(500,4000), x = c(500,4000)) + 
+  theme_classic() + 
+     theme(text = element_text(size = 18))
+
+fullscatter + (over500 / under500)
+
+
+```
+ 
+  - add units to axis?
+  - increase text size
+
+
+
+
