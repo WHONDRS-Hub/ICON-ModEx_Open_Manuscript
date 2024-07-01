@@ -17,10 +17,9 @@ install.packages("knitr", repos='http://cran.us.r-project.org', quiet=TRUE)
 library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 
-#current_path <- rstudioapi::getActiveDocumentContext()$path 
-#setwd(dirname(current_path))
-
-setwd("~/tmp/dynamic-learning-rivers")
+current_path <- rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path))
+setwd("./../")
 getwd()
 ```
 
