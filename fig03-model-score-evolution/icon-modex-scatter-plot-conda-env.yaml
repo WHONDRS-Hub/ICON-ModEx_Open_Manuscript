@@ -98,6 +98,7 @@ dependencies:
   - isoduration=20.11.0=pyhd8ed1ab_0
   - jedi=0.19.1=pyhd8ed1ab_0
   - jinja2=3.1.3=pyhd8ed1ab_0
+  - joblib=1.4.2=py311h06a4308_0
   - jpeg=9e=h5eee18b_1
   - json5=0.9.24=pyhd8ed1ab_0
   - jsonpatch=1.32=pyhd3eb1b0_0
@@ -133,7 +134,6 @@ dependencies:
   - libffi=3.4.4=h6a678d5_0
   - libgcc-devel_linux-64=11.2.0=h1234567_1
   - libgcc-ng=13.2.0=h807b86a_5
-  - libgfortran=3.0.0=1
   - libgfortran-ng=11.2.0=h00389a5_1
   - libgfortran5=11.2.0=h1234567_1
   - libglib=2.78.4=hdc74915_0
@@ -181,8 +181,7 @@ dependencies:
   - numexpr=2.8.7=py311h812550d_0
   - numpy=1.26.4=py311h24aa872_0
   - numpy-base=1.26.4=py311hbfb1bba_0
-  - openblas=0.3.4=ha44fe06_0
-  - openjpeg=2.4.0=h9ca470c_1
+  - openjpeg=2.4.0=h9ca470c_2
   - openssl=3.2.1=hd590300_1
   - overrides=7.7.0=pyhd8ed1ab_0
   - packaging=23.1=py311h06a4308_0
@@ -195,7 +194,7 @@ dependencies:
   - pcre2=10.42=hebb0a14_0
   - pexpect=4.9.0=pyhd8ed1ab_0
   - pickleshare=0.7.5=py_1003
-  - pillow=10.3.0=py311h5eee18b_0
+  - pillow=10.4.0=py311h5eee18b_0
   - pip=23.3.1=py311h06a4308_0
   - pixman=0.40.0=h7f8727e_1
   - pkgutil-resolve-name=1.3.10=pyhd8ed1ab_1
@@ -359,7 +358,7 @@ dependencies:
   - r-vroom=1.6.4=r43h884c59f_0
   - r-withr=2.5.1=r43h6115d3f_0
   - r-xfun=0.40=r43h76d94ec_0
-  - r-xml2=1.3.5=r43h884c59f_0
+  - r-xml2=1.3.6=r43h884c59f_0
   - r-xtable=1.8_4=r43h6115d3f_0
   - r-yaml=2.3.7=r43h76d94ec_0
   - readline=8.2=h5eee18b_0
@@ -371,6 +370,8 @@ dependencies:
   - rfc3986-validator=0.1.1=pyh9f0ad1d_0
   - rpds-py=0.18.0=py311h46250e7_0
   - ruamel.yaml=0.17.21=py311h5eee18b_0
+  - scikit-learn=1.4.2=py311ha02d727_1
+  - scipy=1.13.1=py311h24aa872_0
   - send2trash=1.8.2=pyh41d4057_0
   - setuptools=68.2.2=py311h06a4308_0
   - sip=6.7.12=py311h6a678d5_0
@@ -380,8 +381,9 @@ dependencies:
   - sqlite=3.41.2=h5eee18b_0
   - stack_data=0.6.2=pyhd8ed1ab_0
   - sysroot_linux-64=2.17=h57e8cba_10
-  - tenacity=8.2.2=py311h06a4308_0
+  - tenacity=8.2.3=py311h06a4308_0
   - terminado=0.18.1=pyh0d859eb_0
+  - threadpoolctl=3.5.0=py311h92b7b1e_0
   - tinycss2=1.2.1=pyhd8ed1ab_0
   - tk=8.6.12=h1ccaba5_0
   - tktable=2.10=h3d55465_1
@@ -425,4 +427,4 @@ dependencies:
       - widgetsnbextension==4.0.10
       - y-py==0.6.2
       - ypy-websocket==0.8.4
-prefix: /home/sfgary/pw/.miniconda3c/envs/pyr
+prefix: /home/sfgary/pw/.miniconda3c
