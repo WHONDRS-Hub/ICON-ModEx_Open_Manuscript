@@ -42,7 +42,7 @@ dependencies:
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
   - click=8.1.7=py311h06a4308_0
   - comm=0.2.2=pyhd8ed1ab_0
-  - conda=24.5.0=py311h06a4308_0
+  - conda=24.7.1=py311h06a4308_0
   - conda-content-trust=0.2.0=py311h06a4308_0
   - conda-libmamba-solver=23.12.0=pyhd3eb1b0_1
   - conda-package-handling=2.2.0=py311h06a4308_0
@@ -99,7 +99,7 @@ dependencies:
   - jedi=0.19.1=pyhd8ed1ab_0
   - jinja2=3.1.3=pyhd8ed1ab_0
   - joblib=1.4.2=py311h06a4308_0
-  - jpeg=9e=h5eee18b_1
+  - jpeg=9e=h5eee18b_3
   - json5=0.9.24=pyhd8ed1ab_0
   - jsonpatch=1.32=pyhd3eb1b0_0
   - jsonpointer=2.1=pyhd3eb1b0_0
@@ -181,7 +181,7 @@ dependencies:
   - numexpr=2.8.7=py311h812550d_0
   - numpy=1.26.4=py311h24aa872_0
   - numpy-base=1.26.4=py311hbfb1bba_0
-  - openjpeg=2.4.0=h9ca470c_2
+  - openjpeg=2.5.2=he7f1fd0_0
   - openssl=3.2.1=hd590300_1
   - overrides=7.7.0=pyhd8ed1ab_0
   - packaging=23.1=py311h06a4308_0
@@ -370,7 +370,7 @@ dependencies:
   - rfc3986-validator=0.1.1=pyh9f0ad1d_0
   - rpds-py=0.18.0=py311h46250e7_0
   - ruamel.yaml=0.17.21=py311h5eee18b_0
-  - scikit-learn=1.4.2=py311ha02d727_1
+  - scikit-learn=1.5.1=py311ha02d727_0
   - scipy=1.13.1=py311h24aa872_0
   - send2trash=1.8.2=pyh41d4057_0
   - setuptools=68.2.2=py311h06a4308_0
