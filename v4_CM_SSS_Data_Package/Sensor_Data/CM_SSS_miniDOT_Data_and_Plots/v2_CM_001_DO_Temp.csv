@@ -1,0 +1,53 @@
+# HeaderRows_7
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen
+ 2022-04-27 10:00:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.322
+ 2022-04-27 10:01:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.341
+ 2022-04-27 10:02:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.357
+ 2022-04-27 10:03:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.68,10.352
+ 2022-04-27 10:04:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.35
+ 2022-04-27 10:05:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.351
+ 2022-04-27 10:06:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.68,10.334
+ 2022-04-27 10:07:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.339
+ 2022-04-27 10:08:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.33
+ 2022-04-27 10:09:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.64,10.371
+ 2022-04-27 10:10:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.379
+ 2022-04-27 10:11:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.384
+ 2022-04-27 10:12:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.383
+ 2022-04-27 10:13:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.64,10.379
+ 2022-04-27 10:14:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.63,10.376
+ 2022-04-27 10:15:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.64,10.377
+ 2022-04-27 10:16:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.369
+ 2022-04-27 10:17:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.63,10.377
+ 2022-04-27 10:18:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.399
+ 2022-04-27 10:19:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.63,10.398
+ 2022-04-27 10:20:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.63,10.39
+ 2022-04-27 10:21:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.63,10.396
+ 2022-04-27 10:22:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.401
+ 2022-04-27 10:23:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.64,10.422
+ 2022-04-27 10:24:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.417
+ 2022-04-27 10:25:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.41
+ 2022-04-27 10:26:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.415
+ 2022-04-27 10:27:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.419
+ 2022-04-27 10:28:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.421
+ 2022-04-27 10:29:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.64,10.452
+ 2022-04-27 10:30:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.65,10.448
+ 2022-04-27 10:31:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.431
+ 2022-04-27 10:32:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.47
+ 2022-04-27 10:33:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.476
+ 2022-04-27 10:34:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.474
+ 2022-04-27 10:35:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.465
+ 2022-04-27 10:36:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.481
+ 2022-04-27 10:37:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.69,10.486
+ 2022-04-27 10:38:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.68,10.491
+ 2022-04-27 10:39:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.66,10.495
+ 2022-04-27 10:40:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.67,10.534
+ 2022-04-27 10:41:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.69,10.548
+ 2022-04-27 10:42:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.68,10.538
+ 2022-04-27 10:43:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.7,10.52
+ 2022-04-27 10:44:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.7,10.514
+ 2022-04-27 10:45:00,Pacific Daylight Time (UTC-7),CM_001,421044,3.48,8.68,10.532

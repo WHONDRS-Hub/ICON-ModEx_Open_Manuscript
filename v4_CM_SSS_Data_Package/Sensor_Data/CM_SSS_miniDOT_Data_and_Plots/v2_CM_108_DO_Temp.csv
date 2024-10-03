@@ -1,0 +1,26 @@
+# HeaderRows_7
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen
+ 2023-07-24 16:48:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.02,8.64
+ 2023-07-24 16:53:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.07,8.631
+ 2023-07-24 16:58:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.08,8.627
+ 2023-07-24 17:03:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.613
+ 2023-07-24 17:08:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.11,8.604
+ 2023-07-24 17:13:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.13,8.584
+ 2023-07-24 17:18:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.13,8.571
+ 2023-07-24 17:23:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.552
+ 2023-07-24 17:28:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.14,8.556
+ 2023-07-24 17:33:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.14,8.535
+ 2023-07-24 17:38:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.526
+ 2023-07-24 17:43:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.14,8.504
+ 2023-07-24 17:48:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.496
+ 2023-07-24 17:53:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.484
+ 2023-07-24 17:58:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.465
+ 2023-07-24 18:03:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.452
+ 2023-07-24 18:08:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.451
+ 2023-07-24 18:13:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.12,8.436
+ 2023-07-24 18:18:00,Eastern Daylight Time (UTC-4),CM_108,177943,3.5,22.11,8.438

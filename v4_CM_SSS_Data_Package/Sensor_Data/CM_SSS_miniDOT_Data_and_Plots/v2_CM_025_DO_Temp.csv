@@ -1,0 +1,45 @@
+# HeaderRows_7
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen
+ 2022-08-15 10:53:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.77,8.711
+ 2022-08-15 10:54:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.78,8.706
+ 2022-08-15 10:55:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.76,8.652
+ 2022-08-15 10:56:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.76,8.68
+ 2022-08-15 10:57:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.81,8.722
+ 2022-08-15 10:58:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.737
+ 2022-08-15 10:59:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.92,8.82
+ 2022-08-15 11:00:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.92,8.935
+ 2022-08-15 11:01:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.9,8.978
+ 2022-08-15 11:02:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.83,8.917
+ 2022-08-15 11:03:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.84,8.82
+ 2022-08-15 11:04:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.78
+ 2022-08-15 11:05:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.9,8.79
+ 2022-08-15 11:06:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.758
+ 2022-08-15 11:07:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.86,8.784
+ 2022-08-15 11:08:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.94,8.833
+ 2022-08-15 11:09:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.95,8.945
+ 2022-08-15 11:10:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.9,8.87
+ 2022-08-15 11:11:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.819
+ 2022-08-15 11:12:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.85,8.83
+ 2022-08-15 11:13:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.89,8.856
+ 2022-08-15 11:14:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.87,8.905
+ 2022-08-15 11:15:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.909
+ 2022-08-15 11:16:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.92,8.864
+ 2022-08-15 11:17:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.874
+ 2022-08-15 11:18:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.89,8.912
+ 2022-08-15 11:19:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.977
+ 2022-08-15 11:20:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.966
+ 2022-08-15 11:21:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.87,8.957
+ 2022-08-15 11:22:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.88,8.963
+ 2022-08-15 11:23:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.94,9.039
+ 2022-08-15 11:24:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,29.03,9.095
+ 2022-08-15 11:25:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,29,9.052
+ 2022-08-15 11:26:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.94,8.974
+ 2022-08-15 11:27:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.87,8.841
+ 2022-08-15 11:28:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.81,8.685
+ 2022-08-15 11:29:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.76,8.616
+ 2022-08-15 11:30:00,Central Daylight Time (UTC-5),CM_025,164227,3.49,28.76,8.624

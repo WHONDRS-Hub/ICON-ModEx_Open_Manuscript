@@ -1,0 +1,43 @@
+# HeaderRows_7
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen
+ 2022-09-05 14:03:00,Mountain Standard Time (UTC-7),CM_021,135727,3.42,31.92,4.984
+ 2022-09-05 14:04:00,Mountain Standard Time (UTC-7),CM_021,135727,3.43,31.99,4.951
+ 2022-09-05 14:05:00,Mountain Standard Time (UTC-7),CM_021,135727,3.43,32.06,4.964
+ 2022-09-05 14:06:00,Mountain Standard Time (UTC-7),CM_021,135727,3.43,32.11,4.952
+ 2022-09-05 14:07:00,Mountain Standard Time (UTC-7),CM_021,135727,3.44,32.18,4.937
+ 2022-09-05 14:08:00,Mountain Standard Time (UTC-7),CM_021,135727,3.44,32.22,4.917
+ 2022-09-05 14:09:00,Mountain Standard Time (UTC-7),CM_021,135727,3.44,32.25,4.929
+ 2022-09-05 14:10:00,Mountain Standard Time (UTC-7),CM_021,135727,3.44,32.29,4.915
+ 2022-09-05 14:11:00,Mountain Standard Time (UTC-7),CM_021,135727,3.44,32.32,4.906
+ 2022-09-05 14:12:00,Mountain Standard Time (UTC-7),CM_021,135727,3.44,32.35,4.905
+ 2022-09-05 14:13:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.38,4.87
+ 2022-09-05 14:14:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.4,4.874
+ 2022-09-05 14:15:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.4,4.88
+ 2022-09-05 14:16:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.45,4.879
+ 2022-09-05 14:17:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.46,4.874
+ 2022-09-05 14:18:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.49,4.888
+ 2022-09-05 14:19:00,Mountain Standard Time (UTC-7),CM_021,135727,3.45,32.51,4.893
+ 2022-09-05 14:20:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.51,4.885
+ 2022-09-05 14:21:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.51,4.875
+ 2022-09-05 14:22:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.53,4.871
+ 2022-09-05 14:23:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.53,4.871
+ 2022-09-05 14:24:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.57,4.878
+ 2022-09-05 14:25:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.57,4.867
+ 2022-09-05 14:26:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.57,4.87
+ 2022-09-05 14:27:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.58,4.856
+ 2022-09-05 14:28:00,Mountain Standard Time (UTC-7),CM_021,135727,3.46,32.58,4.861
+ 2022-09-05 14:29:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.58,4.85
+ 2022-09-05 14:30:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.59,4.857
+ 2022-09-05 14:31:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.59,4.877
+ 2022-09-05 14:32:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.59,4.919
+ 2022-09-05 14:33:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.61,4.912
+ 2022-09-05 14:34:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.6,4.928
+ 2022-09-05 14:35:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.62,4.907
+ 2022-09-05 14:36:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.61,4.923
+ 2022-09-05 14:37:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.62,4.902
+ 2022-09-05 14:38:00,Mountain Standard Time (UTC-7),CM_021,135727,3.47,32.59,4.946

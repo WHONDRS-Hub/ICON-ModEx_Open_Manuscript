@@ -1,0 +1,76 @@
+# HeaderRows_7
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen
+ 2023-04-04 09:55:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.38,9.584
+ 2023-04-04 09:56:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.38,9.581
+ 2023-04-04 09:57:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.35,9.584
+ 2023-04-04 09:58:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.37,9.574
+ 2023-04-04 09:59:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.34,9.588
+ 2023-04-04 10:00:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.32,9.583
+ 2023-04-04 10:01:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.29,9.597
+ 2023-04-04 10:02:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.31,9.585
+ 2023-04-04 10:03:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.597
+ 2023-04-04 10:04:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.603
+ 2023-04-04 10:05:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.24,9.601
+ 2023-04-04 10:06:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.588
+ 2023-04-04 10:07:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.587
+ 2023-04-04 10:08:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.25,9.602
+ 2023-04-04 10:09:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.591
+ 2023-04-04 10:10:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.23,9.599
+ 2023-04-04 10:11:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.23,9.599
+ 2023-04-04 10:12:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.59
+ 2023-04-04 10:13:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.24,9.598
+ 2023-04-04 10:14:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.587
+ 2023-04-04 10:15:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.588
+ 2023-04-04 10:16:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.24,9.6
+ 2023-04-04 10:17:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.25,9.597
+ 2023-04-04 10:18:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.25,9.59
+ 2023-04-04 10:19:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.24,9.602
+ 2023-04-04 10:20:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.24,9.599
+ 2023-04-04 10:21:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.583
+ 2023-04-04 10:22:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.585
+ 2023-04-04 10:23:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.586
+ 2023-04-04 10:24:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.591
+ 2023-04-04 10:25:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.581
+ 2023-04-04 10:26:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.26,9.581
+ 2023-04-04 10:27:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.588
+ 2023-04-04 10:28:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.28,9.582
+ 2023-04-04 10:29:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.3,9.582
+ 2023-04-04 10:30:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.29,9.58
+ 2023-04-04 10:31:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.27,9.582
+ 2023-04-04 10:32:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.3,9.587
+ 2023-04-04 10:33:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.32,9.571
+ 2023-04-04 10:34:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.31,9.585
+ 2023-04-04 10:35:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.33,9.575
+ 2023-04-04 10:36:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.34,9.568
+ 2023-04-04 10:37:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.32,9.585
+ 2023-04-04 10:38:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.35,9.567
+ 2023-04-04 10:39:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.35,9.568
+ 2023-04-04 10:40:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.36,9.567
+ 2023-04-04 10:41:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.36,9.559
+ 2023-04-04 10:42:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.37,9.552
+ 2023-04-04 10:43:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.37,9.548
+ 2023-04-04 10:44:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.39,9.556
+ 2023-04-04 10:45:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.35,9.567
+ 2023-04-04 10:46:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.38,9.565
+ 2023-04-04 10:47:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.39,9.559
+ 2023-04-04 10:48:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.41,9.549
+ 2023-04-04 10:49:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.41,9.554
+ 2023-04-04 10:50:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.41,9.561
+ 2023-04-04 10:51:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.4,9.557
+ 2023-04-04 10:52:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.43,9.537
+ 2023-04-04 10:53:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.43,9.55
+ 2023-04-04 10:54:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.46,9.539
+ 2023-04-04 10:55:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.43,9.539
+ 2023-04-04 10:56:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.44,9.549
+ 2023-04-04 10:57:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.46,9.55
+ 2023-04-04 10:58:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.48,9.544
+ 2023-04-04 10:59:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.48,9.538
+ 2023-04-04 11:00:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.48,9.534
+ 2023-04-04 11:01:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.53,9.517
+ 2023-04-04 11:02:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.51,9.535
+ 2023-04-04 11:03:00,Central Daylight Time (UTC-5),CM_058,755115,3.48,17.52,9.525

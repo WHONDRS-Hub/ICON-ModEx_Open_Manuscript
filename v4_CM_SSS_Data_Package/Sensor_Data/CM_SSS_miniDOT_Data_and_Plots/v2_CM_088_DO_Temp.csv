@@ -1,0 +1,68 @@
+# HeaderRows_7
+# HeaderRows_Format: Column_Header; Unit; InstallationMethod_ID; Instrument_Summary
+# DateTime; YYYY-MM-DD hh:mm:ss; Minidot_01; PME miniDOT Logger real time clock.
+# Battery; volts; Minidot_01; PME miniDOT Logger internal batteries.
+# Temperature; degree_celsius; Minidot_01; PME miniDOT Logger with temperature sensor.
+# Dissolved_Oxygen; milligrams_per_liter; Minidot_01; PME miniDOT Logger with optical dissolved oxygen sensor (fluorescence quenching).
+DateTime,Time_Zone,Parent_ID,miniDOT_SN,Battery,Temperature,Dissolved_Oxygen
+ 2023-04-10 11:19:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.57,11.425
+ 2023-04-10 11:20:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.54,11.447
+ 2023-04-10 11:21:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.56,11.432
+ 2023-04-10 11:22:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.57,11.422
+ 2023-04-10 11:23:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.58,11.425
+ 2023-04-10 11:24:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.58,11.417
+ 2023-04-10 11:25:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.59,11.414
+ 2023-04-10 11:26:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.59,11.432
+ 2023-04-10 11:27:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.6,11.406
+ 2023-04-10 11:28:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.61,11.417
+ 2023-04-10 11:29:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.61,11.431
+ 2023-04-10 11:30:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.6,11.428
+ 2023-04-10 11:31:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.61,11.417
+ 2023-04-10 11:32:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.61,11.42
+ 2023-04-10 11:33:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.422
+ 2023-04-10 11:34:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.414
+ 2023-04-10 11:35:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.416
+ 2023-04-10 11:36:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.61,11.434
+ 2023-04-10 11:37:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.61,11.433
+ 2023-04-10 11:38:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.422
+ 2023-04-10 11:39:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.437
+ 2023-04-10 11:40:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.63,11.417
+ 2023-04-10 11:41:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.428
+ 2023-04-10 11:42:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.417
+ 2023-04-10 11:43:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.63,11.42
+ 2023-04-10 11:44:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.42
+ 2023-04-10 11:45:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.42
+ 2023-04-10 11:46:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.42
+ 2023-04-10 11:47:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.431
+ 2023-04-10 11:48:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.42
+ 2023-04-10 11:49:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.62,11.444
+ 2023-04-10 11:50:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.64,11.423
+ 2023-04-10 11:51:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.65,11.421
+ 2023-04-10 11:52:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.417
+ 2023-04-10 11:53:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.65,11.416
+ 2023-04-10 11:54:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.435
+ 2023-04-10 11:55:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.431
+ 2023-04-10 11:56:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.65,11.435
+ 2023-04-10 11:57:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.65,11.433
+ 2023-04-10 11:58:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.65,11.438
+ 2023-04-10 11:59:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.423
+ 2023-04-10 12:00:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.65,11.428
+ 2023-04-10 12:01:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.68,11.425
+ 2023-04-10 12:02:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.446
+ 2023-04-10 12:03:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.66,11.452
+ 2023-04-10 12:04:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.439
+ 2023-04-10 12:05:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.445
+ 2023-04-10 12:06:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.449
+ 2023-04-10 12:07:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.68,11.444
+ 2023-04-10 12:08:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.69,11.433
+ 2023-04-10 12:09:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.449
+ 2023-04-10 12:10:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.7,11.442
+ 2023-04-10 12:11:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.68,11.457
+ 2023-04-10 12:12:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.7,11.43
+ 2023-04-10 12:13:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.68,11.447
+ 2023-04-10 12:14:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.446
+ 2023-04-10 12:15:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.7,11.434
+ 2023-04-10 12:16:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.67,11.453
+ 2023-04-10 12:17:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.69,11.444
+ 2023-04-10 12:18:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.71,11.438
+ 2023-04-10 12:19:00,Pacific Daylight Time (UTC-7),CM_088,806577,3.4,9.7,11.435
