@@ -33,16 +33,16 @@ dependencies:
   - bwidget=1.9.16=h9eba36c_0
   - bzip2=1.0.8=h7b6447c_0
   - c-ares=1.19.1=h5eee18b_0
-  - ca-certificates=2024.7.2=h06a4308_0
+  - ca-certificates=2024.9.24=h06a4308_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
   - cairo=1.16.0=hb05425b_5
-  - certifi=2024.7.4=py311h06a4308_0
+  - certifi=2024.8.30=py311h06a4308_0
   - cffi=1.16.0=py311h5eee18b_0
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
   - click=8.1.7=py311h06a4308_0
   - comm=0.2.2=pyhd8ed1ab_0
-  - conda=24.7.1=py311h06a4308_0
+  - conda=24.9.1=py311h06a4308_0
   - conda-content-trust=0.2.0=py311h06a4308_0
   - conda-libmamba-solver=23.12.0=pyhd3eb1b0_1
   - conda-package-handling=2.2.0=py311h06a4308_0
@@ -139,7 +139,7 @@ dependencies:
   - libglib=2.78.4=hdc74915_0
   - libgomp=13.2.0=h807b86a_5
   - libiconv=1.16=h5eee18b_3
-  - libllvm14=14.0.6=hdb19cb5_3
+  - libllvm14=14.0.6=hecde1de_4
   - libmamba=1.5.3=haf1ee3a_0
   - libmambapy=1.5.3=py311h2dafd23_0
   - libnghttp2=1.57.0=h2d74bed_0
@@ -408,7 +408,7 @@ dependencies:
   - xz=5.4.5=h5eee18b_0
   - yaml=0.2.5=h7f98852_2
   - yaml-cpp=0.8.0=h6a678d5_0
-  - yarl=1.9.3=py311h5eee18b_0
+  - yarl=1.11.0=py311h5eee18b_0
   - zeromq=4.3.5=h6a678d5_0
   - zipp=3.17.0=pyhd8ed1ab_0
   - zlib=1.2.13=h5eee18b_0
@@ -427,4 +427,4 @@ dependencies:
       - widgetsnbextension==4.0.10
       - y-py==0.6.2
       - ypy-websocket==0.8.4
-prefix: /home/sfgary/pw/.miniconda3c
+prefix: /home/sfgary/pw/software/.miniconda3c
