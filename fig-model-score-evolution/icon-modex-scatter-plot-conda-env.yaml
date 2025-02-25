@@ -331,6 +331,7 @@ dependencies:
   - r-rvest=1.0.3=r43h6115d3f_0
   - r-sass=0.4.7=r43h884c59f_0
   - r-scales=1.2.1=r43h6115d3f_0
+  - r-segmented=1.6_4=r43h142f84f_0
   - r-selectr=0.4_2=r43h6115d3f_0
   - r-shiny=1.7.5.1=r43h6115d3f_0
   - r-shinyjs=2.1.0=r43h6115d3f_0
@@ -416,13 +417,17 @@ dependencies:
   - pip:
       - aiofiles==22.1.0
       - aiosqlite==0.20.0
+      - boto3==1.37.0
+      - botocore==1.37.0
       - ipywidgets==8.1.2
+      - jmespath==1.0.1
       - jupyter-server-fileid==0.9.1
       - jupyter-server-ydoc==0.8.0
       - jupyter-ydoc==0.2.5
       - jupyterlab==3.6.7
       - jupyterlab-slurm==3.0.1
       - jupyterlab-widgets==3.0.10
+      - s3transfer==0.11.2
       - widgetsnbextension==4.0.10
       - y-py==0.6.2
       - ypy-websocket==0.8.4
