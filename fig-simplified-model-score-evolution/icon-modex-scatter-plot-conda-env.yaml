@@ -11,7 +11,7 @@ dependencies:
   - _sysroot_linux-64_curr_repodata_hack=3=haa98f57_10
   - aiohttp=3.9.5=py311h5eee18b_0
   - aiosignal=1.2.0=pyhd3eb1b0_0
-  - anaconda-anon-usage=0.5.0=py311hfc0e8ea_100
+  - anaconda-anon-usage=0.6.1=py311hfc0e8ea_100
   - ansicolors=1.1.8=pyhd8ed1ab_0
   - anyio=4.3.0=pyhd8ed1ab_0
   - archspec=0.2.3=pyhd8ed1ab_0
@@ -33,7 +33,7 @@ dependencies:
   - bwidget=1.9.16=h9eba36c_0
   - bzip2=1.0.8=h7b6447c_0
   - c-ares=1.19.1=h5eee18b_0
-  - ca-certificates=2024.12.31=h06a4308_0
+  - ca-certificates=2025.2.25=h06a4308_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
   - cairo=1.16.0=hb05425b_5
@@ -417,17 +417,13 @@ dependencies:
   - pip:
       - aiofiles==22.1.0
       - aiosqlite==0.20.0
-      - boto3==1.37.0
-      - botocore==1.37.0
       - ipywidgets==8.1.2
-      - jmespath==1.0.1
       - jupyter-server-fileid==0.9.1
       - jupyter-server-ydoc==0.8.0
       - jupyter-ydoc==0.2.5
       - jupyterlab==3.6.7
       - jupyterlab-slurm==3.0.1
       - jupyterlab-widgets==3.0.10
-      - s3transfer==0.11.2
       - widgetsnbextension==4.0.10
       - y-py==0.6.2
       - ypy-websocket==0.8.4
