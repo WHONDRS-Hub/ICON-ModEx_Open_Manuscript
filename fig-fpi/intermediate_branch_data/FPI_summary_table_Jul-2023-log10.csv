@@ -1,0 +1,26 @@
+,ID,Importance,std(importance),Uncertainty in importance,Source,Unit,Definition,num_loop,num_training_samples,id_loop
+slp_dg_cav,17,5.690152711688065,0.7771313857576323,6.555045242521844,RiverAtlas,degx10,Mean terrain slope over reach catchment,14,615,Jul-2023-log10
+for_pc_cse,22,5.690152711688065,0.7771313857576323,6.555045242521844,RiverAtlas,percent,Forest cover extent over reach catchment,14,615,Jul-2023-log10
+Mean_Temp_Deg_C,23,5.690152711688065,0.7771313857576323,6.555045242521844,WHONDRS,degrees_Celsius,Mean water temperature from dissolved oxygen (DO) sensor (miniDOT) in degrees Celsius measured during in situ sensor deployment. This calculation excludes the first 20 minutes and last 5 minutes inside the water to account for the equilibration time of the instrument for the CM Data. SSS data are trimmed to the average time of equilibrated CM data.,14,615,Jul-2023-log10
+tmp_dc_cyr,15,5.690152711688065,0.7771313857576323,6.555045242521844,RiverAtlas,deg. C,Annual avg. air temp. over reach catchment,14,615,Jul-2023-log10
+ele_mt_cav,24,5.690152711688065,0.7771313857576323,6.555045242521844,RiverAtlas,m,Mean elevation over reach catchment,14,615,Jul-2023-log10
+gwt_cm_cav,18,5.690152711688065,0.7771313857576323,6.555045242521844,RiverAtlas,cm,Mean ground water table depth over reach catchment,14,615,Jul-2023-log10
+RA_SO,13,4.777986195315256,0.47555678525962475,5.851352343283655,RiverAtlas,non-dim.,Stream order,14,615,Jul-2023-log10
+RA_dm,14,4.777986195315256,0.47555678525962475,5.851352343283655,RiverAtlas,m,Est. avg. depth of reach derived from other RA vars.,14,615,Jul-2023-log10
+RA_ms_di,11,4.777986195315256,0.47555678525962475,5.851352343283655,RiverAtlas,m/s,Range between annual min and max avg. stream speed,14,615,Jul-2023-log10
+RA_ms_av,12,4.777986195315256,0.47555678525962475,5.851352343283655,RiverAtlas,m/s,Annual avg. stream speed,14,615,Jul-2023-log10
+dor_pc_pva,2,4.777986195315256,0.47555678525962475,5.851352343283655,RiverAtlas,percent,Degree of dam regulation on reach,14,615,Jul-2023-log10
+run_mm_cyr,9,4.561155824468504,0.7813477196923656,5.889998664692136,RiverAtlas,mm/year,Annual avg. land surface runoff over reach catchment,14,615,Jul-2023-log10
+pre_mm_cyr,10,4.561155824468504,0.7813477196923656,5.889998664692136,RiverAtlas,mm,Annual avg. precipitation over reach catchment,14,615,Jul-2023-log10
+pst_pc_cse,6,4.561155824468504,0.7813477196923656,5.889998664692136,RiverAtlas,percent,Pasture extent over reach catchment,14,615,Jul-2023-log10
+tmp_dc_cdi,8,4.561155824468504,0.7813477196923656,5.889998664692136,RiverAtlas,deg. C,Range of annual min and max air temp. over reach catchment derived from RA data,14,615,Jul-2023-log10
+pre_mm_cdi,7,4.561155824468504,0.7813477196923656,5.889998664692136,RiverAtlas,mm,Range of annual min and max precip. over reach catchment derived from RA data,14,615,Jul-2023-log10
+crp_pc_cse,21,3.18649701588656,0.5754266056010229,4.325856574664524,RiverAtlas,percent,Cropland extent over reach catchment,14,615,Jul-2023-log10
+ire_pc_cse,16,3.18649701588656,0.5754266056010229,4.325856574664524,RiverAtlas,percent,Irrigated area extent (Equipped) over reach catchment,14,615,Jul-2023-log10
+Mean_DO_mg_per_L,20,3.0947488043589657,0.6013893791958892,4.470758644391873,WHONDRS,milligrams_per_liter,Dissolved oxygen measured during in situ sensor deployment.,14,615,Jul-2023-log10
+Mean_DO_percent_saturation,19,3.0947488043589657,0.6013893791958892,4.470758644391873,WHONDRS,percent_saturation,Dissolved oxygen saturation measured during in situ sensor deployment.,14,615,Jul-2023-log10
+pH,5,2.3609515430554,0.6279979274828752,3.948085203275327,WHONDRS,pH,pH.,14,615,Jul-2023-log10
+sgr_dk_rav,4,1.9004343520071298,0.546289660377035,2.9370181528655888,RiverAtlas,dm/km,Avg. stream gradient over reach,14,615,Jul-2023-log10
+ppd_pk_cav,3,1.7214085592389217,0.39617267961399144,2.273157098175848,RiverAtlas,people/km^2,Average population density over reach catchment,14,615,Jul-2023-log10
+prm_pc_cse,1,1.0756784315373806,0.0802802980006754,1.228984676754773,RiverAtlas,percent,Permafrost extent over reach catchment,14,615,Jul-2023-log10
+gla_pc_cse,0,1.0067266941692694,0.007361594168727324,1.0178855843293306,RiverAtlas,percent,Glacier extent over reach catchment,14,615,Jul-2023-log10
