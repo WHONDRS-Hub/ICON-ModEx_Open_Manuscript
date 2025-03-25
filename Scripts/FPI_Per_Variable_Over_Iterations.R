@@ -10,31 +10,35 @@
 # ==============================================================================
 
 library(tidyverse)
+library(gsheet)
 
 current_path <- rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path))
 setwd("./..")
 
 # =============================== User inputs ==================================
+short_names <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1zHmY46AIOhQ3W-gebzJwmCr4XR4HAZVc8hTZfni6JIk/edit?usp=sharing')
 
 data <- read_csv('./fig-fpi/FPI_summary_table_ALL.csv') %>%
-  rename(Feature = 1)
+  rename(Feature = 1) %>%
+  left_join(short_names, by = c('Feature' = 'Variable')) %>%
+  rename(Variable = AM_short_var_names)
 
 # =============================== make figure ==================================
 
 order <- data %>%
   filter(num_loop == 18) %>%
   arrange(desc(Importance)) %>%
-  pull(Feature)
+  pull(Variable)
 
-data$Feature <- factor(data$Feature, levels = order)
+data$Variable <- factor(data$Variable, levels = order)
 
 fpi <- ggplot(data = data, aes(x = num_training_samples, y = Importance))+
   geom_point()+
   geom_errorbar(aes(ymin = Importance - `std(importance)`, ymax = Importance + `std(importance)`), width = 0.2)+
-  facet_wrap(~ Feature)+
+  facet_wrap(~ Variable)+
   theme_bw()+
-  labs(x = 'Number of samples in training set', y = 'Feature')
+  labs(x = 'Number of samples in training set', y = 'Variable')
 
 ggsave(
   './fig-fpi/FPI_Per_Variable_Over_Iterations.pdf',
