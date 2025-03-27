@@ -34,11 +34,12 @@ order <- data %>%
 data$Variable <- factor(data$Variable, levels = order)
 
 fpi <- ggplot(data = data, aes(x = num_training_samples, y = Importance))+
+  geom_errorbar(aes(ymin = Importance - `std(importance)`, ymax = Importance + `std(importance)`), width = 0.2, color = 'darkgrey')+
   geom_point()+
-  geom_errorbar(aes(ymin = Importance - `std(importance)`, ymax = Importance + `std(importance)`), width = 0.2)+
   facet_wrap(~ Variable)+
   theme_bw()+
-  labs(x = 'Number of samples in training set', y = 'Variable')
+  labs(x = 'Number of samples in training set', y = 'Feature Permutation Importance (FPI)')+
+  theme(strip.text = element_text(size = 10))
 
 ggsave(
   './fig-fpi/FPI_Per_Variable_Over_Iterations.pdf',
