@@ -26,12 +26,15 @@ data <- read_csv('./fig-fpi/FPI_summary_table_ALL.csv') %>%
 
 # =============================== make figure ==================================
 
-order <- data %>%
-  filter(num_loop == 18) %>%
-  arrange(desc(Importance)) %>%
-  pull(Variable)
-
-data$Variable <- factor(data$Variable, levels = order)
+# reorder to be same order as figure 5
+data$Variable <- factor(data$Variable, levels = c("Elevation", "Water temperature",
+                                                  "Forest cover", "Cropland", "Oxygen concentration",
+                                                  "Oxygen saturation", "Ground water table", "Slope",
+                                                  "Irrigated area", "MAAT", "Reach depth",
+                                                  "Stream order", "Stream speed", "Stream speed range",
+                                                  "MAP", "Runoff", "MAAT range", "MAP range", "Pasture extent",
+                                                  "pH", "Stream gradient", "Population density", 
+                                                  "Dam regulation", "Permafrost extent", "Glacier extent"))
 
 fpi <- ggplot(data = data, aes(x = num_training_samples, y = Importance))+
   geom_errorbar(aes(ymin = Importance - `std(importance)`, ymax = Importance + `std(importance)`), width = 0.2, color = 'darkgrey')+
