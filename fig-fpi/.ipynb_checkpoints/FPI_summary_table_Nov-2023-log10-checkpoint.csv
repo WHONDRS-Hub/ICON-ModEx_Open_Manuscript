@@ -1,0 +1,26 @@
+,ID,Importance,std(importance),Uncertainty in importance,Source,Unit,Definition
+gwt_cm_cav,13,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,cm,Mean ground water table depth over reach catchment
+tmp_dc_cyr,9,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,deg. C,Annual avg. air temp. over reach catchment
+Mean_DO_percent_saturation,1,7.87480357640046,1.8541298718689359,12.900715598525563,WHONDRS,percent_saturation,Dissolved oxygen saturation measured during in situ sensor deployment.
+Mean_DO_mg_per_L,0,7.87480357640046,1.8541298718689359,12.900715598525563,WHONDRS,milligrams_per_liter,Dissolved oxygen measured during in situ sensor deployment.
+crp_pc_cse,21,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,percent,Cropland extent over reach catchment
+ire_pc_cse,18,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,percent,Irrigated area extent (Equipped) over reach catchment
+for_pc_cse,17,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,percent,Forest cover extent over reach catchment
+slp_dg_cav,12,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,degx10,Mean terrain slope over reach catchment
+Mean_Temp_Deg_C,10,7.87480357640046,1.8541298718689359,12.900715598525563,WHONDRS,degrees_Celsius,Mean water temperature from dissolved oxygen (DO) sensor (miniDOT) in degrees Celsius measured during in situ sensor deployment. This calculation excludes the first 20 minutes and last 5 minutes inside the water to account for the equilibration time of the instrument for the CM Data. SSS data are trimmed to the average time of equilibrated CM data.
+ele_mt_cav,14,7.87480357640046,1.8541298718689359,12.900715598525563,RiverAtlas,m,Mean elevation over reach catchment
+RA_SO,2,5.0797817660701,1.280073167620599,7.345958312160104,RiverAtlas,non-dim.,Stream order
+RA_dm,4,5.0797817660701,1.280073167620599,7.345958312160104,RiverAtlas,m,Est. avg. depth of reach derived from other RA vars.
+RA_ms_av,5,5.0797817660701,1.280073167620599,7.345958312160104,RiverAtlas,m/s,Annual avg. stream speed
+RA_ms_di,3,5.0797817660701,1.280073167620599,7.345958312160104,RiverAtlas,m/s,Range between annual min and max avg. stream speed
+run_mm_cyr,7,4.679120029023834,1.5447708379741123,7.733794814362366,RiverAtlas,mm/year,Annual avg. land surface runoff over reach catchment
+pre_mm_cyr,8,4.679120029023834,1.5447708379741123,7.733794814362366,RiverAtlas,mm,Annual avg. precipitation over reach catchment
+tmp_dc_cdi,15,4.679120029023834,1.5447708379741123,7.733794814362366,RiverAtlas,deg. C,Range of annual min and max air temp. over reach catchment derived from RA data
+pre_mm_cdi,16,4.679120029023834,1.5447708379741123,7.733794814362366,RiverAtlas,mm,Range of annual min and max precip. over reach catchment derived from RA data
+pH,23,2.9729818862936703,1.1094994402500162,5.268992226824541,WHONDRS,pH,pH.
+pst_pc_cse,22,2.9110279655617743,1.1621947295803041,4.918114886718907,RiverAtlas,percent,Pasture extent over reach catchment
+sgr_dk_rav,24,2.284359798813726,0.5615358923094672,3.285635366705772,RiverAtlas,dm/km,Avg. stream gradient over reach
+ppd_pk_cav,20,2.18457088785451,0.5580471291430078,3.2810014013985005,RiverAtlas,people/km^2,Average population density over reach catchment
+dor_pc_pva,6,1.8262373294794707,0.5682873548188957,2.82676789125339,RiverAtlas,percent,Degree of dam regulation on reach
+prm_pc_cse,11,1.1267403782244352,0.0942992290870928,1.3302903832414208,RiverAtlas,percent,Permafrost extent over reach catchment
+gla_pc_cse,19,1.0178111127532865,0.01972579164803416,1.0540289174486634,RiverAtlas,percent,Glacier extent over reach catchment
