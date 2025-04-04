@@ -11,7 +11,7 @@ dependencies:
   - _sysroot_linux-64_curr_repodata_hack=3=haa98f57_10
   - aiohttp=3.9.5=py311h5eee18b_0
   - aiosignal=1.2.0=pyhd3eb1b0_0
-  - anaconda-anon-usage=0.5.0=py311hfc0e8ea_100
+  - anaconda-anon-usage=0.7.0=py311hfc0e8ea_101
   - ansicolors=1.1.8=pyhd8ed1ab_0
   - anyio=4.3.0=pyhd8ed1ab_0
   - archspec=0.2.3=pyhd8ed1ab_0
@@ -33,7 +33,7 @@ dependencies:
   - bwidget=1.9.16=h9eba36c_0
   - bzip2=1.0.8=h7b6447c_0
   - c-ares=1.19.1=h5eee18b_0
-  - ca-certificates=2024.12.31=h06a4308_0
+  - ca-certificates=2025.2.25=h06a4308_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
   - cairo=1.16.0=hb05425b_5
@@ -65,7 +65,7 @@ dependencies:
   - fontconfig=2.14.1=h4c34cd2_2
   - fonttools=4.55.3=py311h5eee18b_0
   - fqdn=1.5.1=pyhd8ed1ab_0
-  - freetype=2.12.1=h4a9f257_0
+  - freetype=2.13.3=h4a9f257_0
   - fribidi=1.0.10=h7b6447c_0
   - frozendict=2.4.4=py311h331c9d8_0
   - frozenlist=1.5.0=py311h5eee18b_0
@@ -176,8 +176,8 @@ dependencies:
   - notebook=6.5.4=py311h06a4308_1
   - notebook-shim=0.2.4=pyhd8ed1ab_0
   - numexpr=2.10.1=py311hd28fd6d_0
-  - numpy=2.2.2=py311h24aa872_0
-  - numpy-base=2.2.2=py311hbfb1bba_0
+  - numpy=2.2.4=py311h210a465_0
+  - numpy-base=2.2.4=py311h80f3631_0
   - openjpeg=2.5.2=he7f1fd0_0
   - openssl=3.2.1=hd590300_1
   - overrides=7.7.0=pyhd8ed1ab_0
@@ -371,7 +371,7 @@ dependencies:
   - ruamel.yaml=0.17.21=py311h5eee18b_0
   - ruamel.yaml.clib=0.2.8=py311h459d7ec_0
   - scikit-learn=1.6.1=py311h6a678d5_0
-  - scipy=1.15.1=py311h24aa872_0
+  - scipy=1.15.2=py311h210a465_1
   - send2trash=1.8.2=pyh41d4057_0
   - setuptools=68.2.2=py311h06a4308_0
   - sip=6.7.12=py311h6a678d5_1
@@ -417,18 +417,14 @@ dependencies:
   - pip:
       - aiofiles==22.1.0
       - aiosqlite==0.20.0
-      - boto3==1.37.0
-      - botocore==1.37.0
       - ipywidgets==8.1.2
-      - jmespath==1.0.1
       - jupyter-server-fileid==0.9.1
       - jupyter-server-ydoc==0.8.0
       - jupyter-ydoc==0.2.5
       - jupyterlab==3.6.7
       - jupyterlab-slurm==3.0.1
       - jupyterlab-widgets==3.0.10
-      - s3transfer==0.11.2
       - widgetsnbextension==4.0.10
       - y-py==0.6.2
       - ypy-websocket==0.8.4
-prefix: /home/sfgary/pw/software/.miniconda3e
+prefix: /home/sfgary/pw/software/.miniconda3c
