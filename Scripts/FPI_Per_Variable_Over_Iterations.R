@@ -27,7 +27,7 @@ data <- read_csv('./fig-fpi/FPI_summary_table_ALL.csv') %>%
 
 # =============================== make figure ==================================
 
-# reorder to be same order as figure 5
+# Reorder `Variable` to be in the desired order
 data$Variable <- factor(data$Variable, levels = c("Elevation", "Water temperature",
                                                   "Forest cover", "Cropland", "Oxygen concentration",
                                                   "Oxygen saturation", "Ground water table", "Slope",
@@ -37,19 +37,12 @@ data$Variable <- factor(data$Variable, levels = c("Elevation", "Water temperatur
                                                   "pH", "Stream gradient", "Population density", 
                                                   "Dam regulation", "Permafrost extent", "Glacier extent"))
 
-
-# strip_colors <- c("Water Quality" = "black", 
-#                   "Geomorphology" = "blue", 
-#                   "Hydrology and Hydraulics" = "darkorange", 
-#                   "Climate" = "purple", 
-#                   "Land use" = "green")
-
-# Ensure both columns exist in your dataset
+# Ensure "Final categories for Stefan" exists
 if (!("Final categories for Stefan" %in% names(data))) {
   stop("Column 'Final categories for Stefan' not found in data.")
 }
 
-# Create a named vector of colors based on unique categories
+# Define colors for categories
 category_colors <- c(
   "Water Quality" = "black", 
   "Geomorphology" = "blue", 
@@ -58,34 +51,34 @@ category_colors <- c(
   "Land use" = "darkgreen"
 )  
 
-# Get unique values of `Final categories for Stefan` corresponding to `Variable`
-facet_levels <- unique(data$Variable)
-strip_categories <- unique(data[, c("Variable", "Final categories for Stefan")])
+# Create mapping of facets to categories
+strip_categories <- data[!duplicated(data$Variable), c("Variable", "Final categories for Stefan")]
 
-# Ensure correct matching between facets and colors
+# Map strip colors to variables
 strip_fill <- setNames(
-  category_colors[strip_categories$`Final categories for Stefan`],  # Assign colors
-  strip_categories$Variable  # Map to facets
+  category_colors[strip_categories$`Final categories for Stefan`],  
+  strip_categories$Variable
 )
 
-# Debugging: Print strip_fill to ensure colors are mapped correctly
+# Print for debugging
 print(strip_fill)
 
-# Plot
+# Plot with white strip text color
 fpi <- ggplot(data = data, aes(x = num_training_samples, y = Importance)) +
   geom_errorbar(aes(ymin = Importance - `std(importance)`, ymax = Importance + `std(importance)`), 
                 width = 0.2, color = 'darkgrey') +
   geom_point() +
   theme_bw() +
   labs(x = 'Number of samples in training set', y = 'Feature Permutation Importance (FPI)') +
-  theme(strip.text = element_text(size = 10, color = 'white')) +
+  theme(strip.text = element_text(size = 10, color = 'white')) +  # Set strip text color to white
   ggh4x::facet_wrap2(
     facets = ~Variable, 
     strip = ggh4x::strip_themed(
-      background_x = ggh4x::elem_list_rect(fill = strip_fill[facet_levels])  # Correct color mapping
+      background_x = ggh4x::elem_list_rect(fill = strip_fill[levels(data$Variable)])  
     )
   )
 
+# Save the plot
 ggsave(
   './fig-fpi/FPI_Per_Variable_Over_Iterations.pdf',
   fpi,
@@ -95,3 +88,5 @@ ggsave(
   units = 'in',
   dpi = 300
 )
+
+
