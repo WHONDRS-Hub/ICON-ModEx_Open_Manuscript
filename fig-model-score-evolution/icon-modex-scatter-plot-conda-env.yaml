@@ -11,7 +11,7 @@ dependencies:
   - _sysroot_linux-64_curr_repodata_hack=3=haa98f57_10
   - aiohttp=3.9.5=py311h5eee18b_0
   - aiosignal=1.2.0=pyhd3eb1b0_0
-  - anaconda-anon-usage=0.7.0=py311hfc0e8ea_101
+  - anaconda-anon-usage=0.7.1=py311hfc0e8ea_100
   - ansicolors=1.1.8=pyhd8ed1ab_0
   - anyio=4.3.0=pyhd8ed1ab_0
   - archspec=0.2.3=pyhd8ed1ab_0
@@ -36,11 +36,11 @@ dependencies:
   - ca-certificates=2025.2.25=h06a4308_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
-  - cairo=1.16.0=hb05425b_5
-  - certifi=2025.1.31=py311h06a4308_0
+  - cairo=1.16.0=he5ede1b_6
+  - certifi=2025.4.26=py311h06a4308_0
   - cffi=1.16.0=py311h5eee18b_0
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
-  - click=8.1.7=py311h06a4308_0
+  - click=8.1.8=py311h06a4308_0
   - comm=0.2.2=pyhd8ed1ab_0
   - conda=24.11.3=py311h06a4308_0
   - conda-content-trust=0.2.0=py311h06a4308_0
@@ -82,7 +82,7 @@ dependencies:
   - gxx_linux-64=11.2.0=hc2dff05_0
   - h11=0.14.0=pyhd8ed1ab_0
   - h2=4.1.0=pyhd8ed1ab_0
-  - harfbuzz=10.2.0=hf296adc_0
+  - harfbuzz=10.2.0=hdfddeaa_1
   - hpack=4.0.0=pyh9f0ad1d_0
   - httpcore=1.0.4=pyhd8ed1ab_0
   - httpx=0.27.0=pyhd8ed1ab_0
@@ -140,7 +140,7 @@ dependencies:
   - libmamba=1.5.3=haf1ee3a_0
   - libmambapy=1.5.3=py311h2dafd23_0
   - libnghttp2=1.57.0=h2d74bed_0
-  - libopenblas=0.3.21=h043d6bf_0
+  - libopenblas=0.3.29=ha39b09d_0
   - libpng=1.6.39=h5eee18b_0
   - libpq=12.20=hdbd6064_0
   - libsodium=1.0.18=h36c2ea0_1
@@ -151,7 +151,7 @@ dependencies:
   - libtiff=4.5.1=hffd6297_1
   - libuuid=1.41.5=h5eee18b_0
   - libwebp-base=1.3.2=h5eee18b_1
-  - libxcb=1.15=h7f8727e_0
+  - libxcb=1.17.0=h9b100fa_0
   - libxkbcommon=1.0.1=h5eee18b_1
   - libxml2=2.10.4=hf1b16e4_1
   - lz4-c=1.9.4=h6a678d5_0
@@ -176,8 +176,8 @@ dependencies:
   - notebook=6.5.4=py311h06a4308_1
   - notebook-shim=0.2.4=pyhd8ed1ab_0
   - numexpr=2.10.1=py311hd28fd6d_0
-  - numpy=2.2.4=py311h210a465_0
-  - numpy-base=2.2.4=py311h80f3631_0
+  - numpy=2.2.5=py311h7610711_0
+  - numpy-base=2.2.5=py311h150128d_0
   - openjpeg=2.5.2=he7f1fd0_0
   - openssl=3.2.1=hd590300_1
   - overrides=7.7.0=pyhd8ed1ab_0
@@ -185,7 +185,7 @@ dependencies:
   - pandas=2.2.3=py311h6a678d5_0
   - pandoc=2.12=h06a4308_3
   - pandocfilters=1.5.0=pyhd8ed1ab_0
-  - pango=1.50.7=h0fee60c_1
+  - pango=1.50.7=h668f713_2
   - papermill=2.6.0=pyhd8ed1ab_1
   - parso=0.8.3=pyhd8ed1ab_0
   - pcre2=10.42=hebb0a14_0
@@ -200,8 +200,9 @@ dependencies:
   - ply=3.11=py311h06a4308_0
   - prometheus_client=0.20.0=pyhd8ed1ab_0
   - prompt-toolkit=3.0.42=pyha770c72_0
-  - propcache=0.2.0=py311h5eee18b_0
+  - propcache=0.3.1=py311h5eee18b_0
   - psutil=5.9.8=py311h459d7ec_0
+  - pthread-stubs=0.3=h0ce48e5_1
   - ptyprocess=0.7.0=pyhd3deb0d_0
   - pure_eval=0.2.2=pyhd8ed1ab_0
   - pybind11-abi=4=hd3eb1b0_1
@@ -217,7 +218,7 @@ dependencies:
   - python-dateutil=2.9.0=pyhd8ed1ab_0
   - python-fastjsonschema=2.19.1=pyhd8ed1ab_0
   - python-json-logger=2.0.7=pyhd8ed1ab_0
-  - python-tzdata=2023.3=pyhd3eb1b0_0
+  - python-tzdata=2025.2=pyhd3eb1b0_0
   - python_abi=3.11=2_cp311
   - pytz=2024.1=pyhd8ed1ab_0
   - pyyaml=6.0.1=py311h459d7ec_1
@@ -371,7 +372,7 @@ dependencies:
   - ruamel.yaml=0.17.21=py311h5eee18b_0
   - ruamel.yaml.clib=0.2.8=py311h459d7ec_0
   - scikit-learn=1.6.1=py311h6a678d5_0
-  - scipy=1.15.2=py311h210a465_1
+  - scipy=1.15.3=py311h5e4e545_0
   - send2trash=1.8.2=pyh41d4057_0
   - setuptools=68.2.2=py311h06a4308_0
   - sip=6.7.12=py311h6a678d5_1
@@ -405,6 +406,12 @@ dependencies:
   - webencodings=0.5.1=pyhd8ed1ab_2
   - websocket-client=1.7.0=pyhd8ed1ab_0
   - wheel=0.41.2=py311h06a4308_0
+  - xorg-libx11=1.8.12=h9b100fa_1
+  - xorg-libxau=1.0.12=h9b100fa_0
+  - xorg-libxdmcp=1.1.5=h9b100fa_0
+  - xorg-libxext=1.3.6=h9b100fa_0
+  - xorg-libxrender=0.9.12=h9b100fa_0
+  - xorg-xorgproto=2024.1=h5eee18b_1
   - xz=5.4.5=h5eee18b_0
   - yaml=0.2.5=h7f98852_2
   - yaml-cpp=0.8.0=h6a678d5_0
