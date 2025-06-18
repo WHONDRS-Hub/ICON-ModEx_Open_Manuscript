@@ -83,6 +83,7 @@ for(iteration in sorted_iterations) {
   # ============================ create map ============================
   
   coords_sf <- combined_coords %>%
+    filter(Type != 'Priority Site - Convergent') %>% 
     st_as_sf(coords = c('Longitude','Latitude'), crs = common_crs)
   
   combined_map <- ggplot()+
@@ -91,12 +92,8 @@ for(iteration in sorted_iterations) {
     theme_map() + 
     scale_color_manual(values = c("Priority Site - Divergent" = "purple3", "Priority Site - Convergent" = "dodgerblue1" , 'Sampled Site' = 'black')) + 
     scale_shape_manual(values = c("Priority Site - Divergent" = 18, "Priority Site - Convergent" = 16, 'Sampled Site' = 16)) + 
-    scale_size_manual(values = c("Priority Site - Divergent" = 3, "Priority Site - Convergent" = 1.5, 'Sampled Site' = 3)) +
-    # theme(legend.background = element_blank(),
-    #       legend.position = c(0.01, 0.04),
-    #       legend.title = element_blank(),  # Remove legend title
-    #       legend.text = element_text(size = 10))  # Increase legend key size
-  theme(legend.position = 'none')
+    scale_size_manual(values = c("Priority Site - Divergent" = 3, "Priority Site - Convergent" = 1.5, 'Sampled Site' = 3))+
+    theme(legend.position = 'none')
 
   clean_iteration <- str_extract(iteration, "^[A-Za-z]+-\\d{4}")
   
