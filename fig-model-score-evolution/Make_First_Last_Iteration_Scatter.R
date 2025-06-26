@@ -56,11 +56,11 @@ fullscatter <-
 ggplot(data = last_split, aes(abs(Log_Observed_Normalized_Respiration_Rate ),
                                abs(Log_Predicted_Normalized_Respiration_Rate),
                             color =  ds_split))+ 
-  geom_point(data = first, color = "coral4", size = 3, pch = 19, alpha = 0.5) + 
-  geom_point(data = last_split, color = "grey59", size = 3, pch = 21) +
-  geom_vline (xintercept = breakpoint, linetype = "dashed", color="grey") + 
-  geom_hline (yintercept = breakpoint, linetype = "dashed", color="dark grey") + 
-  geom_abline (linetype = "longdash", color="black") + 
+  geom_vline (xintercept = breakpoint, linetype = "dashed", color="grey90") + 
+  geom_hline (yintercept = breakpoint, linetype = "dashed", color="grey90") + 
+  geom_abline (linetype = "dotted", color="grey90", size = 1) + 
+  geom_point(data = first, color = "tan4", size = 3, pch = 19, alpha = 0.4) + 
+  geom_point(data = last_split, color = "grey75", size = 3, pch = 21) +
   geom_smooth( data = last_split,
                aes(abs(Log_Observed_Normalized_Respiration_Rate ), 
                    abs(Log_Predicted_Normalized_Respiration_Rate),
@@ -72,12 +72,12 @@ ggplot(data = last_split, aes(abs(Log_Observed_Normalized_Respiration_Rate ),
   geom_smooth( data = first,
                aes(abs(Log_Observed_Normalized_Respiration_Rate ), 
                    abs(Log_Predicted_Normalized_Respiration_Rate)), method = "lm", alpha = 0.2,
-               color =  "coral4",
-               linetype = '3313') +
+               color =  "chocolate4",
+               linetype = 'twodash') +
   xlab(expression("Observed stream O"[2]*" consumption rates (log10)")) +
   ylab(expression("Predicted stream O"[2]*" consumption rates (log10)"))+
   scale_shape_manual(values = c(21, 16)) +
-  scale_color_manual(values = c( "dodgerblue", "red3")) +
+  scale_color_manual(values = c( "grey55", "grey55")) +
   lims(y = c(0,4), x = c(0,4)) + 
   theme_classic() +
   theme(text = element_text(size = 16, family = 'serif'), 
@@ -86,7 +86,7 @@ ggplot(data = last_split, aes(abs(Log_Observed_Normalized_Respiration_Rate ),
 # Create marginal density plot for x-axis
 x_density <- ggplot() +
   geom_density(data = first, aes(abs(Log_Observed_Normalized_Respiration_Rate)), 
-               fill = "coral4", alpha = 0.6, color = "coral4") +
+               fill = "chocolate4", alpha = 0.6, color = "chocolate4") +
   geom_density(data = last_split, aes(abs(Log_Observed_Normalized_Respiration_Rate)), 
                fill = "grey59", alpha = 0.75, color = "grey39") +
   xlim(0, 4) +  # Match your main plot limits
@@ -95,7 +95,7 @@ x_density <- ggplot() +
 # Create marginal density plot for y-axis
 y_density <- ggplot() +
   geom_density(data = first, aes(abs(Log_Predicted_Normalized_Respiration_Rate)), 
-               fill = "coral4", alpha = 0.6, color = "coral4") +
+               fill = "chocolate4", alpha = 0.6, color = "chocolate4") +
   geom_density(data = last_split, aes(abs(Log_Predicted_Normalized_Respiration_Rate)), 
                fill = "grey59", alpha = 0.75, color = "grey39") +
   xlim(0, 4) +  # Match your main plot limits
