@@ -9,11 +9,8 @@ dependencies:
   - _openmp_mutex=4.5=2_gnu
   - _r-mutex=1.0.0=anacondar_1
   - _sysroot_linux-64_curr_repodata_hack=3=haa98f57_10
-  - aiohappyeyeballs=2.4.4=py311h06a4308_0
-  - aiohttp=3.11.10=py311h5eee18b_0
-  - aiosignal=1.2.0=pyhd3eb1b0_0
   - anaconda-anon-usage=0.7.2=py311hfc0e8ea_100
-  - ansicolors=1.1.8=pyhd8ed1ab_0
+  - ansicolors=1.1.8=py311h06a4308_0
   - anyio=4.3.0=pyhd8ed1ab_0
   - archspec=0.2.3=pyhd8ed1ab_0
   - argon2-cffi=23.1.0=pyhd8ed1ab_0
@@ -34,10 +31,10 @@ dependencies:
   - bwidget=1.9.16=h9eba36c_0
   - bzip2=1.0.8=h7b6447c_0
   - c-ares=1.19.1=h5eee18b_0
-  - ca-certificates=2025.2.25=h06a4308_0
+  - ca-certificates=2025.7.15=h06a4308_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
-  - cairo=1.16.0=he5ede1b_6
+  - cairo=1.18.4=h44eff21_0
   - certifi=2025.8.3=py311h06a4308_0
   - cffi=1.16.0=py311h5eee18b_0
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
@@ -69,7 +66,6 @@ dependencies:
   - freetype=2.13.3=h4a9f257_0
   - fribidi=1.0.10=h7b6447c_0
   - frozendict=2.4.4=py311h331c9d8_0
-  - frozenlist=1.5.0=py311h5eee18b_0
   - gcc_impl_linux-64=11.2.0=h1234567_1
   - gcc_linux-64=11.2.0=h5c386dc_0
   - gfortran_impl_linux-64=11.2.0=h1234567_1
@@ -137,7 +133,7 @@ dependencies:
   - libglib=2.84.2=h37c7471_0
   - libgomp=13.2.0=h807b86a_5
   - libiconv=1.16=h5eee18b_3
-  - libkrb5=1.21.3=h520c7b4_3
+  - libkrb5=1.21.3=h520c7b4_4
   - libllvm14=14.0.6=hecde1de_4
   - libmamba=1.5.3=haf1ee3a_0
   - libmambapy=1.5.3=py311h2dafd23_0
@@ -156,16 +152,15 @@ dependencies:
   - libxcb=1.17.0=h9b100fa_0
   - libxkbcommon=1.0.1=h5eee18b_1
   - libxml2=2.10.4=hf1b16e4_1
-  - lmdb=0.9.29=h2531618_0
+  - lmdb=0.9.31=hb25bd0a_0
   - lz4-c=1.9.4=h6a678d5_0
   - make=4.2.1=h1bed415_1
   - markupsafe=2.1.5=py311h459d7ec_0
-  - matplotlib=3.10.0=py311h06a4308_0
-  - matplotlib-base=3.10.0=py311hbfdbfaf_0
+  - matplotlib=3.10.5=py311h06a4308_0
+  - matplotlib-base=3.10.5=py311h9489213_0
   - matplotlib-inline=0.1.6=pyhd8ed1ab_0
   - menuinst=2.0.1=py311h06a4308_1
   - mistune=3.0.2=pyhd8ed1ab_0
-  - multidict=6.1.0=py311h5eee18b_0
   - mysql=5.7.24=h721c034_2
   - nb_conda_kernels=2.3.1=py311h06a4308_0
   - nbclassic=1.0.0=py311h06a4308_0
@@ -178,32 +173,31 @@ dependencies:
   - nest-asyncio=1.6.0=pyhd8ed1ab_0
   - notebook=6.5.4=py311h06a4308_1
   - notebook-shim=0.2.4=pyhd8ed1ab_0
-  - numexpr=2.11.0=py311hbaae466_0
+  - numexpr=2.11.0=py311hccd6f0b_1
   - numpy=2.3.1=py311h7610711_0
   - numpy-base=2.3.1=py311h150128d_0
   - openjpeg=2.5.2=he7f1fd0_0
   - openssl=3.2.1=hd590300_1
   - overrides=7.7.0=pyhd8ed1ab_0
   - packaging=23.1=py311h06a4308_0
-  - pandas=2.3.1=py311h277b779_0
+  - pandas=2.3.2=py311h277b779_0
   - pandoc=2.12=h06a4308_3
   - pandocfilters=1.5.0=pyhd8ed1ab_0
   - pango=1.50.7=h668f713_2
-  - papermill=2.6.0=pyhd8ed1ab_2
+  - papermill=2.6.0=py311h06a4308_0
   - parso=0.8.3=pyhd8ed1ab_0
   - pcre2=10.42=hebb0a14_0
   - pexpect=4.9.0=pyhd8ed1ab_0
   - pickleshare=0.7.5=py_1003
   - pillow=11.1.0=py311hcea889d_0
   - pip=23.3.1=py311h06a4308_0
-  - pixman=0.40.0=h7f8727e_1
+  - pixman=0.46.4=h7934f7d_0
   - pkgutil-resolve-name=1.3.10=pyhd8ed1ab_1
   - platformdirs=3.10.0=py311h06a4308_0
   - pluggy=1.0.0=py311h06a4308_1
   - ply=3.11=py311h06a4308_0
   - prometheus_client=0.20.0=pyhd8ed1ab_0
   - prompt-toolkit=3.0.42=pyha770c72_0
-  - propcache=0.3.1=py311h5eee18b_0
   - psutil=5.9.8=py311h459d7ec_0
   - pthread-stubs=0.3=h0ce48e5_1
   - ptyprocess=0.7.0=pyhd3deb0d_0
@@ -375,7 +369,7 @@ dependencies:
   - ruamel.yaml=0.17.21=py311h5eee18b_0
   - ruamel.yaml.clib=0.2.8=py311h459d7ec_0
   - scikit-learn=1.7.1=py311hc74f9fe_0
-  - scipy=1.16.0=py311hbd568b2_0
+  - scipy=1.16.0=py311hcb7a30d_1
   - send2trash=1.8.2=pyh41d4057_0
   - setuptools=68.2.2=py311h06a4308_0
   - sip=6.7.12=py311h6a678d5_1
@@ -418,7 +412,6 @@ dependencies:
   - xz=5.4.5=h5eee18b_0
   - yaml=0.2.5=h7f98852_2
   - yaml-cpp=0.8.0=h6a678d5_0
-  - yarl=1.18.0=py311h5eee18b_0
   - zeromq=4.3.5=h6a678d5_0
   - zipp=3.17.0=pyhd8ed1ab_0
   - zlib=1.2.13=h5eee18b_0
