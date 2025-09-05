@@ -39,7 +39,7 @@ predicted_respiration_rate_map <-
     frame.colour=c('black'), frame.linewidth=0.4,
     ticks.colour='black',  direction='horizontal',
     title.position = "top", title.hjust=0.5,
-    title = expression(paste("Predicted respiration rate (mg O"[2]," / L of sediment / hour)"))))
+    title = expression(paste("Predicted respiration rate (mg O"[2]," L of sediment "[-1]" hour"[-1]")"))))
 
 
 
@@ -168,7 +168,7 @@ site_predRR_map <-
     frame.colour=c('black'), frame.linewidth=0.4,
     ticks.colour='black',  direction='horizontal',
     title.position = "top", title.hjust=0.5,
-    title = expression(paste("Change in predicted respiration rate from first to last iteration (mg O"[2],"/ L of sediment / hour)"))))
+    title = expression(paste("Change in predicted respiration rate from first to last iteration (mg O"[2]," L of sediment "[-1]" hour"[-1]")"))))
 
 
 
@@ -205,7 +205,7 @@ site_predRR_map_positive_bar <-
     frame.colour=c('black'), frame.linewidth=0.4,
     ticks.colour='black',  direction='horizontal',
     title.position = "top", title.hjust=0.5,
-    title = expression(paste("Change in predicted respiration rate from first to last iteration (mg O"[2],"/ L of sediment / hour)"))))
+    title = expression(paste("Change in predicted respiration rate from first to last iteration (mg O"[2]," L of sediment "[-1]" hour"[-1]")"))))
 
 
 
@@ -297,7 +297,7 @@ site_error_map <-
     frame.colour=c('black'), frame.linewidth=0.4,
     ticks.colour='black',  direction='horizontal',
     title.position = "top", title.hjust=0.5,
-    title = expression(paste("Change in error from first to last iteration (mg O"[2],"/ L of sediment / hour)"))))
+    title = expression(paste("Change in error from first to last iteration (mg O"[2]," L of sediment "[-1]" hour"[-1]")"))))
 
 
 
@@ -331,7 +331,7 @@ site_error_map_negative_bar <-
     frame.colour=c('black'), frame.linewidth=0.4,
     ticks.colour='black',  direction='horizontal',
     title.position = "top", title.hjust=0.5,
-    title = expression(paste("Change in error from first to last iteration (mg O"[2],"/ L of sediment / hour)"))))
+    title = expression(paste("Change in error from first to last iteration (mg O"[2]," L of sediment "[-1]" hour"[-1]")"))))
 
 
 
