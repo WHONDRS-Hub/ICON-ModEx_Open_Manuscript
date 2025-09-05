@@ -152,7 +152,7 @@ diff_df <-
 # You can filter out the WHONDRS data by selecting all sites with ID's prefixed with `SSS`, `CM_`, and `S19S` which correspond to the three major phases of the collection of respiration rate data.
 
 glorich_preds <- 
-  read.csv('../data/ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv') %>% 
+  read_csv('https://github.com/WHONDRS-Hub/ICON-ModEx_Open_Manuscript/raw/refs/heads/origin/fig5_maps/fig-sample-iteration-map/data/ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv') %>%
   mutate(Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 - Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Sep2019) %>% 
   mutate(sample_type = case_when(str_detect(Sample_Name, "SSS") ~ "WHONDRS",
                                  str_detect(Sample_Name, "CM_") ~ "WHONDRS",
