@@ -1,4 +1,9 @@
-# Compile all iteration
+# Description: This script compiles predicted respiration rates and errors
+#              across all sampling iterations into a single dataframe for analysis and plotting.
+#              This scripts also prepares the sampling points as points objects and 
+#              reads in geospatial polyonsmapping d
+
+# Import libraries
 library(here); setwd(here()) # setwd to the location of the project
 library(tidyverse)
 library(sf)
@@ -8,9 +13,7 @@ library(ggnewscale)
 library(colorspace)
 library(RColorBrewer)
 library(scales)
-
 library(cowplot)
-
 sf_use_s2(F)
 
 
@@ -28,8 +31,6 @@ all_files <- list.files(
   full.names = TRUE)
 
 
-
-
 # /----------------------------------------------------------------------------#
 #/  Filter to only log10 files                                          --------
 
@@ -43,8 +44,6 @@ files_to_keep <- all_files[sapply(all_files, function(f) {
     grepl(paste0("/", exclude_dir, "/"), f)
   })) && grepl("log10", f)
 })]
-
-
 
 
 # /----------------------------------------------------------------------------#
@@ -165,14 +164,12 @@ glorich_preds <-
          Predicted_Normalized_Respiration_Rate_lastminusfirst)
 
 
-
 # /----------------------------------------------------------------------------#
 #/    Get CONUS state polygons                                            ------
 
 library(rnaturalearth)
 
 conus <- ne_states(country = "united states of america")
-
 conus <- conus %>% filter(!name %in% c('Alaska','Hawaii'))
 
 
@@ -203,7 +200,6 @@ diff_df_points <- st_as_sf(
 glorich_preds_points <- st_as_sf(
   glorich_preds,
   coords = c("Longitude", "Latitude"),
-  # coords = c("Sample_Longitude_pre_avg", "Sample_Latitude_pre_avg"),
   crs = 4326) %>% 
   st_filter(., conus, .pred = st_intersects)
   
@@ -212,9 +208,8 @@ glorich_preds_points <- st_as_sf(
 #/  Get sampling dates
 
 sample_dates <- 
-  read.csv('../data/ICON-ModEx_Data.csv') %>% 
+  read.csv('https://github.com/parallelworks/dynamic-learning-rivers/blob/main/input_data/ICON-ModEx_Data.csv')
   mutate(Date = parse_date_time(Date, c('ymd', 'mdy'))) %>% 
-  # mutate(Date = as.Date(Date)) %>% 
   mutate(month = month(Date)) %>% 
   mutate(month_abb = month.abb[month]) %>% 
   filter(!is.na(Sample_Longitude) & !is.na(Sample_Longitude)) %>% 
@@ -234,7 +229,6 @@ pos_col <- rev(sequential_hcl(6, palette = 'Blues 3'))[2:6]
 neg_col <- rev(sequential_hcl(6, palette = 'Reds 3'))[2:6]
 
 
-
 # /----------------------------------------------------------------------------#
 #/    Reproject to EPSG:6350: NAD83(2011) / Conus Albers                --------
 
@@ -247,20 +241,9 @@ first_iter_df_points <- st_transform(first_iter_df_points, crs = 6350)
 sample_dates <- st_transform(sample_dates, crs = 6350)
 
 
-
-
-# /----------------------------------------------------------------------------#
-#/    Average per site location               --------
-
-# diff_df_points <- mutate(group_id = cur_group_id())
-
-
-
 # /----------------------------------------------------------------------------#
 #/    Add columns for coordinates               --------
 
 diff_df_points <- bind_cols(diff_df_points, as.data.frame(st_coordinates(diff_df_points)))
 
 glorich_preds_points <- bind_cols(glorich_preds_points, as.data.frame(st_coordinates(glorich_preds_points)))
-
-
