@@ -1,7 +1,7 @@
 # Description: This script compiles predicted respiration rates and errors
-#              across all sampling iterations into a single dataframe for analysis and plotting.
+#              across all sampling iterations into a single data frame for analysis and plotting.
 #              This scripts also prepares the sampling points as points objects and 
-#              reads in geospatial polyonsmapping d
+#              reads in background data for mapping.
 
 # Import libraries
 library(here); setwd(here()) # setwd to the location of the project
@@ -20,8 +20,8 @@ sf_use_s2(F)
 # /----------------------------------------------------------------------------#
 #/  List all folders in the directory;  a file for each iteration?       -------
 
-# Set your base directory path here
-base_directory <- "../ICON-ModEx_Open_Manuscript/fig-model-score-evolution/intermediate_branch_data"
+# Set the directory path containing the prediction from individual iterations 
+base_directory <- "../../fig-model-score-evolution/intermediate_branch_data"
 
 # Find all files named ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv recursively
 all_files <- list.files(
@@ -37,7 +37,7 @@ all_files <- list.files(
 # Exclude certain directories
 exclude_dirs <- c("pca_hp_100", "pca_hp_200", "pca_hp_300", 'pca_lp_100', 'pca_lp_200', 'pca_lp_300')
 
-
+# Make list of files to concatenate
 files_to_keep <- all_files[sapply(all_files, function(f) {
   # Check if the file is not in excluded directories and contains 'log10'
   !any(sapply(exclude_dirs, function(exclude_dir) {
@@ -148,20 +148,22 @@ diff_df <-
 #/   Get point locations of GloRICH predictions                           ------
 
 # The `output_all_sites_*` files have both the WHONDRS data and the GLORICH data. 
-# You can filter out the WHONDRS data by selecting all sites with ID's prefixed with `SSS`, `CM_`, and `S19S` which correspond to the three major phases of the collection of respiration rate data.
+# You can filter out the WHONDRS data by selecting all sites with ID's prefixed 
+# with `SSS`, `CM_`, and `S19S` which correspond to the three major phases of the collection of respiration rate data.
 
-glorich_preds <- 
-  read_csv('https://github.com/WHONDRS-Hub/ICON-ModEx_Open_Manuscript/raw/refs/heads/origin/fig5_maps/fig-sample-iteration-map/data/ICON-ModEx_Combined_Predicted_Observed_Respiration_Rates.csv') %>%
-  mutate(Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 - Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Sep2019) %>% 
-  mutate(sample_type = case_when(str_detect(Sample_Name, "SSS") ~ "WHONDRS",
-                                 str_detect(Sample_Name, "CM_") ~ "WHONDRS",
-                                 str_detect(Sample_Name, "S19S") ~ "WHONDRS")) %>% 
+glorich_preds <- glorich_preds %>%
+  read.csv('https://raw.githubusercontent.com/WHONDRS-Hub/ICON-ModEx_Open_Manuscript/refs/heads/main/fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>%
+  # mutate(Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 - Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Sep2019) %>% 
+  mutate(Normalized_Respiration_Rate_lastminusfirst = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023 - Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Sep2019) %>% 
+  mutate(sample_type = case_when(str_detect(Sample_ID, "SSS") ~ "WHONDRS",
+                                 str_detect(Sample_ID, "CM_") ~ "WHONDRS",
+                                 str_detect(Sample_ID, "S19S") ~ "WHONDRS")) %>% 
   mutate(sample_type = ifelse(is.na(sample_type), "GLORICH", sample_type)) %>% 
   
-  dplyr::select(Sample_Name, sample_type, Latitude, Longitude, 
-         Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023,
-         Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Sep2019,
-         Predicted_Normalized_Respiration_Rate_lastminusfirst)
+  dplyr::select(Sample_ID, sample_type, Latitude, Longitude, 
+                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023,
+                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Sep2019,
+                Normalized_Respiration_Rate_lastminusfirst)
 
 
 # /----------------------------------------------------------------------------#
@@ -169,7 +171,9 @@ glorich_preds <-
 
 library(rnaturalearth)
 
+# Select USA polygon
 conus <- ne_states(country = "united states of america")
+# Keep only CONUS
 conus <- conus %>% filter(!name %in% c('Alaska','Hawaii'))
 
 
@@ -208,7 +212,7 @@ glorich_preds_points <- st_as_sf(
 #/  Get sampling dates
 
 sample_dates <- 
-  read.csv('https://github.com/parallelworks/dynamic-learning-rivers/blob/main/input_data/ICON-ModEx_Data.csv')
+  read.csv('https://raw.githubusercontent.com/parallelworks/dynamic-learning-rivers/refs/heads/main/input_data/ICON-ModEx_Data.csv') %>%
   mutate(Date = parse_date_time(Date, c('ymd', 'mdy'))) %>% 
   mutate(month = month(Date)) %>% 
   mutate(month_abb = month.abb[month]) %>% 

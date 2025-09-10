@@ -8,13 +8,15 @@ predicted_respiration_rate_map <-
 
   ggplot() +
   geom_sf(data=conus, size=0.2, color='grey50', fill='grey90') +
-  
+
+  # Plot GLORICH points  
   geom_point(data= subset(glorich_preds_points, sample_type=='GLORICH') %>% arrange(desc(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023)), 
              aes(x=X, y=Y, 
                  fill=abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023)),
              stroke=0.01, shape=21, size=1.25, colour = "transparent",
              position=position_jitter(h=0, w=0)) +
 
+  # Plot WHNDRS points
   geom_point(data= subset(glorich_preds_points, sample_type!='GLORICH') %>% arrange(desc(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023)), 
              aes(x=X, y=Y, fill=abs(Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023)), 
                  stroke=0.3, shape=21, size=1.75, colour = "black",
@@ -39,7 +41,7 @@ predicted_respiration_rate_map <-
     frame.colour=c('black'), frame.linewidth=0.4,
     ticks.colour='black',  direction='horizontal',
     title.position = "top", title.hjust=0.5,
-    title = expression(paste("Predicted respiration rate (mg O"[2]," L of sediment "[-1]" hour"[-1]")"))))
+    title = expression(paste("Predicted respiration rate (mg O"[2]" L of sediment "[-1]" hour"[-1]")"))))
 
 
 
@@ -345,6 +347,7 @@ ggsave('../ICON-ModEx_Open_Manuscript/Maps/sample_iteration_map/site_error_map_n
 #/  Fig.5 - Combine on single plot                                     ---------
 
 # arrange plots grob into layout 
+
 fig <- plot_grid(predicted_respiration_rate_map, 
                  site_predRR_map,
                  site_error_map,
@@ -357,6 +360,9 @@ fig <- plot_grid(predicted_respiration_rate_map,
 
 # /----------------------------------------------------------------------------#
 #/   Save figure to file                                               ---------
+
+# Note: This initial figure is then manually modified to include the additional
+#       colorbars from the other figures.
 
 ggsave('../ICON-ModEx_Open_Manuscript/Maps/sample_iteration_map/iconmodex_fig5_3panels_v05.pdf',
        fig,
