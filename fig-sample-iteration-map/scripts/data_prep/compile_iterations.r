@@ -151,8 +151,42 @@ diff_df <-
 # You can filter out the WHONDRS data by selecting all sites with ID's prefixed 
 # with `SSS`, `CM_`, and `S19S` which correspond to the three major phases of the collection of respiration rate data.
 
+
+
+
+# Get Glorich predictions for Nov 2023
+glorich_nov2023 <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv')
+glorich_nov2023['Sample_ID'] = as.character(glorich_nov2023$Sample_ID)
+glorich_nov2023 <- glorich_nov2023[,c('Sample_ID', 'Sample_Latitude_pre_avg', 'Sample_Longitude_pre_avg','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
+names(glorich_nov2023) <- c('Sample_ID', 'Latitude', 'Longitude','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023')
+
+# Get WHNDRS points
+whndrs_nov2023 <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_obs_avgpre_stdpre_merged.csv')
+whndrs_nov2023 <- whndrs_nov2023[,c('Sample_ID', 'Sample_Latitude_obs', 'Sample_Longitude_obs','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
+names(whndrs_nov2023) <- c('Sample_ID', 'Latitude', 'Longitude', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023')
+
+all_preds_nov2023 <- bind_rows(whndrs_nov2023, glorich_nov2023)
+
+
+
+# Get Glorich predictions for Dec 2021
+glorich_dec2021a <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Dec-2021a-log10/output_all_sites_avgpre_stdpre_merged_filtered.csv')
+glorich_dec2021a['Sample_ID'] = as.character(glorich_dec2021a$Sample_ID)
+glorich_dec2021a <- glorich_dec2021a[,c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
+names(glorich_dec2021a) <- c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Dec2021a')
+
+whndrs_dec2021a <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Dec-2021a-log10/output_obs_avgpre_stdpre_merged.csv')
+whndrs_dec2021a <- whndrs_dec2021a[,c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
+names(whndrs_dec2021a) <- c('Sample_ID','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Dec2021a')
+
+all_preds_dec2021a <- bind_rows(whndrs_dec2021a, glorich_dec2021a)
+
+
+glorich_preds <- full_join(all_preds_dec2021a, all_preds_nov2023, by=c('Sample_ID'))
+
+
 glorich_preds <- glorich_preds %>%
-  read.csv('https://raw.githubusercontent.com/WHONDRS-Hub/ICON-ModEx_Open_Manuscript/refs/heads/main/fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>%
+  # read.csv('https://raw.githubusercontent.com/WHONDRS-Hub/ICON-ModEx_Open_Manuscript/refs/heads/main/fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>%
   # mutate(Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 - Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Sep2019) %>% 
   mutate(Normalized_Respiration_Rate_lastminusfirst = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023 - Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Sep2019) %>% 
   mutate(sample_type = case_when(str_detect(Sample_ID, "SSS") ~ "WHONDRS",
@@ -162,7 +196,7 @@ glorich_preds <- glorich_preds %>%
   
   dplyr::select(Sample_ID, sample_type, Latitude, Longitude, 
                 Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023,
-                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Sep2019,
+                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Dec2021a,
                 Normalized_Respiration_Rate_lastminusfirst)
 
 
