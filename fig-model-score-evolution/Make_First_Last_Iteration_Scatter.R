@@ -44,6 +44,16 @@ segCI_log <- confint(lm_all_final_log,level = 0.95)
 last_split_log <- last%>%
   mutate(ds_split = ifelse(Log_Observed_Normalized_Respiration_Rate > breakpoint_log, "Hot", ifelse(Log_Observed_Normalized_Respiration_Rate < breakpoint_log, "Cold", "Cold") ))
 
+# get r2 of breakpoint lines
+lm_hot_final_log <- lm(Log_Predicted_Normalized_Respiration_Rate ~ Log_Observed_Normalized_Respiration_Rate, last_split_log %>% filter(ds_split == 'Hot'))
+summary(lm_hot_final_log)
+
+lm_cold_final_log <- lm(Log_Predicted_Normalized_Respiration_Rate ~ Log_Observed_Normalized_Respiration_Rate, last_split_log %>% filter(ds_split == 'Cold'))
+summary(lm_cold_final_log)
+
+# get r2 of first iteration
+lm_all_first_log <- lm(Log_Predicted_Normalized_Respiration_Rate ~ Log_Observed_Normalized_Respiration_Rate, first)
+summary(lm_all_first_log)
 
 ## ================== Create scatter ====================
 
