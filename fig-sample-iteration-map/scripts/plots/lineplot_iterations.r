@@ -4,19 +4,15 @@
 
 # Join the 
 combined_df_j <- 
-  left_join(combined_df,
-            diff_df[,c('Sample_ID', 'Predicted_Normalized_Respiration_Rate_lastminusfirst', 'Normalized_Respiration_Rate_abserror_lastminusfirst')],
+  right_join(combined_df,
+             whndrs_diff_df[,c('Sample_ID', 'Predicted_Normalized_Respiration_Rate_lastminusfirst', 'Normalized_Respiration_Rate_abserror_lastminusfirst')],
             by='Sample_ID') %>% 
   arrange(Normalized_Respiration_Rate_abserror_lastminusfirst) %>% 
   mutate(Date_MY = as.yearmon(Date)) %>% 
   mutate(iteration_date = paste('#', iteration_num, ' - ', Date_MY)) %>% 
-  mutate(iteration_date = fct_reorder(iteration_date, iteration_num))
+  mutate(iteration_date = fct_reorder(iteration_date, iteration_num)) %>% 
+  mutate(Normalized_Respiration_Rate_abserror = abs(Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_obs - Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg))
   # mutate(name = factor(name, levels=c("north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"))) %>%
-  
-
-
-
-
 
 
 
@@ -37,8 +33,8 @@ red_cols <- rev(sequential_hcl(6, palette = 'Reds 3'))[2:6]
 ### PLOT OF RR CHANGE
 
 
-
 rr_line_plot  <- 
+  
   ggplot()+
   geom_line(data= subset(combined_df_j, Predicted_Normalized_Respiration_Rate_lastminusfirst < 0), 
             aes(x= iteration_num, y= abs(Predicted_Normalized_Respiration_Rate), color=abs(Predicted_Normalized_Respiration_Rate_lastminusfirst), group=Sample_ID), size=0.1) +
@@ -74,10 +70,13 @@ rr_line_plot  <-
   
   scale_y_log10(labels = label_log(digits = 1)) +
   # coord_cartesian(ylim=c(10^1, 10^3.5)) +
-  scale_x_continuous(breaks=seq(1,19), labels=seq(1,19), expand=c(0,0)) +
+  scale_x_continuous(breaks=seq(1,19), expand=c(0,0), # labels=seq(1,19),
+                     labels = c('Dec 2021a', 'Dec 2021b', unique(combined_df$Date_label)[c(-1, -2)])
+                     ) +
   line_plot_theme() +
-  theme(legend.title = element_blank()) +
-  xlab("Iteration number") +
+  theme(legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("Iteration") +
   ylab( expression(paste("Predicted respiration rate"))) +  #  (mg O"[2],"/ L of sediment / hour)
   labs(caption = 'Green = increased predicted RR between first and last\n
               Purple = decrease predicted RR between first and last')
@@ -88,6 +87,7 @@ rr_line_plot  <-
 ### PLOT OF ERROR CHANGE
 
 error_line_plot <- 
+  
   ggplot()+
   geom_line(data= subset(combined_df_j, Normalized_Respiration_Rate_abserror_lastminusfirst < -1), 
             aes(x= iteration_num, y= Normalized_Respiration_Rate_abserror, color=abs(Normalized_Respiration_Rate_abserror_lastminusfirst), group=Sample_ID), size=0.1) +
@@ -123,9 +123,11 @@ error_line_plot <-
   
   scale_y_log10(labels = label_log(digits = 1)) +
   coord_cartesian(ylim=c(10^1, 10^3.5)) +
-  scale_x_continuous(breaks=seq(1,19), labels=seq(1,19), expand=c(0,0)) +
+  scale_x_continuous(breaks=seq(1,19), expand=c(0,0), # labels=seq(1,19), 
+                     labels = c('Dec 2021a', 'Dec 2021b', unique(combined_df$Date_label)[c(-1, -2)])) +
   line_plot_theme() +
-  theme(legend.title = element_blank()) +
+  theme(legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
   xlab("Iteration number") +
   ylab( expression(paste("Error of predicted RR"))) +  # (mg O"[2],"/ L of sediment / hour)
   labs(caption = 'Red = increased in error of predicted RR between first and last\n
@@ -151,9 +153,10 @@ fig <- plot_grid(rr_line_plot,
 # /----------------------------------------------------------------------------#
 #/   Save figure to file                                               ---------
 
-ggsave('../ICON-ModEx_Open_Manuscript/Maps/sample_iteration_map/iconmodex_iteration_lineplot_v01.png',
+ggsave('../output/figures/lineplot/iconmodex_iteration_lineplot_v06.png',
        fig,
        width=190, height=170, dpi=600, units='mm')
+
 
 
 

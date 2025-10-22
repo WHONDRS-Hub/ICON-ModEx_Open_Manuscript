@@ -1,5 +1,5 @@
-# Description: Overview script executing the data preparation and plotting 
-#              Figure 5 showing maps of ICON-MODEX sampling locations across the United States.
+# Description: Overview script executing the data preparation and plotting panels for  
+#              Figure 2 showing maps of ICON-MODEX sampling locations across the United States.
 # Contact: Etienne Fluet-Chhouinard
 # Affiliation: Pacific Northwest National Laboratory, Richland, WA, USA
 # Email: etienne.fluet@pnnl.gov
@@ -34,7 +34,7 @@ source('data_prep/summary_for_paper.r')
 #/    Plots                                                     ----------------
 
 # Make figure 5 for ICON-Modex paper; of 3 map panels
-source('plots/fig_maps_3panels.r')
+source('plots/fig5_maps_3panels.r')
 
 # Make lineplot of RR across iterations
 source('plots/lineplot_iterations.r')

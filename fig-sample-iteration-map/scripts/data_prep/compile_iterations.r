@@ -3,7 +3,10 @@
 #              This scripts also prepares the sampling points as points objects and 
 #              reads in background data for mapping.
 
-# Import libraries
+
+
+# /----------------------------------------------------------------------------#
+#/  Import libraries
 library(here); setwd(here()) # setwd to the location of the project
 library(tidyverse)
 library(sf)
@@ -69,6 +72,8 @@ for (file in files_to_keep) {
   if(subdir_name_clean %in% c('Nov-2023')) next
     
   
+  if(subdir_name_clean %in% c('Dec-2021a'))  subdir_name_clean <- 'Sep-2019'
+  
   # Convert the cleaned subdirectory name to a yearmon object
   date_format <- try(as.yearmon(subdir_name_clean, format = "%b-%Y"), silent = TRUE)
   print(date_format)
@@ -79,10 +84,12 @@ for (file in files_to_keep) {
   }
   
   # Add a new column with the date
-  temp_df$Date <- date_format
+  temp_df$subdir_date <- subdir_name_clean
+  temp_df$Date <- as.character(date_format)
   
   # Append the data to the combined data frame
   combined_df <- rbind(combined_df, temp_df)
+  
 }
 
 
@@ -91,6 +98,7 @@ for (file in files_to_keep) {
 #/  Prep iteration number                                               --------
 
 # Convert to year-month format
+combined_df$Date_label <- combined_df$Date
 combined_df$Date <- as.Date(as.yearmon(combined_df$Date), frac = 0)
 
 # Sort the combined_df by the Date column
@@ -100,11 +108,19 @@ combined_df <- combined_df[order(combined_df$Date), ]
 combined_df$iteration_num <- as.numeric(factor(combined_df$Date))
 
 
+
 # /----------------------------------------------------------------------------#
 #/  Compute error between pred & obs                                    --------
 
+combined_df <-
+  combined_df %>% 
+  mutate(Predicted_Normalized_Respiration_Rate = Predicted_Normalized_Respiration_Rate * -1, 
+         Observed_Normalized_Respiration_Rate = Observed_Normalized_Respiration_Rate * -1) %>% 
+  mutate(Normalized_Respiration_Rate_abserror = Predicted_Normalized_Respiration_Rate - Observed_Normalized_Respiration_Rate)
+
+
 # Calculate difference
-combined_df['Normalized_Respiration_Rate_abserror'] <- abs(combined_df['Predicted_Normalized_Respiration_Rate'] - combined_df['Observed_Normalized_Respiration_Rate'])
+# combined_df['Normalized_Respiration_Rate_abserror'] <- abs(combined_df['Predicted_Normalized_Respiration_Rate'] - combined_df['Observed_Normalized_Respiration_Rate'])
 
 
 # /----------------------------------------------------------------------------#
@@ -136,11 +152,31 @@ last_iter_df <- combined_df %>%
 
 
 
+# /----------------------------------------------------------------------------#
+### CALCULATE DIFFERENCE 
 # Perform a left join using dplyr's left_join function
-diff_df <- 
-  left_join(first_iter_df, last_iter_df, by = "Sample_ID") %>% 
-  mutate(Normalized_Respiration_Rate_abserror_lastminusfirst =  Normalized_Respiration_Rate_abserror_lastiter  -  Normalized_Respiration_Rate_abserror_firstiter,
-         Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_lastiter -  Predicted_Normalized_Respiration_Rate_firstiter)
+# Note:  The first-to-last change in rates will be the same as change in errors too. 
+
+whndrs_diff_df <- 
+  left_join(last_iter_df, first_iter_df, by = "Sample_ID") %>% 
+  mutate(
+    Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_lastiter -  Predicted_Normalized_Respiration_Rate_firstiter,
+    Normalized_Respiration_Rate_abserror_lastminusfirst  =  Normalized_Respiration_Rate_abserror_lastiter -  Normalized_Respiration_Rate_abserror_firstiter)  %>% 
+  
+  # Flip sign of the errors 
+  # mutate(Normalized_Respiration_Rate_abserror_lastminusfirst = Normalized_Respiration_Rate_abserror_lastminusfirst * -1 ) %>%
+
+
+  select(Sample_ID, 
+         Sample_Longitude_obs, 
+         Sample_Latitude_obs, 
+         Predicted_Normalized_Respiration_Rate_lastiter,
+         Predicted_Normalized_Respiration_Rate_firstiter,
+         Predicted_Normalized_Respiration_Rate_lastminusfirst,
+         
+         Normalized_Respiration_Rate_abserror_lastiter,
+         Normalized_Respiration_Rate_abserror_firstiter,
+         Normalized_Respiration_Rate_abserror_lastminusfirst)
 
 
 
@@ -148,56 +184,63 @@ diff_df <-
 #/   Get point locations of GloRICH predictions                           ------
 
 # The `output_all_sites_*` files have both the WHONDRS data and the GLORICH data. 
-# You can filter out the WHONDRS data by selecting all sites with ID's prefixed 
-# with `SSS`, `CM_`, and `S19S` which correspond to the three major phases of the collection of respiration rate data.
+# NOTE:  NOPE - not any more
+
+
+# Get Glorich predictions for first iteration (Dec 2021a, b or later)
+glorich_firstiter <- 
+  read_csv('../../fig-model-score-evolution/intermediate_branch_data/Dec-2021a-log10/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>%
+  # read_csv('../../fig-model-score-evolution/intermediate_branch_data/Dec-2021b-log10/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>%
+  filter(!is.na(Sample_ID)) %>% 
+  mutate(Sample_ID = as.numeric(Sample_ID)) %>% 
+  select(Sample_ID, Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg)
+
+
+names(glorich_firstiter) <- c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_first')
 
 
 
 
 # Get Glorich predictions for Nov 2023
-glorich_nov2023 <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv')
-glorich_nov2023['Sample_ID'] = as.character(glorich_nov2023$Sample_ID)
-glorich_nov2023 <- glorich_nov2023[,c('Sample_ID', 'Sample_Latitude_pre_avg', 'Sample_Longitude_pre_avg','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
-names(glorich_nov2023) <- c('Sample_ID', 'Latitude', 'Longitude','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023')
+glorich_lastiter <- 
+  read_csv('../../fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>% 
+  filter(!is.na(Sample_ID)) %>% 
+  mutate(Sample_ID = as.numeric(Sample_ID)) %>% 
+  select(Sample_ID, Sample_Latitude_pre_avg, Sample_Longitude_pre_avg, Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg)
 
-# Get WHNDRS points
-whndrs_nov2023 <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_obs_avgpre_stdpre_merged.csv')
-whndrs_nov2023 <- whndrs_nov2023[,c('Sample_ID', 'Sample_Latitude_obs', 'Sample_Longitude_obs','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
-names(whndrs_nov2023) <- c('Sample_ID', 'Latitude', 'Longitude', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023')
-
-all_preds_nov2023 <- bind_rows(whndrs_nov2023, glorich_nov2023)
+names(glorich_lastiter) <- c('Sample_ID', 'Latitude', 'Longitude','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_last')
 
 
 
-# Get Glorich predictions for Dec 2021
-glorich_dec2021a <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Dec-2021a-log10/output_all_sites_avgpre_stdpre_merged_filtered.csv')
-glorich_dec2021a['Sample_ID'] = as.character(glorich_dec2021a$Sample_ID)
-glorich_dec2021a <- glorich_dec2021a[,c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
-names(glorich_dec2021a) <- c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Dec2021a')
-
-whndrs_dec2021a <- read_csv('../../fig-model-score-evolution/intermediate_branch_data/Dec-2021a-log10/output_obs_avgpre_stdpre_merged.csv')
-whndrs_dec2021a <- whndrs_dec2021a[,c('Sample_ID', 'Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg')]
-names(whndrs_dec2021a) <- c('Sample_ID','Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Dec2021a')
-
-all_preds_dec2021a <- bind_rows(whndrs_dec2021a, glorich_dec2021a)
+# Join across iterations
+glorich_preds <- 
+  full_join(glorich_lastiter, glorich_firstiter, by='Sample_ID') %>% 
+  mutate(Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_first = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_first * -1,
+         Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_last = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_last * -1)
 
 
-glorich_preds <- full_join(all_preds_dec2021a, all_preds_nov2023, by=c('Sample_ID'))
 
+
+
+# You can filter out the WHONDRS data by selecting all sites with ID's prefixed 
+# with `SSS`, `CM_`, and `S19S` which correspond to the three major phases of the collection of respiration rate data.
 
 glorich_preds <- glorich_preds %>%
   # read.csv('https://raw.githubusercontent.com/WHONDRS-Hub/ICON-ModEx_Open_Manuscript/refs/heads/main/fig-model-score-evolution/intermediate_branch_data/Nov-2023-log10-DO-update-correct/output_all_sites_avgpre_stdpre_merged_filtered.csv') %>%
   # mutate(Predicted_Normalized_Respiration_Rate_lastminusfirst = Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Nov2023 - Predicted_Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_Sep2019) %>% 
-  mutate(Normalized_Respiration_Rate_lastminusfirst = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023 - Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Sep2019) %>% 
+  mutate(Normalized_Respiration_Rate_lastminusfirst = Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_last - Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_first) %>% 
   mutate(sample_type = case_when(str_detect(Sample_ID, "SSS") ~ "WHONDRS",
                                  str_detect(Sample_ID, "CM_") ~ "WHONDRS",
                                  str_detect(Sample_ID, "S19S") ~ "WHONDRS")) %>% 
   mutate(sample_type = ifelse(is.na(sample_type), "GLORICH", sample_type)) %>% 
   
   dplyr::select(Sample_ID, sample_type, Latitude, Longitude, 
-                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Nov2023,
-                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_Dec2021a,
-                Normalized_Respiration_Rate_lastminusfirst)
+                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_last,
+                Normalized_Respiration_Rate_mg_DO_per_H_per_L_sediment_pre_avg_first,
+                Normalized_Respiration_Rate_lastminusfirst) 
+  
+  # Flip the rates
+  # mutate(Normalized_Respiration_Rate_lastminusfirst = Normalized_Respiration_Rate_lastminusfirst * -1 )
 
 
 # /----------------------------------------------------------------------------#
@@ -207,6 +250,7 @@ library(rnaturalearth)
 
 # Select USA polygon
 conus <- ne_states(country = "united states of america")
+
 # Keep only CONUS
 conus <- conus %>% filter(!name %in% c('Alaska','Hawaii'))
 
@@ -215,7 +259,7 @@ conus <- conus %>% filter(!name %in% c('Alaska','Hawaii'))
 #/    Get map theme                                                       ------
 
 # Load custom theme for figure
-source('themes.r')
+source('set_up/themes.r')
 
 
 # /----------------------------------------------------------------------------#
@@ -228,8 +272,8 @@ first_iter_df_points <- st_as_sf(
   st_filter(., conus, .pred = st_intersects)
 
 
-diff_df_points <- st_as_sf(
-  diff_df,
+whndrs_diff_df_points <- st_as_sf(
+  whndrs_diff_df,
   coords = c("Sample_Longitude_obs", "Sample_Latitude_obs"),
   crs = 4326) %>% 
   st_filter(., conus, .pred = st_intersects)
@@ -240,7 +284,8 @@ glorich_preds_points <- st_as_sf(
   coords = c("Longitude", "Latitude"),
   crs = 4326) %>% 
   st_filter(., conus, .pred = st_intersects)
-  
+
+
 
 # /----------------------------------------------------------------------------#
 #/  Get sampling dates
@@ -271,8 +316,8 @@ neg_col <- rev(sequential_hcl(6, palette = 'Reds 3'))[2:6]
 #/    Reproject to EPSG:6350: NAD83(2011) / Conus Albers                --------
 
 conus <- st_transform(conus, crs = 6350)
-diff_df_points <- st_transform(diff_df_points, crs = 6350)
-filtered_df_points <- st_transform(filtered_df_points, crs = 6350)
+whndrs_diff_df_points <- st_transform(whndrs_diff_df_points, crs = 6350)
+# filtered_df_points <- st_transform(filtered_df_points, crs = 6350)
 glorich_preds_points <- st_transform(glorich_preds_points, crs = 6350)
 first_iter_df_points <- st_transform(first_iter_df_points, crs = 6350)
 first_iter_df_points <- st_transform(first_iter_df_points, crs = 6350)
@@ -282,6 +327,8 @@ sample_dates <- st_transform(sample_dates, crs = 6350)
 # /----------------------------------------------------------------------------#
 #/    Add columns for coordinates               --------
 
-diff_df_points <- bind_cols(diff_df_points, as.data.frame(st_coordinates(diff_df_points)))
+whndrs_diff_df_points <- bind_cols(whndrs_diff_df_points, as.data.frame(st_coordinates(whndrs_diff_df_points)))
 
 glorich_preds_points <- bind_cols(glorich_preds_points, as.data.frame(st_coordinates(glorich_preds_points)))
+
+
